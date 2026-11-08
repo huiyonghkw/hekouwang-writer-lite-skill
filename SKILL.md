@@ -7,7 +7,7 @@ metadata:
   slug: hekouwang-writer-skill
   displayName: 会勇禾口王 · 写作技能
   summary: 中文写作两种模式。文档模式：把素材写成结构清晰、读得懂、数字可对账的文档。文章模式：公众号文章与文案先诊断再改写去 AI 味。出处/模态/修订三铁律，修订可回退并列改动清单，六把纯标准库检查脚本（锯末词、长句、结构节奏、表格与敏感信息、算术对账、改动对账）。
-  homepage: https://github.com/huiyonghkw/hekouwang-writer-skill
+  homepage: https://huiyonghkw.github.io/hekouwang-writer-skill/
   handoff: |
     - 主题或素材，要写成新文档 → 按文档类型套结构的成稿 + 进度卡；只问会改变事实、范围或交付形式的问题
     - 现有文档，要整体改进 → 保留事实与意图的改进稿 + 逐条改动清单（可回退）

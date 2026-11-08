@@ -2,6 +2,8 @@
 
 **会勇禾口王 · 中文写作质量控制 Skill**
 
+[在线产品介绍与 HTML 案例](https://huiyonghkw.github.io/hekouwang-writer-skill/) · [GitHub 源码](https://github.com/huiyonghkw/hekouwang-writer-skill)
+
 把素材写成结构清楚、事实可追溯、数字可对账的中文文档；也支持基于研究包写文章、修订已有文稿和文章去 AI 味。
 
 它不只是给模型一组写作提示：有明确的文档/文章分流、出处与模态保护、修改差异对账，以及 6 个纯 Python 标准库脚本。脚本只检查和报告，不会自动改写文档；机械检查也不等于事实正确或合规保证。
