@@ -174,3 +174,45 @@ hekouwang-terminal-kit README 改写任务：开源/付费分档说明散落在�
 - Source: self_check
 - Pattern-Key: skill-upgrade.dbs-borrow-v150
 - Recurrence-Count: 1
+
+## [LRN-20261109-001] self_check
+
+**Logged**: 2026-11-09
+**Priority**: high
+**Status**: pending
+**Area**: evidence
+
+### Summary
+写多接口供应商能力表时，把单个接口文档里的频次限制当成了产品级限制，错误地写成「外呼与 webcall 200 次/分钟」。实际只有 webCall 文档标注 200 次/分钟，外呼接口未标频次，415 `call is limit` 也只出现在 webCall 报错表。
+
+### Details
+12 份供应商接口文档里，限制条款分散在各接口的「请求频次」「常见报错」小节。整理成能力表时按产品归类合并，导致 A 接口的数值被扩张到 B 接口。核对时逐份回读原文才发现。此类错误不会触发算术对账（数字本身没错），只会被来源核对捕获。
+
+### Suggested Action
+多接口能力表定稿前，对每一个数值回读它所在的原文小节，并在表内注明「哪个接口、哪一节」。同一产品不同接口的限制不得合并成一行。
+
+### Metadata
+- Source: self_check
+- Pattern-Key: evidence.limit-scope-expansion
+- Recurrence-Count: 1
+
+## [LRN-20261109-002] self_check
+
+**Logged**: 2026-11-09
+**Priority**: high
+**Status**: pending
+**Area**: product-proof
+
+### Summary
+Skill 官网和案例页主要展示能力声明与结果摘要，没有把「原始材料 → 判断 → 改写 → 对账 → 交付」完整证据链展示出来，导致访客看不出它与普通润色工具的差异。
+
+### Details
+检查 `docs/index.html` 与 `docs/cases/family-pension-case.html` 时发现：首页 Product Proof 使用泛化的项目进度和预算示例，未直接连接真实养老案例；案例页展示了「出处、模态、数字」三个概念和脚本结果，但没有展示原始材料、逐项判断、改前/改后、改动清单及可展开的真实对账结果。仓库中的 `examples/family-pension-case.md` 已有这些方法落地素材，包括长句拆分、模态保留、46,400 + 4,000 × 3 = 58,400 元对账、电话无链接和检查器结果，网页尚未把它们转成可体验的证据。
+
+### Suggested Action
+下一轮网页改版优先串起一条真实证据链：用养老案例替换泛化首页 Demo，展示原始片段、事实/模态/出处标记、改前改后、改动清单、数字对账和检查结果；再补文章模式的诊断→改写案例。网页文案每个能力判断后面都要跟一个可观察动作或结果，避免只写「可核对」「保护原意」等抽象承诺。
+
+### Metadata
+- Source: self_check
+- Pattern-Key: product-proof.evidence-chain-visibility
+- Recurrence-Count: 1
