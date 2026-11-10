@@ -10,7 +10,8 @@
 ## 铁律
 
 1. 改 `scripts/*.py` 后必须跑 `python3 scripts/<脚本>.py --selftest`，全部通过才能提交。
-2. 改版本号时同步三处：`SKILL.md` 的 `metadata.version`、`_meta.json`、`CHANGELOG.md`。
+2. 改版本号时同步四处：`SKILL.md` 的 `metadata.version`、`_meta.json`、`CHANGELOG.md`、`README.md` 安装示例的 `--branch vX.Y.Z`；并打同名 git tag，README 锁的就是它。产品页不展示版本号，别在 HTML 里加回去。
+   发版前还要比对 `docs/listing-skillpay.md`：包内能力有变化，先改那份文案再改平台商品描述；顺序反了就是拿旧描述送审，SkillPay 会以「描述与上传文件能力说明不一致」驳回。
 3. 新增或改名 `references/*.md` 时，同步 `SKILL.md` 指针、`_meta.json` 的 `references` 和 README 目录树。
 4. `SKILL.md` 不重复 `references/` 的细节，只留要点 + 一行指针；改完跑 skill doctor 确认无死链、门禁 PASS。
 

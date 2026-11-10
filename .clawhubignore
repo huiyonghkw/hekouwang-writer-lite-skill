@@ -1,5 +1,6 @@
 docs/
 .git/
+.gstack/
 .learnings/
 .github/
 node_modules/

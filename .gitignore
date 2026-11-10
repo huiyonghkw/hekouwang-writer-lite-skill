@@ -2,3 +2,8 @@
 *.log
 __pycache__/
 .DS_Store
+
+# 付费包资产：只存本地，绝不进公开仓库（打包时由 paid/build_package.py 合并）
+paid/
+dist/
+

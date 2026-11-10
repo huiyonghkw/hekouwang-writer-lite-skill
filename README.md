@@ -2,7 +2,7 @@
 
 **会勇禾口王 · 对得上账的中文写作质控 Skill**
 
-[在线产品介绍与 HTML 案例](https://huiyonghkw.github.io/hekouwang-writer-skill/) · [GitHub 源码](https://github.com/huiyonghkw/hekouwang-writer-skill) · [ClawHub](https://clawhub.ai/huiyonghkw/skills/hekouwang-writer-skill)
+[在线产品介绍与 HTML 案例](https://huiyonghkw.github.io/hekouwang-writer-skill/) · [GitHub 源码](https://github.com/huiyonghkw/hekouwang-writer-skill) · [ClawHub](https://clawhub.ai/huiyonghkw/skills/hekouwang-writer-skill) · [支付宝购买 ¥9.9/月](https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939)
 
 把素材写成结构清楚、出处找得到、数字对得上的中文文档；也支持基于研究包写文章、修订已有文稿和文章去 AI 味。
 
@@ -155,12 +155,21 @@ hekouwang-writer-skill/
 
 ## 作为 Agent Skill 安装
 
+**两条安装路径**：愿意自己动手的，用下面的 ClawHub 或 git 方式，免费；不想碰命令行的，可以在[支付宝订阅](https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939)（¥9.9/月，含 5 次免费试用），按引导安装、订阅期内跟随最新版本。
+
+付费包在公开版基础上叠加增量（版本号因此比公开版高一档），多这几件：
+
+- **数字台账**：全文数字连单位、上下文、行号抽成一张表，逐个找出处（`number_ledger.py`）
+- **批量体检**：整个目录一次跑完五个单文件检查器，汇总排序，可另存 HTML 报告（`deep_check.py`）
+- **术语表草稿**：抽候选术语与同尾分组，人工定名后写进 glossary（`glossary_builder.py`）
+- **三套场景包**：政务办事指南、项目汇报、公众号长文，各含材料清单、口径陷阱与验收问题
+
 推荐用 ClawHub 或锁定到已审版本的 git tag：
 
 ```bash
 clawhub install hekouwang-writer-skill
 # 或
-git clone --branch v1.6.3 https://github.com/huiyonghkw/hekouwang-writer-skill.git \
+git clone --branch v1.6.4 https://github.com/huiyonghkw/hekouwang-writer-skill.git \
   ~/.codebuddy/skills/hekouwang-writer-skill
 ```
 
