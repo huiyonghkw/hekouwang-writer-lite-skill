@@ -155,10 +155,13 @@ hekouwang-writer-skill/
 
 ## 作为 Agent Skill 安装
 
-推荐用 skills CLI（按当前宿主安装）：
+推荐用 ClawHub 或锁定到已审版本的 git tag：
 
 ```bash
-npx skills add huiyonghkw/hekouwang-writer-skill
+clawhub install hekouwang-writer-skill
+# 或
+git clone --branch v1.6.3 https://github.com/huiyonghkw/hekouwang-writer-skill.git \
+  ~/.codebuddy/skills/hekouwang-writer-skill
 ```
 
 也可手动拷贝到宿主 skill 目录（示例：CodeBuddy 的 `~/.codebuddy/skills/`）：

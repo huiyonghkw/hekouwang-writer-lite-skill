@@ -124,24 +124,52 @@ def check_tables(lines, path, errors):
                             f"表中为 {total:g}")
 
             # 模式2：某数据行标签含合计类词 → 逐列验算
-            # 数值型表头（如档次表的 200/300/...）参与求和；
+            # 只加该合计行之前的明细行；其他合计行不参与；
+            # 数值型表头（如档次表的 200/300/...）可参与求和；
             # 非纯数字表头（如"1月""2013-2019年"）不参与；
+            # 明细里应有数字却解析失败 → 标「检查不完整」，不静默放过；
             # 少于 2 个加项不验（单项"合计"多是误报）。
             for ln, cells in data:
                 if not cells or not any(w in cells[0] for w in TOTAL_WORDS):
                     continue
                 if len(cells) != ncol:
                     continue
-                others = [header] + [r for _ln2, r in data if r is not cells]
+                detail_rows = []
+                for _ln2, r in data:
+                    if r is cells:
+                        break
+                    if not r or any(w in r[0] for w in TOTAL_WORDS):
+                        continue
+                    detail_rows.append(r)
                 for ci in range(1, ncol):
                     vals = []
-                    for r in others:
+                    incomplete = 0
+                    hv = is_pure_num(header[ci]) if ci < len(header) else None
+                    if hv is not None:
+                        vals.append(hv)
+                    for r in detail_rows:
                         if len(r) != ncol:
+                            incomplete += 1
                             continue
-                        v = is_pure_num(r[ci]) if r is header else to_num(r[ci])
-                        if v is not None:
-                            vals.append(v)
+                        raw = r[ci].strip() if isinstance(r[ci], str) else r[ci]
+                        if not raw:
+                            continue
+                        v = to_num(r[ci])
+                        if v is None:
+                            incomplete += 1
+                            continue
+                        vals.append(v)
                     total = to_num(cells[ci])
+                    if cells[ci].strip() and total is None:
+                        errors.append(
+                            f"L{ln} 「{cells[0]}」第{ci}列（{header[ci]}）"
+                            f"合计单元格非数字，检查不完整")
+                        continue
+                    if incomplete:
+                        errors.append(
+                            f"L{ln} 「{cells[0]}」第{ci}列（{header[ci]}）"
+                            f"有 {incomplete} 个非数字明细，检查不完整")
+                        continue
                     if total is None or len(vals) < 2:
                         continue
                     s = sum(vals)

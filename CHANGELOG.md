@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.6.3（2026-11-10）
+
+- ClawHub 安全审查：晋升规则改为「先提案 diff，用户确认后再改 SKILL.md」；临时副本要求 `tempfile` + 权限/清理/涉密确认；盲读补保密提醒。
+- `check_fidelity.py` 列合计只加该合计行之前的明细行，排除其他合计行；非数字明细改为「检查不完整」而不静默放过。
+- 安装说明改为 `clawhub install` / 锁定 git tag；发布包用 `.clawhubignore` 排除 `docs/` 产品页。
+- frontmatter 补 `metadata.openclaw.requires.bins: [python3]`。
+
 ## v1.6.2（2026-11-10）
 
 - 发布到 ClawHub / SkillHub。ClawHub 上 1.6.1 版本号已被占用且未成为 latest，故以 1.6.2 发布本期「对得上账」定位收束与产品页改版内容（与 1.6.1 变更相同）。
