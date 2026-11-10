@@ -1,0 +1,63 @@
+/* Atelier 纸面 · 共享 token（首页与案例页共用） */
+@font-face{
+  font-family:'HKW Sans SC';
+  src:url('fonts/hkw-sans-sc-subset.woff2?v=6') format('woff2-variations');
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+:root{
+  --ink:#141413;
+  --muted:#5c5b57;
+  --faint:#8b897f;
+  --paper:#f4f2ec;
+  --surface:#fffcf7;
+  --line:#e6e2d8;
+  --line-strong:#d3cec3;
+  --accent:#0f5c4c;
+  --accent-soft:#e4f0ec;
+  --warn-bg:#f6efe4;
+  --warn-ink:#6a5330;
+  --radius:12px;
+  --shadow:0 20px 48px -34px rgba(20,20,19,.28);
+  --font: 'HKW Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  --mono: ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+/* 纸纹：只保留极淡一层；柔光只留左上一点 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:radial-gradient(60% 42% at 8% -6%,rgba(15,92,76,.07),transparent 58%);
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body>*{position:relative;z-index:1}
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:6px;
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}

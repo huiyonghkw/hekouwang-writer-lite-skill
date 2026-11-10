@@ -2,90 +2,504 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="hekouwang-writer-skill：中文写作质量控制 Agent Skill。写文档、修文章、查数字，保留出处、模态与原意。">
-<title>hekouwang · Writer Skill — 中文写作质量控制</title>
+<meta name="description" content="hekouwang-writer-skill：对得上账的中文写作质控。出处、数字、修订清单；脚本只报告不改写。真实案例：家庭养老保险办事文档。">
+<link rel="icon" href="icon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg?v=2">
+<link rel="stylesheet" href="tokens.css">
+<title>hekouwang · Writer Skill — 对得上账的中文写作质控</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{sans:['-apple-system','BlinkMacSystemFont','HKW Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei','sans-serif'],mono:['ui-monospace','SFMono-Regular','Menlo','monospace']},colors:{ink:'#17202b',muted:'#5c6878',paper:'#f4f6f9',line:'#dfe5eb',teal:'#089b8c',violet:'#5d56d9'}}}}</script>
-<noscript><style>.reveal{opacity:1!important;transform:none!important}.demo-switch,#menu,#copy-command{display:none!important}#mobile{display:block!important}.demo-before,.demo-after{display:block!important}</style></noscript>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['HKW Sans SC','-apple-system','BlinkMacSystemFont','PingFang SC','Hiragino Sans GB','Microsoft YaHei','sans-serif'],mono:['ui-monospace','SFMono-Regular','Menlo','monospace']},colors:{ink:'#141413',muted:'#5c5b57',paper:'#f4f2ec',line:'#e6e2d8',accent:'#0f5c4c'}}}}</script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.demo-switch,#menu,#copy-command{display:none!important}#mobile{display:block!important}</style></noscript>
 <style>
-@font-face{font-family:'HKW Sans SC';src:url('fonts/hkw-sans-sc-subset.woff2?v=6') format('woff2-variations');font-weight:100 900;font-style:normal;font-display:swap}
-:root{color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f6f9;color:#17202b;font-family:-apple-system,BlinkMacSystemFont,'HKW Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;line-height:1.65;overflow-x:hidden}.shell{max-width:1120px;margin:auto;padding:0 28px}.dot-bg{background-image:radial-gradient(#cdd6df 1px,transparent 1px);background-size:18px 18px}.hero-wash{background:radial-gradient(ellipse at 50% 18%,rgba(116,220,206,.24),transparent 42%),radial-gradient(ellipse at 79% 6%,rgba(127,120,230,.17),transparent 32%)}.hero-title{font-family:-apple-system,BlinkMacSystemFont,'HKW Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:900!important;-webkit-text-stroke:0;text-shadow:none}.hero-title .gradient{-webkit-text-stroke:0;text-shadow:none}.gradient{background:linear-gradient(110deg,#099f8f,#5d56d9);-webkit-background-clip:text;background-clip:text;color:transparent}.topbar{background:rgba(255,255,255,.86);border-bottom:1px solid rgba(205,214,223,.7);backdrop-filter:blur(14px)}.panel{background:#fff;border:1px solid #e0e6ec;box-shadow:0 24px 60px rgba(31,50,71,.09)}.soft{background:#edf4f5;border:1px solid #d8e8e8}.pill{border:1px solid #dce4eb;background:rgba(255,255,255,.72);color:#728095}.btn-primary{background:linear-gradient(110deg,#119f8e,#5d56d9);color:#fff;box-shadow:0 10px 24px rgba(38,153,153,.22)}.btn-primary:hover{filter:saturate(1.12);transform:translateY(-1px)}.btn-secondary{background:#fff;border:1px solid #d7dee6}.btn-secondary:hover{border-color:#9baaba;transform:translateY(-1px)}button,a{transition:all .2s ease}.focus:focus-visible{outline:3px solid #75cfc4;outline-offset:3px}.reveal{opacity:0;transform:translateY(15px);transition:opacity .65s ease,transform .65s ease}.reveal.on{opacity:1;transform:none}.faq-copy{display:none}.faq.open .faq-copy{display:block}.faq.open .faq-plus{transform:rotate(45deg)}.faq-plus{transition:transform .2s}.code{white-space:pre-wrap;overflow-wrap:anywhere}.tiny-grid{background-image:linear-gradient(#e9eef2 1px,transparent 1px),linear-gradient(90deg,#e9eef2 1px,transparent 1px);background-size:24px 24px}.tag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#087d73}
-@media(max-width:767px){.shell{padding:0 18px}.hero-title{font-size:38px!important;line-height:1.16!important}.nav-links{display:none!important}.hero-copy{font-size:16px!important}.demo-body{padding:18px!important}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
-/* UI 升级层：保留青紫品牌视觉，减少卡片数量，把改写演示放进首屏 */
-.hero-title{font-size:clamp(40px,4.4vw,60px)!important;line-height:1.12!important;letter-spacing:-.055em}
-.hero-wash{padding-top:56px!important;padding-bottom:40px!important}
-.panel{border-radius:20px}
-.demo{margin-top:34px}
-.demo-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;border-bottom:1px solid #e6ebef;background:#fbfcfd}
-.demo-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
-.demo-dot{width:8px;height:8px;border-radius:99px;background:linear-gradient(120deg,#119f8e,#5d56d9);flex:none}
-.demo-switch{display:flex;gap:6px;background:#eef2f5;border-radius:99px;padding:3px}
-.demo-chip{border:0;background:transparent;color:#5c6878;font-size:12px;font-weight:600;padding:6px 14px;border-radius:99px;cursor:pointer;white-space:nowrap}
-.demo-chip[aria-selected="true"]{background:#fff;color:#17202b;box-shadow:0 1px 3px rgba(31,50,71,.12)}
-.demo-body{display:grid;gap:14px;padding:20px}
-.demo-block{border:1px solid #e4e9ee;border-radius:12px;padding:16px 18px;background:#fbfcfd}
-.demo-block.is-after{border-color:#cfe7e2;background:#f0faf8}
-.demo-block-label{display:flex;align-items:center;gap:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7d8a99;margin-bottom:10px}
-.demo-block.is-after .demo-block-label{color:#087d73}
-.demo-text{font-size:15px;line-height:1.95;color:#3d4a58;white-space:pre-line}
-.demo-block.is-after .demo-text{color:#17202b}
-.demo-note{font-size:12px;line-height:1.85;color:#5c6878;margin-top:2px}
-.demo-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:13px 20px;border-top:1px solid #e6ebef;background:#fbfcfd;font-size:11px;color:#7d8a99}
-.term{background:#17202b;color:#e7edf2;border-radius:20px;padding:20px 22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:2}
-.term .ok{color:#8fd6b4}.term .dim{color:#8b98a6}.term .key{color:#a9d8ff}
-.rule-list li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:11px 0;border-bottom:1px dashed #e2e8ee;font-size:13px}
-.rule-list li:last-child{border-bottom:0}
-.rule-list code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#087d73;font-weight:600}
-.rule-list span{color:#5c6878;font-size:12px}
-.step-num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.1em;color:#087d73}
-.closing{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding:26px 30px;border-radius:20px;background:linear-gradient(110deg,rgba(17,159,142,.08),rgba(93,86,217,.08));border:1px solid #d9e6e4}
-@media(max-width:767px){.demo{margin-top:24px}.demo-head,.demo-foot{padding:11px 14px}.demo-body{padding:14px;gap:12px}.demo-text{font-size:14px}.demo-chip{padding:6px 10px;font-size:11px}.term{padding:16px;font-size:11px}.closing{padding:20px}}</style>
+.shell{max-width:1100px;margin:auto;padding:0 28px}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.focus:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.on{opacity:1;transform:none}
+
+.topbar{background:rgba(244,242,236,.78);border-bottom:1px solid transparent;backdrop-filter:blur(16px) saturate(1.2);transition:border-color .25s ease,background .25s ease}
+.topbar.is-stuck{border-bottom-color:var(--line);background:rgba(255,252,247,.88)}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.03em;color:var(--ink);font-size:14px}
+.brand-icon{width:22px;height:22px;border-radius:6px;flex:none;display:block}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--muted)}
+.nav-links a{position:relative}
+.nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:not(.btn):hover{color:var(--ink)}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--ink);color:#f7f4ee;box-shadow:0 10px 24px -14px rgba(20,20,19,.55)}
+.btn-primary:hover{background:#242320}
+.btn-secondary{background:rgba(255,252,247,.7);border-color:var(--line-strong);color:var(--ink);backdrop-filter:blur(8px)}
+.btn-secondary:hover{border-color:var(--ink);background:var(--surface)}
+.btn-sm{padding:8px 14px;font-size:13px}
+
+.hero{position:relative;padding:88px 0 72px;overflow:hidden}
+.hero-wash{position:absolute;inset:auto -8% -40% 48%;height:55%;pointer-events:none;background:radial-gradient(closest-side,rgba(15,92,76,.08),transparent 72%)}
+.hero-brand{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.hero-brand::before{content:"";width:18px;height:1px;background:var(--accent)}
+.hero-title{margin:22px 0 0;max-width:15ch;font-size:clamp(44px,6.4vw,72px);line-height:1.05;letter-spacing:-.048em;font-weight:800;color:var(--ink)}
+.hero-title em{font-style:normal;font-weight:inherit;letter-spacing:inherit;color:var(--accent)}
+.hero-copy{margin:24px 0 0;max-width:34rem;font-size:18px;line-height:1.85;color:var(--muted)}
+.hero-note{margin:14px 0 0;font-size:14px;color:var(--faint)}
+.hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+
+.demo{margin-top:56px;border:1px solid rgba(20,20,19,.08);border-radius:18px;background:rgba(255,252,247,.86);backdrop-filter:blur(12px);box-shadow:var(--shadow);overflow:hidden}
+.demo-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:18px 26px;background:linear-gradient(180deg,rgba(255,255,255,.55),transparent)}
+.demo-title{font-size:13px;font-weight:650;color:var(--ink);letter-spacing:-.01em}
+.demo-switch{display:flex;gap:8px;padding:4px;border-radius:12px;background:rgba(20,20,19,.04)}
+.demo-chip{border:0;background:transparent;padding:8px 14px;border-radius:12px;color:var(--faint);font-size:13px;font-weight:600;cursor:pointer;transition:background .2s ease,color .2s ease,box-shadow .2s ease}
+.demo-chip[aria-selected="true"]{color:var(--ink);background:var(--surface);box-shadow:0 1px 2px rgba(20,20,19,.06),0 4px 12px -8px rgba(20,20,19,.2)}
+.demo-body{display:grid;gap:0;padding:0 10px 10px}
+@media(min-width:768px){.demo-body{grid-template-columns:1fr 1fr;gap:10px}}
+.demo-block{padding:22px 24px;min-width:0;border-radius:16px;background:rgba(244,242,236,.55)}
+.demo-block.is-after{background:linear-gradient(160deg,rgba(228,240,236,.95),rgba(255,252,247,.9))}
+.demo-block-label{display:block;margin-bottom:12px;font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.demo-block.is-after .demo-block-label{color:var(--accent)}
+.demo-text{margin:0;font-size:15px;line-height:1.9;color:var(--muted);white-space:pre-line;transition:opacity .28s ease}
+.demo-block.is-after .demo-text{color:var(--ink)}
+.demo-note{grid-column:1/-1;margin:10px 0 0;padding:16px 24px;border-radius:14px;font-size:13px;line-height:1.75;color:var(--muted);background:rgba(20,20,19,.035)}
+.demo-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:14px 26px 18px;font-size:12px;color:var(--faint)}
+.demo-foot a{color:var(--accent);font-weight:650}
+
+.section{padding:104px 0}
+.section-head{max-width:38rem}
+.eyebrow{margin:0;font-size:12px;font-weight:650;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.section-head h2{margin:14px 0 0;font-size:clamp(32px,4.2vw,48px);line-height:1.12;letter-spacing:-.038em;font-weight:780}
+.section-head h2 .soft{color:var(--muted);font-weight:520}
+.section-head p{margin:18px 0 0;font-size:16px;color:var(--muted);line-height:1.85}
+.surface{position:relative;background:rgba(255,252,247,.55);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.surface::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 40% at 50% 0%,rgba(15,92,76,.05),transparent 70%)}
+
+.chain{--mark:9px;--track:28px;margin-top:48px;position:relative;padding-left:var(--track)}
+.chain::before{content:"";position:absolute;left:calc((var(--mark) - 1px) / 2);top:10px;bottom:10px;width:1px;background:var(--line-strong)}
+.chain-row{position:relative;padding:0 0 32px}
+.chain-row:last-child{padding-bottom:0}
+.chain-row::before{content:"";position:absolute;left:calc(var(--track) * -1);top:8px;width:var(--mark);height:var(--mark);border-radius:50%;background:var(--surface);border:1.5px solid var(--accent);box-sizing:border-box;z-index:1}
+.chain-idx{font:11px/1 var(--mono);letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+.chain-body h3{margin:0;font-size:18px;font-weight:720;letter-spacing:-.025em}
+.chain-body p{margin:8px 0 0;font-size:15px;line-height:1.85;color:var(--muted);max-width:42rem}
+.chain-body .out{margin-top:10px;font-size:13px;color:var(--ink)}
+.chain-body .out b{font-weight:650;color:var(--accent)}
+.chain-body code{font-family:var(--mono);font-size:12px;color:var(--accent)}
+
+.compare-wrap{margin-top:40px;padding:8px 28px 12px;border-radius:20px;background:rgba(255,252,247,.8);border:1px solid rgba(20,20,19,.06);box-shadow:var(--shadow)}
+.compare{width:100%;border-collapse:collapse;font-size:15px}
+.compare th,.compare td{text-align:left;padding:18px 8px;vertical-align:top;line-height:1.7;border-bottom:1px solid var(--line)}
+.compare tr:last-child td{border-bottom:0}
+.compare th{padding-top:18px;padding-bottom:14px;font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.compare td:first-child,.compare th:first-child{padding-right:28px;width:46%;color:var(--muted);font-weight:400}
+.compare td:last-child{color:var(--ink);font-weight:580}
+.split{display:grid;gap:28px;margin-top:36px}
+@media(min-width:768px){.split{grid-template-columns:1fr 1fr;gap:24px}}
+.split>div{padding:24px 26px;border-radius:20px;background:rgba(255,252,247,.75);border:1px solid rgba(20,20,19,.06)}
+.split h3{margin:0;font-size:12px;font-weight:650;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.split ul{margin:16px 0 0;padding:0;list-style:none}
+.split li{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.8;color:var(--muted)}
+.split li:last-child{border-bottom:0}
+.split li b{color:var(--ink);font-weight:650}
+.split>div>p{margin:14px 0 0;font-size:14px;line-height:1.85;color:var(--muted)}
+.term{margin-top:18px;padding:18px 20px;background:linear-gradient(160deg,#1a1a18,#20332d);color:#e8e6e1;border-radius:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.95;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.term .ok{color:#9dceb8}.term .dim{color:#8e8c86}.term .key{color:#9ec9ff}.term .bad{color:#e2a8a0}
+
+.case-card{display:block;padding:28px;margin-top:18px;border:1px solid rgba(20,20,19,.07);border-radius:18px;background:rgba(255,252,247,.78);color:inherit;box-shadow:0 18px 48px -36px rgba(20,20,19,.28);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.case-card:hover{transform:translateY(-3px);border-color:rgba(15,92,76,.25);box-shadow:0 24px 56px -30px rgba(15,92,76,.28)}
+.case-card:hover .case-title{color:var(--accent)}
+.case-badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:12px;font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft)}
+.case-badge.demo{color:var(--warn-ink);background:var(--warn-bg)}
+.case-title{margin:14px 0 0;font-size:28px;font-weight:760;letter-spacing:-.035em;transition:color .2s ease}
+.case-grid{display:grid;gap:12px;margin-top:22px}
+@media(min-width:640px){.case-grid{grid-template-columns:1fr 1fr}}
+.case-grid div{padding:14px 16px;background:rgba(244,242,236,.7);border-radius:14px}
+.case-grid b{display:block;margin-bottom:6px;font:10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.case-grid span{font-size:13px;line-height:1.7;color:var(--muted)}
+.pair{display:grid;gap:16px;margin-top:4px}
+@media(min-width:768px){.pair{grid-template-columns:1fr 1fr;gap:16px}}
+.pair .case-card{margin-top:0}
+.pair .case-title{font-size:22px}
+
+.steps{margin-top:40px;display:grid;gap:14px}
+.step{display:grid;gap:12px;padding:26px 28px;border:1px solid rgba(20,20,19,.06);border-radius:20px;background:rgba(255,252,247,.78)}
+@media(min-width:768px){.step{grid-template-columns:120px 1fr;gap:28px}}
+.step-num{font:12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;color:var(--accent);padding-top:4px}
+.step p{margin:0;font-size:15px;color:var(--ink)}
+.step .hint{margin-top:10px;font-size:13px;line-height:1.7;color:var(--muted)}
+.code{display:block;margin-top:14px;padding:14px 16px;background:rgba(20,20,19,.04);border-radius:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--accent);white-space:pre-wrap;overflow-wrap:anywhere}
+.host{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.host span{font-size:12px;color:var(--muted);padding:5px 10px;border-radius:12px;background:rgba(20,20,19,.04)}
+.prompt{margin-top:16px;padding:22px 24px;background:linear-gradient(160deg,#1a1a18,#20332d);color:#eceae4;border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.prompt-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:12px;font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:#8e8c86}
+.prompt p{margin:0;font-size:14px;line-height:1.85;color:#ddd9d0}
+.prompt button{margin-top:16px;padding:8px 14px;border:1px solid #4a4844;background:transparent;color:#eceae4;border-radius:12px;font-size:12px;font-weight:600;cursor:pointer;transition:border-color .2s ease,background .2s ease}
+.prompt button:hover{border-color:#8e8c86;background:rgba(255,255,255,.04)}
+
+.faq{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item button{width:100%;display:flex;justify-content:space-between;gap:16px;padding:20px 0;border:0;background:transparent;text-align:left;font-size:16px;font-weight:650;color:var(--ink);cursor:pointer}
+.faq-plus{display:grid;place-items:center;width:28px;height:28px;border-radius:12px;background:rgba(20,20,19,.04);font-weight:400;color:var(--faint);font-size:18px;line-height:1;transition:transform .25s ease,background .2s ease,color .2s ease}
+.faq-copy{display:none;padding:0 0 20px;font-size:14px;line-height:1.85;color:var(--muted)}
+.faq-item.open .faq-copy{display:block}
+.faq-item.open .faq-plus{transform:rotate(45deg);background:var(--accent-soft);color:var(--accent)}
+.closing{margin-top:48px;padding:28px;border-radius:18px;background:linear-gradient(145deg,rgba(228,240,236,.9),rgba(255,252,247,.95));border:1px solid rgba(15,92,76,.12);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+.closing h3{margin:0;font-size:22px;font-weight:720;letter-spacing:-.025em}
+.closing p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.closing .actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.footer{border-top:1px solid var(--line);padding:32px 0;font-size:13px;color:var(--faint)}
+.footer .shell{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.footer a:hover{color:var(--ink)}
+.more{margin-top:28px;font-size:14px;color:var(--muted)}
+.more a{color:var(--accent);font-weight:650}
+
+@media(max-width:767px){
+  .shell{padding:0 18px}
+  .nav-links{display:none}
+  .hero{padding:64px 0 48px}
+  .hero-title{max-width:none}
+  .section{padding:72px 0}
+  .compare-wrap{padding:4px 16px 8px}
+  .case-card{padding:22px}
+  .chain{--track:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-<header class="topbar sticky top-0 z-30"><nav class="shell flex h-[60px] items-center justify-between" aria-label="主导航"><a href="#top" class="focus flex items-center gap-3 rounded-lg font-semibold tracking-tight"><span class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-teal to-violet text-sm text-white">W</span><span>hekouwang</span></a><div class="nav-links flex items-center gap-7 text-sm text-muted"><a class="focus rounded" href="#product">产品</a><a class="focus rounded" href="#examples">示例</a><a class="focus rounded" href="#start">快速开始</a><a class="focus rounded" href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub ↗</a><a class="btn-primary focus rounded-full px-5 py-2 font-semibold" href="#start">Install</a></div><button id="menu" class="focus rounded-lg border border-line px-3 py-1.5 md:hidden" aria-expanded="false" aria-controls="mobile">☰</button></nav><div id="mobile" class="shell hidden border-t border-line pb-4 pt-3 md:hidden"><div class="flex flex-col gap-3 text-sm text-muted"><a href="#product">产品</a><a href="#examples">示例</a><a href="#start">快速开始</a><a href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub ↗</a></div></div></header>
+<header class="topbar sticky top-0 z-30">
+  <nav class="shell flex h-[58px] items-center justify-between" aria-label="主导航">
+    <a href="#top" class="brand focus"><img class="brand-icon" src="icon.svg?v=2" width="22" height="22" alt="">hekouwang-writer-skill</a>
+    <div class="nav-links">
+      <a class="focus" href="#story">怎么工作</a>
+      <a class="focus" href="#diff">差别</a>
+      <a class="focus" href="#examples">案例</a>
+      <a class="focus" href="#start">安装</a>
+      <a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="btn btn-primary btn-sm focus" href="#start">安装</a>
+    </div>
+    <button id="menu" class="btn btn-secondary btn-sm focus md:hidden" aria-expanded="false" aria-controls="mobile">菜单</button>
+  </nav>
+  <div id="mobile" class="shell hidden border-t border-[var(--line)] pb-4 pt-3 md:hidden">
+    <div class="flex flex-col gap-3 text-sm" style="color:var(--muted)">
+      <a href="#story">怎么工作</a><a href="#diff">差别</a><a href="#examples">案例</a><a href="#start">安装</a>
+      <a href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </div>
+</header>
+
 <main id="top">
-<section class="hero-wash dot-bg border-b border-line"><div class="shell flex flex-col items-center pb-12 pt-10 text-center md:pb-16 md:pt-12"><div class="reveal pill rounded-full px-4 py-2 font-mono text-xs tracking-[.12em]"><span class="mr-2 text-teal">●</span>AGENT SKILL · CJK WRITING · MIT-0</div><h1 class="hero-title reveal mt-6 max-w-3xl text-[60px] font-bold leading-[1.1] tracking-[-.055em]" style="transition-delay:.08s">中文写作，<br class="md:hidden">不只要<br class="hidden md:inline"><span class="gradient">写得顺</span>，<br class="md:hidden">还要对得上。</h1><p class="hero-copy reveal mt-5 max-w-2xl text-[18px] leading-8 text-muted" style="transition-delay:.16s">hekouwang-writer-skill 是一个中文写作质量控制 Agent Skill：写文档、修文章、做体检，保护出处、数字、模态和原意。</p><p class="reveal mt-3 text-sm text-muted" style="transition-delay:.20s">适合内容创作者、研究人员、产品/运营，以及需要交付正式中文文档的人。</p><div class="reveal mt-7 flex flex-wrap justify-center gap-3" style="transition-delay:.24s"><a class="btn-primary focus rounded-full px-7 py-3 font-semibold" href="#start">免费安装</a><a class="btn-secondary focus rounded-full px-7 py-3 font-semibold" href="cases/family-pension-case.html">读真实案例</a></div>
-<div class="demo reveal panel w-full max-w-3xl overflow-hidden text-left" style="transition-delay:.32s">
-<div class="demo-head"><span class="demo-title"><span class="demo-dot" aria-hidden="true"></span>看它怎么改一段话</span><div class="demo-switch" role="tablist" aria-label="改写示例切换">
-<button class="demo-chip" role="tab" id="demo-chip-1" aria-selected="true" aria-controls="demo-body" data-demo="1">长句拆开</button>
-<button class="demo-chip" role="tab" id="demo-chip-2" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="2">枚举改列表</button></div></div>
-<div class="demo-body grid gap-4 p-5 md:grid-cols-2 md:p-6" id="demo-body" role="tabpanel" aria-labelledby="demo-chip-1">
-<div class="demo-block"><span class="demo-block-label">改前</span><p class="demo-text" id="demo-before">她2026年12月满60时只有14年；2027年保费不能提前缴（已确认），只能2027年当年缴，2027年底才满15年，待遇自次月起发。</p></div>
-<div class="demo-block is-after"><span class="demo-block-label">改后</span><p class="demo-text" id="demo-after">她2026年12月满60岁时只有14年。2027年保费不能提前缴（恩阳区城乡局已确认），只能2027年当年缴。到2027年底才满15年，待遇自次月起发。</p></div>
-<p class="demo-note md:col-span-2" id="demo-note">一句里挤了四个时间点。拆开后，时间、条件和来源各自成句；数字和条件一个没丢。</p></div>
-<div class="demo-foot"><span>摘录自仓库内真实案例记录（家庭办事文档，已脱敏），不是虚构示例。</span><a class="focus rounded font-semibold text-teal" href="cases/family-pension-case.html">看完整案例 →</a></div>
-</div>
-</div></section>
-<section id="product" class="shell py-20 md:py-24">
-<div class="reveal max-w-2xl"><p class="tag">WHAT IT DOES</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">你给它一个具体任务，<br><span class="text-muted">它交付一份可核对的结果。</span></h2></div>
-<div class="reveal panel mt-10 grid overflow-hidden md:grid-cols-2"><article class="p-8 md:p-10"><span class="tag">DOCUMENT MODE · DEFAULT</span><h3 class="mt-6 text-2xl font-bold">“把这份材料整理成办事指南。”</h3><p class="mt-4 text-muted">适合方案、报告、说明、邮件、汇报、家庭文档。先判断读者和目的，再用 WRITE 五步装进结构。</p><div class="mt-7 border-t border-line pt-5 text-sm"><b>交付：</b>成稿 + 进度卡 + 必要的检查结果</div></article><article class="border-t border-line bg-[#f9fafb] p-8 md:border-l md:border-t-0 md:p-10"><span class="tag">ARTICLE MODE</span><h3 class="mt-6 text-2xl font-bold">“先诊断，再把这篇文章写得像人。”</h3><p class="mt-4 text-muted">适合公众号、头条和长文章母版。保留事实、原意和信息密度，不编第一人称，不承诺绕过检测。</p><div class="mt-7 border-t border-line pt-5 text-sm"><b>交付：</b>诊断清单 + 改写文本 + 事实保留说明</div></article></div></section>
-<section id="examples" class="border-y border-line bg-white"><div class="shell py-20 md:py-24">
-<div class="reveal flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p class="tag">EXAMPLES FROM THE REPOSITORY</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">先看它怎么工作。</h2></div><a class="focus w-fit rounded-full border border-line px-5 py-2 text-sm font-semibold text-muted hover:border-slate-400" href="https://github.com/huiyonghkw/hekouwang-writer-skill/tree/main/examples" target="_blank" rel="noreferrer">打开全部案例 ↗</a></div>
-<a class="reveal panel mt-10 grid overflow-hidden md:grid-cols-[1.1fr_1fr] hover:-translate-y-0.5" href="cases/family-pension-case.html"><div class="p-8 md:p-10"><span class="tag">REAL CASE PROOF · 真实案例</span><h3 class="mt-6 text-3xl font-bold tracking-[-.03em]">家庭办事文档</h3><p class="mt-4 max-w-md text-muted">一份家庭养老保险办理指南。读者是不懂社保的家属，目标是 12 月去窗口前定档次、办业务，并留一份以后可查的记录。</p><div class="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-sm"><span><b class="text-muted">读者</b> 不了解社保的家属</span><span><b class="text-muted">交付</b> 行动清单 + 过程存档</span></div></div><div class="border-t border-line bg-[#f0faf8] p-8 md:border-l md:border-t-0 md:p-10"><span class="tag">记录里的一段改前改后</span><p class="mt-5 text-[15px] leading-8 text-muted">她2026年12月满60时只有14年；2027年保费不能提前缴（已确认）……</p><p class="mt-4 flex items-start gap-2 text-[15px] leading-8"><span class="mt-2 text-teal" aria-hidden="true">→</span><span>她2026年12月满60岁时只有14年。2027年保费不能提前缴（恩阳区城乡局已确认）……</span></p><span class="mt-7 inline-block text-sm font-semibold text-teal">打开 HTML 案例 →</span></div></a>
-<div class="reveal mt-12"><p class="tag">流程演示 · 占位素材 · 未运行脚本</p><ul class="mt-4 divide-y divide-line border-y border-line"><li><a class="focus flex flex-wrap items-baseline justify-between gap-2 py-4 hover:bg-[#fafbfc]" href="cases/revise-project-report.html"><b>修订项目报告</b><span class="text-sm text-muted">既有文档 → 保留数字、责任和范围</span></a></li><li><a class="focus flex flex-wrap items-baseline justify-between gap-2 py-4 hover:bg-[#fafbfc]" href="cases/article-from-research.html"><b>从研究包写文章</b><span class="text-sm text-muted">判断、数字和证据 → 对得上</span></a></li><li><a class="focus flex flex-wrap items-baseline justify-between gap-2 py-4 hover:bg-[#fafbfc]" href="cases/write-sop.html"><b>写操作说明</b><span class="text-sm text-muted">素材 → 可执行步骤与待确认项</span></a></li><li><a class="focus flex flex-wrap items-baseline justify-between gap-2 py-4 hover:bg-[#fafbfc]" href="cases/doc-checkup-only.html"><b>只检查，不改写</b><span class="text-sm text-muted">原句 → 问题、建议和验证状态</span></a></li><li><a class="focus flex flex-wrap items-baseline justify-between gap-2 py-4 hover:bg-[#fafbfc]" href="cases/deai-rewrite.html"><b>文章去 AI 味</b><span class="text-sm text-muted">先诊断，再保真改写</span></a></li></ul></div>
-</div></section>
-<section class="shell py-20 md:py-24"><div class="reveal max-w-2xl"><p class="tag">THREE GUARANTEES</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">三个不会被顺手抹掉的东西。</h2></div><div class="reveal mt-10 grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0"><div class="py-6 md:py-0 md:pr-10"><b class="text-2xl text-teal">01</b><h3 class="mt-5 text-xl font-bold">出处</h3><p class="mt-3 text-sm leading-7 text-muted">政策、数字、专有名词查不到出处，就标注“暂无出处”，不编造。</p></div><div class="py-6 md:border-l md:border-line md:px-10 md:py-0"><b class="text-2xl text-teal">02</b><h3 class="mt-5 text-xl font-bold">模态</h3><p class="mt-3 text-sm leading-7 text-muted">“约、可能、待核实”是事实的一部分，不会被润色成确定语气。</p></div><div class="py-6 md:border-l md:border-line md:pl-10 md:py-0"><b class="text-2xl text-teal">03</b><h3 class="mt-5 text-xl font-bold">修订</h3><p class="mt-3 text-sm leading-7 text-muted">改动逐条列出，复杂修订可用脚本对账；脚本只报告，不自动覆盖原文。</p></div></div></section>
-<section class="border-y border-line bg-[#f8fafb]"><div class="shell py-20 md:py-24"><div class="reveal max-w-2xl"><p class="tag">QUALITY TOOLING</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">规则不是口号，<br><span class="text-muted">有脚本可以检查。</span></h2></div><div class="reveal mt-10 grid gap-10 md:grid-cols-2"><div><p class="text-sm leading-7 text-muted">六个 Python 标准库工具，按任务复杂度触发。advisory 只提醒，hard 才阻断。</p><ul class="rule-list mt-6"><li><code>sawdust_scan.py</code><span>锯末词密度 · advisory</span></li><li><code>sentence_load.py</code><span>句长与分句堆叠 · advisory</span></li><li><code>rhythm_scan.py</code><span>文章节奏 · advisory</span></li><li><code>doc_lint.py</code><span>表格与标题层级 · hard</span></li><li><code>check_fidelity.py</code><span>算术关系 · hard</span></li><li><code>change_list.py</code><span>改前/改后对账 · strict</span></li></ul></div><div class="term"><div class="mb-3 flex items-center justify-between"><span class="dim">$ python scripts/check_fidelity.py 终稿.md</span><span class="dim">exit 0</span></div><div><span class="key">check_fidelity</span> 补差表 6 行合计 <span class="ok">✓ 验算通过</span></div><div><span class="key">check_fidelity</span> 档次表“当年共入账”行 17 列 <span class="ok">✓ 验算通过</span></div><div><span class="key">check_fidelity</span> 对账等式 46,400 + 4,000 × 3 = 58,400 <span class="ok">✓ 通过</span></div><div class="mt-2 dim"># 摘自仓库案例记录中的终稿检查结果，非本轮重新运行</div></div></div></div></section>
-<section id="start" class="shell py-20 md:py-24"><div class="reveal mx-auto max-w-3xl text-center"><p class="tag">QUICK START</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">三步开始使用</h2><p class="mt-5 text-muted">仓库本身就是产品。按你的 Agent 宿主放入 Skill 目录，再给它一个具体任务。</p></div><div class="reveal mx-auto mt-10 max-w-4xl divide-y divide-line border-y border-line"><div class="grid gap-4 py-7 md:grid-cols-[130px_1fr] md:gap-10"><span class="step-num">01 · 下载</span><div><p>克隆 writer-skill 仓库。</p><code class="code mt-3 block rounded-lg bg-[#f5f7f9] px-4 py-3 font-mono text-xs text-violet">git clone https://github.com/huiyonghkw/hekouwang-writer-skill.git</code></div></div><div class="grid gap-4 py-7 md:grid-cols-[130px_1fr] md:gap-10"><span class="step-num">02 · 安装</span><div><p>复制到宿主识别的 Skill 目录。</p><div class="mt-3 flex flex-wrap gap-2"><span class="pill rounded-full px-3 py-1 text-xs">CodeBuddy</span><span class="pill rounded-full px-3 py-1 text-xs">Claude Code</span><span class="pill rounded-full px-3 py-1 text-xs">Cursor</span><span class="pill rounded-full px-3 py-1 text-xs">Codex</span></div><p class="mt-3 text-xs leading-6 text-muted">各宿主目录与发现规则不同，请按宿主配置；不要把 CodeBuddy 路径照搬到其他工具。</p></div></div><div class="grid gap-4 py-7 md:grid-cols-[130px_1fr] md:gap-10"><span class="step-num">03 · 开始任务</span><div><p>给它材料和目标，说明事实边界。可以直接复制下面这段指令。</p><div class="mt-4 rounded-2xl bg-[#17202b] p-5 text-left text-white shadow-lg md:p-6"><div class="mb-3 flex items-center justify-between"><span class="font-mono text-xs text-white/45">FIRST TASK · COPY PROMPT</span><span id="copy-state" class="text-xs text-[#9be8d0]" role="status"></span></div><p id="first-task" class="text-sm leading-7 text-white/85">请把这份会议材料整理成一页汇报。先确认读者和目的，不要补写材料中没有的事实；数字、日期和“可能/待确认”等表述都要保留。最后列出你做了哪些改动，以及哪些信息还需要我确认。</p><button id="copy-command" class="focus mt-4 rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold">复制示例指令</button></div></div></div></div><p class="reveal mt-8 text-center text-sm text-muted"><a class="focus rounded font-semibold text-teal hover:underline" href="https://github.com/huiyonghkw/hekouwang-writer-skill#installation" target="_blank" rel="noreferrer">查看各宿主完整安装说明 ↗</a></p></div></section>
-<section class="shell py-20 md:py-24"><div class="reveal mx-auto max-w-3xl"><div class="mb-5 flex flex-wrap items-center justify-between gap-2"><p class="tag">VERSION</p><a class="focus rounded text-sm font-semibold text-teal hover:underline" href="https://github.com/huiyonghkw/hekouwang-writer-skill/blob/main/CHANGELOG.md" target="_blank" rel="noreferrer">v1.6.0 · 更新记录 ↗</a></div><p class="tag">BOUNDARIES</p><h2 class="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">它不替你假装确定。</h2><div class="mt-10 divide-y divide-line rounded-2xl border border-line bg-white"><div class="faq"><button class="focus flex w-full items-center justify-between p-5 text-left font-semibold" aria-expanded="false"><span>它会替我做事实核查吗？</span><span class="faq-plus text-2xl font-light">+</span></button><div class="faq-copy px-5 pb-5 text-sm leading-7 text-muted">不会。它保护出处、标出缺口；事实核查仍需要来源和人的判断。</div></div><div class="faq"><button class="focus flex w-full items-center justify-between p-5 text-left font-semibold" aria-expanded="false"><span>它承诺绕过 AI 检测吗？</span><span class="faq-plus text-2xl font-light">+</span></button><div class="faq-copy px-5 pb-5 text-sm leading-7 text-muted">不会。它处理空话、套路化表达和信息密度，不证明作者身份，也不承诺绕过检测器。</div></div><div class="faq"><button class="focus flex w-full items-center justify-between p-5 text-left font-semibold" aria-expanded="false"><span>它适合英文写作吗？</span><span class="faq-plus text-2xl font-light">+</span></button><div class="faq-copy px-5 pb-5 text-sm leading-7 text-muted">当前定位是中文文档与中文文章，句长阈值按中文字符设计。</div></div></div><div class="reveal closing mt-12"><div><h3 class="text-xl font-bold">先把一段话改好，再决定要不要装。</h3><p class="mt-2 text-sm text-muted">上面那段改写来自仓库里的真实案例记录。</p></div><div class="flex flex-wrap gap-3"><a class="btn-primary focus rounded-full px-6 py-2.5 text-sm font-semibold" href="#start">免费安装</a><a class="btn-secondary focus rounded-full px-6 py-2.5 text-sm font-semibold" href="cases/family-pension-case.html">读真实案例</a></div></div></div></section>
+<section class="hero">
+  <div class="hero-wash" aria-hidden="true"></div>
+  <div class="shell">
+    <p class="hero-brand reveal">hekouwang · writer-skill</p>
+    <h1 class="hero-title reveal" style="transition-delay:.06s">中文写作，不只要写得顺，还要<em>对得上</em>。</h1>
+    <p class="hero-copy reveal" style="transition-delay:.12s">把材料写成正式中文文档：出处找得到，数字对得上，「约 / 可能 / 待核实」不被润色抹掉。脚本只报告，不替你改文件。</p>
+    <p class="hero-note reveal" style="transition-delay:.16s">下面这条线，来自一份真实脱敏的家庭养老保险办事文档。</p>
+    <div class="hero-actions reveal" style="transition-delay:.2s">
+      <a class="btn btn-primary focus" href="#story">看它怎么对上账</a>
+      <a class="btn btn-secondary focus" href="cases/family-pension-case.html">打开完整案例</a>
+    </div>
+
+    <div class="demo reveal" style="transition-delay:.28s">
+      <div class="demo-head">
+        <span class="demo-title">真实案例里的三处核对</span>
+        <div class="demo-switch" role="tablist" aria-label="核对示例切换">
+          <button class="demo-chip" role="tab" id="demo-chip-1" aria-selected="true" aria-controls="demo-body" data-demo="1">数字算错</button>
+          <button class="demo-chip" role="tab" id="demo-chip-2" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="2">「约」保住</button>
+          <button class="demo-chip" role="tab" id="demo-chip-3" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="3">长句拆开</button>
+        </div>
+      </div>
+      <div class="demo-body" id="demo-body" role="tabpanel" aria-labelledby="demo-chip-1">
+        <div class="demo-block"><span class="demo-block-label" id="demo-label-a">出了什么问题</span><p class="demo-text" id="demo-before"></p></div>
+        <div class="demo-block is-after"><span class="demo-block-label" id="demo-label-b">它做了什么</span><p class="demo-text" id="demo-after"></p></div>
+        <p class="demo-note" id="demo-note"></p>
+      </div>
+      <div class="demo-foot">
+        <span>摘自仓库案例记录与台账，已脱敏</span>
+        <a class="focus" href="cases/family-pension-case.html">看完整证据链 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="section">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">一条真实案例</p>
+      <h2>一份办事文档，<span class="soft">从乱材料到对得上的稿。</span></h2>
+      <p>不讲抽象能力。只走一遍家庭养老保险提档补差案例里实际发生过的事。</p>
+    </div>
+    <div class="reveal chain">
+      <div class="chain-row"><div class="chain-idx">01</div><div class="chain-body"><h3>你给它什么</h3><p>缴费记录、电话核实笔记、政策摘录——材料散，口径不一，有的只有电话、没有网页链接。</p><p class="out"><b>输入：</b>真实材料，不是「帮我写一篇」四个字。</p></div></div>
+      <div class="chain-row"><div class="chain-idx">02</div><div class="chain-body"><h3>它先问清楚谁在用</h3><p>读者是不懂社保的家属；目的是 12 月去窗口前定档次、办业务，并留一份以后能查的记录。</p><p class="out"><b>动作：</b>先定读者和目的，再动笔。</p></div></div>
+      <div class="chain-row"><div class="chain-idx">03</div><div class="chain-body"><h3>它怎么改句子</h3><p>一句里挤了四个时间点，拆开；把「已确认」写成「恩阳区城乡局已确认」。年份、年限、条件一个没丢。</p><p class="out"><b>动作：</b>润色时补出处，不改事实。</p></div></div>
+      <div class="chain-row"><div class="chain-idx">04</div><div class="chain-body"><h3>它怎么拦数字错</h3><p>补差总额一度写成 39,750，正确应为 50,050。后来要求合计独立复算；终稿对账等式 46,400 + 4,000 × 3 = 58,400 两边咬合。</p><p class="out"><b>动作：</b>算术对账；这次错误直接催生了 <code>check_fidelity.py</code>。</p></div></div>
+      <div class="chain-row"><div class="chain-idx">05</div><div class="chain-body"><h3>它交什么</h3><p>摘要 → 已确认事实 → 核算与方案 → 时间线 → 行动清单 → 依据与术语。电话答复标成「电话，无链接」，不伪装成网页出处。</p><p class="out"><b>交付：</b>家属能照着办的文档结构 + 出处边界写清楚。</p></div></div>
+      <div class="chain-row"><div class="chain-idx">06</div><div class="chain-body"><h3>它不做什么</h3><p>不编造没有的链接；不把「约」写成确定数；检查脚本只报告，不自动覆盖原文。</p><p class="out"><b>边界：</b>脚本过关 ≠ 业务事实已经核定。</p></div></div>
+    </div>
+    <p class="more reveal">完整摘录、目录与历史检查结果 → <a class="focus" href="cases/family-pension-case.html">家庭办事文档案例页</a></p>
+  </div>
+</section>
+
+<section id="diff" class="surface section">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">差别</p>
+      <h2>和普通润色差在哪。</h2>
+    </div>
+    <div class="reveal compare-wrap">
+      <table class="compare">
+        <thead><tr><th>普通润色 / 去 AI 味</th><th>这个 Skill</th></tr></thead>
+        <tbody>
+          <tr><td>句子更顺</td><td>顺，且数字、出处还在</td></tr>
+          <tr><td>直接改文件</td><td>可以只检查；改了会列清单</td></tr>
+          <tr><td>口头说「已核实」</td><td>电话就写「电话，无链接」</td></tr>
+          <tr><td>「可能」常被写死</td><td>「约 / 可能 / 待核实」原样保留</td></tr>
+          <tr><td>靠感觉判断好不好</td><td>有脚本报告；脚本不改你的文件</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="reveal split">
+      <div>
+        <h3>两种用法</h3>
+        <ul>
+          <li><b>文档模式（默认）</b>：办事指南、方案、报告、邮件、汇报。先定读者，再装进结构，出成稿与检查结果。</li>
+          <li><b>文章模式</b>：公众号 / 头条正文，或去 AI 味。先诊断再改；不编第一人称，不承诺绕过检测。</li>
+        </ul>
+      </div>
+      <div>
+        <h3>脚本做什么</h3>
+        <p>六个纯 Python 标准库工具：锯末词、句长、节奏、表格标题、算术对账、改前改后差异。advisory 只提醒；表格结构和算术不一致可以阻断。全部只报告，不自动改写。</p>
+        <div class="term">
+          <div><span class="dim"># 案例终稿检查摘要（历史记录）</span></div>
+          <div><span class="key">check_fidelity</span> 补差曾写成 <span class="bad">39,750</span> → 复算后对上</div>
+          <div><span class="key">check_fidelity</span> 46,400 + 4,000 × 3 = 58,400 <span class="ok">✓</span></div>
+          <div class="mt-1 dim"># 脚本不替代来源核实或人工审读</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="examples" class="section">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">案例</p>
+      <h2>先看明白再决定装。</h2>
+      <p>一个真实实测，两个流程示意。其余演示仍在仓库 examples/，不跟真案例抢注意力。</p>
+    </div>
+    <div class="reveal">
+      <a class="case-card focus" href="cases/family-pension-case.html">
+        <span class="case-badge">真实实测 · 已脱敏</span>
+        <h3 class="case-title">家庭办事文档</h3>
+        <div class="case-grid">
+          <div><b>场景</b><span>家属要办城乡居民养老提档补差</span></div>
+          <div><b>你说</b><span>材料很乱，写成去窗口能用的办事文档</span></div>
+          <div><b>它做</b><span>定读者 → 拆句补出处 → 拦合计错误 → 标「电话，无链接」</span></div>
+          <div><b>你得</b><span>可办结构 + 对账等式 + 四项历史检查结果</span></div>
+        </div>
+      </a>
+      <div class="pair">
+        <a class="case-card focus" href="cases/doc-checkup-only.html">
+          <span class="case-badge demo">流程示意 · 未跑脚本</span>
+          <h3 class="case-title">只检查，不改写</h3>
+          <div class="case-grid">
+            <div><b>场景</b><span>领导说先别改文件</span></div>
+            <div><b>你说</b><span>先告诉我问题，不要直接改</span></div>
+            <div><b>它做</b><span>输出位置 / 原句 / 问题 / 建议</span></div>
+            <div><b>你得</b><span>问题表；改不改由你定</span></div>
+          </div>
+        </a>
+        <a class="case-card focus" href="cases/deai-rewrite.html">
+          <span class="case-badge demo">流程示意 · 占位句</span>
+          <h3 class="case-title">文章去 AI 味</h3>
+          <div class="case-grid">
+            <div><b>场景</b><span>成稿读着像模板</span></div>
+            <div><b>你说</b><span>去 AI 味，但别改事实强度</span></div>
+            <div><b>它做</b><span>先诊断再分档改；素材没有就不编</span></div>
+            <div><b>你得</b><span>诊断表 + 保真改写稿</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <p class="more reveal">写 SOP、修订汇报、从研究包写文章等 → <a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill/tree/main/examples" target="_blank" rel="noreferrer">examples/ ↗</a></p>
+  </div>
+</section>
+
+<section id="start" class="surface section">
+  <div class="shell">
+    <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <p class="eyebrow">安装</p>
+      <h2>三步开始使用</h2>
+      <p>装上后，先用下面这段指令感受「只检查、不改文件」。</p>
+    </div>
+    <div class="reveal steps">
+      <div class="step">
+        <span class="step-num">01 · 安装</span>
+        <div>
+          <p>用 skills CLI 装到当前 Agent 宿主（推荐）。</p>
+          <code class="code">npx skills add huiyonghkw/hekouwang-writer-skill</code>
+          <p class="hint">也可在 <a class="focus" style="color:var(--accent);font-weight:600" href="https://clawhub.ai/huiyonghkw/skills/hekouwang-writer-skill" target="_blank" rel="noreferrer">ClawHub</a> 查看。宿主不支持 CLI 时，再手动克隆。</p>
+          <div class="host"><span>Claude Code</span><span>Cursor</span><span>Codex</span><span>CodeBuddy</span></div>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02 · 备选</span>
+        <div>
+          <p>手动克隆后，复制到宿主识别的 Skill 目录。</p>
+          <code class="code">git clone https://github.com/huiyonghkw/hekouwang-writer-skill.git</code>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03 · 30 秒自测</span>
+        <div>
+          <p>复制下面指令，贴上你自己的一段文字。</p>
+          <div class="prompt">
+            <div class="prompt-meta"><span>FIRST TASK</span><span id="copy-state" role="status"></span></div>
+            <p id="first-task">下面这段里可能有合计对不上，也可能有「约 / 可能 / 待核实」。请先只检查、不要改文件：按「位置 / 原句 / 问题 / 建议」列出；数字和不确定说法都不要擅自改掉。检查完再问我要不要改。</p>
+            <button id="copy-command" class="focus">复制示例指令</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="more reveal" style="text-align:center"><a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill#%E4%BD%9C%E4%B8%BA-agent-skill-%E5%AE%89%E8%A3%85" target="_blank" rel="noreferrer">查看各宿主完整安装说明 ↗</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell" style="max-width:720px">
+    <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline">
+      <p class="eyebrow">边界</p>
+      <a class="focus" style="font-size:13px;color:var(--accent);font-weight:600" href="https://github.com/huiyonghkw/hekouwang-writer-skill/blob/main/CHANGELOG.md" target="_blank" rel="noreferrer">v1.6.1 · 更新记录</a>
+    </div>
+    <h2 class="reveal" style="margin:12px 0 0;font-size:clamp(30px,4vw,42px);letter-spacing:-.035em;font-weight:750">它不替你假装确定。</h2>
+    <div class="reveal faq" style="margin-top:36px">
+      <div class="faq-item">
+        <button class="focus" aria-expanded="false"><span>它和「去 AI 味 / 活人感」Skill 有何不同？</span><span class="faq-plus">+</span></button>
+        <div class="faq-copy">那些产品主攻读感。本 Skill 主攻出处、数字和修订能不能对上，并用只报告不改写的脚本检查。文章模式也能去 AI 味，但不拿编造的细节换「人味」。</div>
+      </div>
+      <div class="faq-item">
+        <button class="focus" aria-expanded="false"><span>它会替我做事实核查吗？</span><span class="faq-plus">+</span></button>
+        <div class="faq-copy">不会。它保护出处、标出缺口；事实核查仍需要来源和人的判断。</div>
+      </div>
+      <div class="faq-item">
+        <button class="focus" aria-expanded="false"><span>为什么案例不全是实测？</span><span class="faq-plus">+</span></button>
+        <div class="faq-copy">只有家庭办事文档带真实脱敏记录与历史检查结果。另外两个是流程示意，用来说明「只检查」和「去 AI 味」怎么走；页上会标明未跑脚本，避免假装测过。</div>
+      </div>
+      <div class="faq-item">
+        <button class="focus" aria-expanded="false"><span>它承诺绕过 AI 检测吗？</span><span class="faq-plus">+</span></button>
+        <div class="faq-copy">不会。它处理空话和套路表达，不证明作者身份，也不承诺绕过检测器。</div>
+      </div>
+    </div>
+    <div class="reveal closing">
+      <div>
+        <h3>先看懂一条真实证据链，再决定要不要装。</h3>
+        <p>养老案例里有错算、对账、出处边界和检查结果。</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary focus" href="#start">免费安装</a>
+        <a class="btn btn-secondary focus" href="cases/family-pension-case.html">读真实案例</a>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
-<footer class="border-t border-line bg-white"><div class="shell flex flex-col justify-between gap-4 py-8 text-sm text-muted sm:flex-row"><span>© 会勇禾口王 · hekouwang-writer-skill · MIT-0</span><div class="flex gap-5"><a class="focus rounded hover:text-ink" href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub ↗</a><a class="focus rounded hover:text-ink" href="https://github.com/huiyonghkw/hekouwang-writer-skill/blob/main/CHANGELOG.md" target="_blank" rel="noreferrer">Changelog</a></div></div></footer>
+
+<footer class="footer">
+  <div class="shell">
+    <span>© 会勇禾口王 · hekouwang-writer-skill · MIT-0</span>
+    <div class="flex gap-5">
+      <a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill/blob/main/CHANGELOG.md" target="_blank" rel="noreferrer">Changelog</a>
+    </div>
+  </div>
+</footer>
+
 <script>
 const $=s=>document.querySelector(s);
 const revealItems=document.querySelectorAll('.reveal');
-if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});revealItems.forEach(e=>io.observe(e));}else{revealItems.forEach(e=>e.classList.add('on'));}
-$('#menu').addEventListener('click',()=>{const open=$('#menu').getAttribute('aria-expanded')==='true';$('#menu').setAttribute('aria-expanded',!open);$('#mobile').classList.toggle('hidden',open)});document.querySelectorAll('#mobile a').forEach(a=>a.addEventListener('click',()=>{$('#mobile').classList.add('hidden');$('#menu').setAttribute('aria-expanded','false')}));
+if('IntersectionObserver'in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+  revealItems.forEach(e=>io.observe(e));
+}else{revealItems.forEach(e=>e.classList.add('on'));}
+const topbar=$('.topbar');
+const onScroll=()=>topbar&&topbar.classList.toggle('is-stuck',window.scrollY>8);
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+const menu=$('#menu');
+if(menu){
+  menu.addEventListener('click',()=>{
+    const open=menu.getAttribute('aria-expanded')==='true';
+    menu.setAttribute('aria-expanded',String(!open));
+    $('#mobile').classList.toggle('hidden',open);
+  });
+  document.querySelectorAll('#mobile a').forEach(a=>a.addEventListener('click',()=>{
+    $('#mobile').classList.add('hidden');
+    menu.setAttribute('aria-expanded','false');
+  }));
+}
+
 const demoData={
-  '1':{before:'她2026年12月满60时只有14年；2027年保费不能提前缴（已确认），只能2027年当年缴，2027年底才满15年，待遇自次月起发。',after:'她2026年12月满60岁时只有14年。2027年保费不能提前缴（恩阳区城乡局已确认），只能2027年当年缴。到2027年底才满15年，待遇自次月起发。',note:'一句里挤了四个时间点。拆开后，时间、条件和来源各自成句；数字和条件一个没丢。'},
-  '2':{before:'电话：恩阳区城乡局 0827-3369682；恩阳区居保局 0827-3369685；……',after:'电话：\n- 恩阳区城乡局 0827-3369682（首选）\n- 恩阳区居保局 0827-3369685',note:'连续分号改成列表，首选项标注出来；原材料没有的内容不补。"首选"来自案例记录中对该号码的标注。'}
+  '1':{a:'出了什么问题',b:'它做了什么',before:'补差总额一度写成 39,750。表内数字看起来整齐，合计没有独立复算。',after:'独立复算后改为正确合计 50,050。终稿对账：46,400 + 4,000 × 3 = 58,400，与表内「需自筹」咬合。',note:'你拿到什么：算术被拦下，而不是被润色掩盖。这次错误催生了 check_fidelity.py。'},
+  '2':{a:'出了什么问题',b:'它做了什么',before:'估算养老金容易被写成确定数；「约」和未计入项常在润色里消失。',after:'表头保留「月养老金（约）」；表注写明未计利息、未计基础养老金历年上调——不当成核定值。',note:'你拿到什么：不确定说法还在，家属不会把估算当成窗口核定结果。'},
+  '3':{a:'改前',b:'改后',before:'她2026年12月满60时只有14年；2027年保费不能提前缴（已确认），只能2027年当年缴，2027年底才满15年，待遇自次月起发。',after:'她2026年12月满60岁时只有14年。2027年保费不能提前缴（恩阳区城乡局已确认），只能2027年当年缴。到2027年底才满15年，待遇自次月起发。',note:'你拿到什么：时间、条件、来源各自成句；数字和条件一个没丢。'}
 };
-const renderDemo=key=>{const d=demoData[key];$('#demo-before').textContent=d.before;$('#demo-after').textContent=d.after;$('#demo-note').textContent=d.note;$('#demo-body').setAttribute('aria-labelledby',`demo-chip-${key}`)};
+const renderDemo=key=>{
+  const d=demoData[key];
+  $('#demo-label-a').textContent=d.a;
+  $('#demo-label-b').textContent=d.b;
+  $('#demo-before').textContent=d.before;
+  $('#demo-after').textContent=d.after;
+  $('#demo-note').textContent=d.note;
+  $('#demo-body').setAttribute('aria-labelledby',`demo-chip-${key}`);
+};
 renderDemo('1');
 const demoChips=[...document.querySelectorAll('.demo-chip')];
-const selectDemo=(chip,focus=false)=>{demoChips.forEach(c=>{const on=c===chip;c.setAttribute('aria-selected',String(on));c.tabIndex=on?0:-1});renderDemo(chip.dataset.demo);if(focus)chip.focus()};
-demoChips.forEach((chip,i)=>{chip.addEventListener('click',()=>selectDemo(chip));chip.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight')next=(i+1)%demoChips.length;else if(e.key==='ArrowLeft')next=(i+demoChips.length-1)%demoChips.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=demoChips.length-1;else return;e.preventDefault();selectDemo(demoChips[next],true)})});
-document.querySelectorAll('.faq button').forEach((b,i)=>{const panel=b.nextElementSibling;panel.id=`faq-panel-${i+1}`;b.setAttribute('aria-controls',panel.id);b.addEventListener('click',()=>{const f=b.closest('.faq'),open=f.classList.toggle('open');b.setAttribute('aria-expanded',String(open))})});
-$('#copy-command').addEventListener('click',async()=>{const text=$('#first-task').innerText;let copied=false;try{await navigator.clipboard.writeText(text);copied=true}catch(e){const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();copied=document.execCommand('copy');t.remove()}$('#copy-state').textContent=copied?'示例指令已复制':'复制失败，请手动选择示例指令';setTimeout(()=>$('#copy-state').textContent='',2200)});
+const selectDemo=(chip,focus=false)=>{
+  demoChips.forEach(c=>{const on=c===chip;c.setAttribute('aria-selected',String(on));c.tabIndex=on?0:-1});
+  renderDemo(chip.dataset.demo);
+  if(focus)chip.focus();
+};
+demoChips.forEach((chip,i)=>{
+  chip.addEventListener('click',()=>selectDemo(chip));
+  chip.addEventListener('keydown',e=>{
+    let next;
+    if(e.key==='ArrowRight')next=(i+1)%demoChips.length;
+    else if(e.key==='ArrowLeft')next=(i+demoChips.length-1)%demoChips.length;
+    else if(e.key==='Home')next=0;
+    else if(e.key==='End')next=demoChips.length-1;
+    else return;
+    e.preventDefault();
+    selectDemo(demoChips[next],true);
+  });
+});
+
+document.querySelectorAll('.faq-item button').forEach((b,i)=>{
+  const panel=b.nextElementSibling;
+  panel.id=`faq-panel-${i+1}`;
+  b.setAttribute('aria-controls',panel.id);
+  b.addEventListener('click',()=>{
+    const item=b.closest('.faq-item');
+    const open=item.classList.toggle('open');
+    b.setAttribute('aria-expanded',String(open));
+  });
+});
+
+$('#copy-command').addEventListener('click',async()=>{
+  const text=$('#first-task').innerText;
+  let copied=false;
+  try{await navigator.clipboard.writeText(text);copied=true}
+  catch(e){
+    const t=document.createElement('textarea');
+    t.value=text;t.style.position='fixed';t.style.opacity='0';
+    document.body.appendChild(t);t.select();copied=document.execCommand('copy');t.remove();
+  }
+  $('#copy-state').textContent=copied?'已复制':'复制失败';
+  setTimeout(()=>$('#copy-state').textContent='',2200);
+});
 </script>
-</body></html>
+</body>
+</html>
