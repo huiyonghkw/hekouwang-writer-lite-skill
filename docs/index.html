@@ -27,6 +27,8 @@ button{font:inherit}
 .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
 .nav-links a:not(.btn):hover{color:var(--ink)}
 .nav-links a:not(.btn):hover::after{transform:scaleX(1)}
+.nav-links a.is-current{color:var(--ink)}
+.nav-links a.is-current::after{transform:scaleX(1)}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--ink);color:#f7f4ee;box-shadow:0 10px 24px -14px rgba(20,20,19,.55)}
@@ -34,23 +36,44 @@ button{font:inherit}
 .btn-secondary{background:rgba(255,252,247,.7);border-color:var(--line-strong);color:var(--ink);backdrop-filter:blur(8px)}
 .btn-secondary:hover{border-color:var(--ink);background:var(--surface)}
 .btn-sm{padding:8px 14px;font-size:13px}
+.btn-accent{background:var(--accent);color:#f7f4ee;box-shadow:0 12px 26px -16px rgba(15,92,76,.7)}
+.btn-accent:hover{background:#0d4f42}
+.price-pill{display:inline-flex;align-items:baseline;gap:8px;padding:7px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:700;letter-spacing:-.01em}
+.price-pill span{font-size:12px;font-weight:600;color:#2f6f60}
+@media(max-width:560px){.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%}}
 
 .hero{position:relative;padding:88px 0 72px;overflow:hidden}
 .hero-wash{position:absolute;inset:auto -8% -40% 48%;height:55%;pointer-events:none;background:radial-gradient(closest-side,rgba(15,92,76,.08),transparent 72%)}
 .hero-brand{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .hero-brand::before{content:"";width:18px;height:1px;background:var(--accent)}
-.hero-title{margin:22px 0 0;max-width:15ch;font-size:clamp(44px,6.4vw,72px);line-height:1.05;letter-spacing:-.048em;font-weight:800;color:var(--ink)}
-.hero-title em{font-style:normal;font-weight:inherit;letter-spacing:inherit;color:var(--accent)}
+.hero-title{margin:26px 0 0;font-size:clamp(36px,9vw,92px);line-height:1.04;letter-spacing:-.05em;font-weight:800;color:var(--ink)}
+.hero-br{display:block;height:0}
+.hero-title em{font-style:normal;font-weight:inherit;letter-spacing:inherit;color:var(--accent);white-space:nowrap}
 .hero-copy{margin:24px 0 0;max-width:34rem;font-size:18px;line-height:1.85;color:var(--muted)}
 .hero-note{margin:14px 0 0;font-size:14px;color:var(--faint)}
-.hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.hero-actions{margin-top:34px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.hero-lead{display:flex;flex-direction:column;align-items:center;max-width:980px;margin:0 auto;text-align:center}
+.hero-lead .hero-copy{margin:24px auto 0;max-width:42rem}
+.hero-lead .hero-note{margin-top:14px}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:64px;width:100%;max-width:640px;margin:46px auto 0;padding-top:24px;border-top:1px solid var(--line)}
+.hero-actions{margin-bottom:0}
+.hero-stats div{display:flex;flex-direction:column;gap:5px;text-align:center}
+@media(max-width:560px){
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .hero-stats div:last-child{grid-column:1/-1}
+}
+.hero-stats b{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.hero-stats span{font-size:12.5px;color:var(--muted)}
 
-.demo{margin-top:56px;border:1px solid rgba(20,20,19,.08);border-radius:18px;background:rgba(255,252,247,.86);backdrop-filter:blur(12px);box-shadow:var(--shadow);overflow:hidden}
+.demo{margin-top:44px;border:1px solid rgba(20,20,19,.08);border-radius:18px;background:rgba(255,252,247,.86);backdrop-filter:blur(12px);box-shadow:var(--shadow);overflow:hidden}
 .demo-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:18px 26px;background:linear-gradient(180deg,rgba(255,255,255,.55),transparent)}
 .demo-title{font-size:13px;font-weight:650;color:var(--ink);letter-spacing:-.01em}
 .demo-switch{display:flex;gap:8px;padding:4px;border-radius:12px;background:rgba(20,20,19,.04)}
 .demo-chip{border:0;background:transparent;padding:8px 14px;border-radius:12px;color:var(--faint);font-size:13px;font-weight:600;cursor:pointer;transition:background .2s ease,color .2s ease,box-shadow .2s ease}
-.demo-chip[aria-selected="true"]{color:var(--ink);background:var(--surface);box-shadow:0 1px 2px rgba(20,20,19,.06),0 4px 12px -8px rgba(20,20,19,.2)}
+.demo-chip[aria-selected="true"]{color:var(--ink);background:transparent;box-shadow:none}
+.demo-switch{position:relative}
+.demo-indicator{position:absolute;top:4px;left:0;height:calc(100% - 8px);border-radius:12px;background:var(--surface);box-shadow:0 1px 2px rgba(20,20,19,.06),0 4px 12px -8px rgba(20,20,19,.2);transition:transform .3s cubic-bezier(.22,1,.36,1),width .3s cubic-bezier(.22,1,.36,1);z-index:0}
+.demo-chip{position:relative;z-index:1}
 .demo-body{display:grid;gap:0;padding:0 10px 10px}
 @media(min-width:768px){.demo-body{grid-template-columns:1fr 1fr;gap:10px}}
 .demo-block{padding:22px 24px;min-width:0;border-radius:16px;background:rgba(244,242,236,.55)}
@@ -63,12 +86,51 @@ button{font:inherit}
 .demo-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:14px 26px 18px;font-size:12px;color:var(--faint)}
 .demo-foot a{color:var(--accent);font-weight:650}
 
-.section{padding:104px 0}
-.section-head{max-width:38rem}
+.section{padding:104px 0;border-top:1px solid rgba(20,20,19,.06)}
+.section--accent{background:linear-gradient(180deg,rgba(228,240,236,.55),rgba(244,242,236,0) 58%)}
+.cap-list{display:grid;gap:12px;margin-top:36px}
+.cap-row{display:grid;grid-template-columns:46px minmax(0,1fr) auto 20px;align-items:center;gap:18px;padding:20px 24px;background:#fff;border:1px solid rgba(20,20,19,.07);border-radius:14px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.cap-row:hover{transform:translateY(-2px);border-color:rgba(15,92,76,.28);box-shadow:0 16px 36px -32px rgba(15,92,76,.5)}
+.cap-num{font:11.5px/1 var(--mono);letter-spacing:.12em;color:var(--accent)}
+.cap-main h3{margin:0;font-size:17px;font-weight:750;letter-spacing:-.02em}
+.cap-main p{margin:5px 0 0;font-size:13.5px;line-height:1.65;color:var(--muted)}
+.cap-tag{padding:5px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font:10.5px/1 var(--mono);letter-spacing:.1em;font-weight:700}
+.cap-arrow{color:var(--faint);font-size:15px;text-align:right}
+.cap-example{margin-top:16px;padding:22px 24px;background:#fff;border:1px solid rgba(20,20,19,.07);border-radius:14px}
+.cap-example h4{margin:0;font:11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.cap-example .ledger{margin-top:14px;border:0;background:transparent;border-radius:0}
+.cap-example .ledger th{background:rgba(244,242,236,.75)}
+@media(max-width:700px){
+  .cap-row{grid-template-columns:32px minmax(0,1fr);gap:10px 14px;padding:16px 18px}
+  .cap-tag{grid-column:2;justify-self:start}
+  .cap-arrow{display:none}
+  .cap-main h3{font-size:16px}
+}
+.story-demo{margin-top:38px;max-width:880px}
+.story-demo .demo{margin-top:0}
+.diagram{margin-top:36px;padding:24px 20px;background:#fff;border:1px solid rgba(20,20,19,.07);border-radius:16px;box-shadow:0 18px 44px -40px rgba(20,20,19,.32);overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:880px;height:auto}
+.diagram-hint{display:none;margin:10px 0 0;text-align:center;font-size:12px;color:var(--faint)}
+@media(max-width:700px){.diagram-hint{display:block}}
+.dg-node>rect{fill:#fff;stroke:var(--line-strong);stroke-width:1.2}
+.dg-node.dg-accent>rect{fill:#fbfffd;stroke:#bcd9d0}
+.dg-node.dg-soft>rect{fill:var(--accent-soft);stroke:#cfe3dc}
+.dg-t{font-size:15px;font-weight:700;fill:var(--ink);font-family:var(--font)}
+.dg-s{font-size:11.5px;fill:var(--muted);font-family:var(--font)}
+.dg-cap{font:11px var(--mono);letter-spacing:.1em;fill:var(--faint)}
+.dg-line{fill:none;stroke:var(--ink);stroke-width:1.3}
+.dg-line-accent{stroke:var(--accent)}
+.dg-dash{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:4 5;opacity:.55}
+.dg-panel{fill:rgba(244,242,236,.55);stroke:var(--line);stroke-width:1.2}
+.dg-chip rect{fill:#fff;stroke:var(--line);stroke-width:1}
+.dg-chip .dg-t{font-size:14px}
+.dg-accent-text{fill:var(--accent);font-weight:700}
+.section-head{max-width:none}
 .eyebrow{margin:0;font-size:12px;font-weight:650;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
 .section-head h2{margin:14px 0 0;font-size:clamp(32px,4.2vw,48px);line-height:1.12;letter-spacing:-.038em;font-weight:780}
 .section-head h2 .soft{color:var(--muted);font-weight:520}
-.section-head p{margin:18px 0 0;font-size:16px;color:var(--muted);line-height:1.85}
+.section-head p{margin:18px 0 0;max-width:44rem;font-size:17px;color:var(--muted);line-height:1.85}
+.section-head[style] p{margin-left:auto;margin-right:auto}
 .surface{position:relative;background:rgba(255,252,247,.55);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .surface::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 40% at 50% 0%,rgba(15,92,76,.05),transparent 70%)}
 
@@ -91,6 +153,24 @@ button{font:inherit}
 .compare th{padding-top:18px;padding-bottom:14px;font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
 .compare td:first-child,.compare th:first-child{padding-right:28px;width:46%;color:var(--muted);font-weight:400}
 .compare td:last-child{color:var(--ink);font-weight:580}
+.ledger{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow-x:auto;background:rgba(255,252,247,.9)}
+.ledger table{width:100%;min-width:520px;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.ledger th,.ledger td{padding:10px 16px;text-align:left;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ledger th{font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:rgba(244,242,236,.7)}
+.ledger th:nth-child(1){width:17%}
+.ledger th:nth-child(2){width:11%}
+.ledger th:nth-child(3){width:11%}
+.ledger th:nth-child(4){width:14%}
+.ledger td:nth-child(2){color:var(--muted)}
+.ledger td.ctx{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ledger tr:last-child td{border-bottom:0}
+@media(max-width:600px){
+  .ledger table{min-width:0;font-size:12px}
+  .ledger th,.ledger td{padding:8px 10px}
+  .ledger th:nth-child(5),.ledger td:nth-child(5){display:none}
+  .mini table{font-size:11.5px}
+  .mini th,.mini td{padding:7px 9px}
+}
 .split{display:grid;gap:28px;margin-top:36px}
 @media(min-width:768px){.split{grid-template-columns:1fr 1fr;gap:24px}}
 .split>div{padding:24px 26px;border-radius:20px;background:rgba(255,252,247,.75);border:1px solid rgba(20,20,19,.06)}
@@ -103,9 +183,26 @@ button{font:inherit}
 .term{margin-top:18px;padding:18px 20px;background:linear-gradient(160deg,#1a1a18,#20332d);color:#e8e6e1;border-radius:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.95;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 .term .ok{color:#9dceb8}.term .dim{color:#8e8c86}.term .key{color:#9ec9ff}.term .bad{color:#e2a8a0}
 
-.case-card{display:block;padding:28px;margin-top:18px;border:1px solid rgba(20,20,19,.07);border-radius:18px;background:rgba(255,252,247,.78);color:inherit;box-shadow:0 18px 48px -36px rgba(20,20,19,.28);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.case-card{display:block;padding:26px;margin-top:18px;border:1px solid rgba(20,20,19,.07);border-radius:16px;background:#fff;color:inherit;box-shadow:0 18px 44px -40px rgba(20,20,19,.32);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
 .case-card:hover{transform:translateY(-3px);border-color:rgba(15,92,76,.25);box-shadow:0 24px 56px -30px rgba(15,92,76,.28)}
 .case-card:hover .case-title{color:var(--accent)}
+.case-card.is-static{cursor:default}
+.case-card.is-static:hover{transform:none;border-color:rgba(20,20,19,.07);box-shadow:0 18px 48px -36px rgba(20,20,19,.28)}
+.case-card.is-static:hover .case-title{color:inherit}
+.paid-card{position:relative;overflow:hidden}
+.paid-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.9}
+.mini{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,252,247,.92);overflow:hidden}
+.mini-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line);background:rgba(244,242,236,.72);font:11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.mini table{width:100%;border-collapse:collapse;font-size:12.5px}
+.mini th,.mini td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.mini th{font:10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:rgba(255,252,247,.6)}
+.mini tr:last-child td{border-bottom:0}
+.mini .num{text-align:right}
+.mini .bad{color:#8a3b2e;font-weight:650}
+.mini .warn{color:var(--warn-ink);font-weight:650}
+.mini .ok{color:var(--accent);font-weight:650}
+.pack-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pack-strip span{padding:8px 12px;border:1px solid var(--line-strong);border-radius:10px;background:rgba(255,252,247,.92);font:11.5px/1.4 var(--mono);color:var(--muted)}
 .case-badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:12px;font:11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft)}
 .case-badge.demo{color:var(--warn-ink);background:var(--warn-bg)}
 .case-title{margin:14px 0 0;font-size:28px;font-weight:760;letter-spacing:-.035em;transition:color .2s ease}
@@ -173,10 +270,10 @@ button{font:inherit}
   <nav class="shell flex h-[58px] items-center justify-between" aria-label="主导航">
     <a href="#top" class="brand focus"><img class="brand-icon" src="icon.svg?v=2" width="22" height="22" alt="">hekouwang-writer-skill</a>
     <div class="nav-links">
-      <a class="focus" href="#story">怎么工作</a>
+      <a class="focus" href="#how">怎么工作</a>
       <a class="focus" href="#diff">差别</a>
       <a class="focus" href="#examples">案例</a>
-      <a class="focus" href="#start">安装</a>
+      <a class="focus" href="#paid">付费</a>
       <a class="focus" href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub</a>
       <a class="btn btn-primary btn-sm focus" href="#start">安装</a>
     </div>
@@ -184,7 +281,7 @@ button{font:inherit}
   </nav>
   <div id="mobile" class="shell hidden border-t border-[var(--line)] pb-4 pt-3 md:hidden">
     <div class="flex flex-col gap-3 text-sm" style="color:var(--muted)">
-      <a href="#story">怎么工作</a><a href="#diff">差别</a><a href="#examples">案例</a><a href="#start">安装</a>
+      <a href="#how">怎么工作</a><a href="#diff">差别</a><a href="#examples">案例</a><a href="#paid">付费</a><a href="#start">安装</a>
       <a href="https://github.com/huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">GitHub</a>
     </div>
   </div>
@@ -194,33 +291,139 @@ button{font:inherit}
 <section class="hero">
   <div class="hero-wash" aria-hidden="true"></div>
   <div class="shell">
-    <p class="hero-brand reveal">hekouwang · writer-skill</p>
-    <h1 class="hero-title reveal" style="transition-delay:.06s">中文写作，不只要写得顺，还要<em>对得上</em>。</h1>
-    <p class="hero-copy reveal" style="transition-delay:.12s">把材料写成正式中文文档：出处找得到，数字对得上，「约 / 可能 / 待核实」不被润色抹掉。脚本只报告，不替你改文件。</p>
-    <p class="hero-note reveal" style="transition-delay:.16s">下面这条线，来自一份真实脱敏的家庭养老保险办事文档。</p>
-    <div class="hero-actions reveal" style="transition-delay:.2s">
-      <a class="btn btn-primary focus" href="#story">看它怎么对上账</a>
-      <a class="btn btn-secondary focus" href="cases/family-pension-case.html">打开完整案例</a>
-    </div>
-
-    <div class="demo reveal" style="transition-delay:.28s">
-      <div class="demo-head">
-        <span class="demo-title">真实案例里的三处核对</span>
-        <div class="demo-switch" role="tablist" aria-label="核对示例切换">
-          <button class="demo-chip" role="tab" id="demo-chip-1" aria-selected="true" aria-controls="demo-body" data-demo="1">数字算错</button>
-          <button class="demo-chip" role="tab" id="demo-chip-2" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="2">「约」保住</button>
-          <button class="demo-chip" role="tab" id="demo-chip-3" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="3">长句拆开</button>
+      <div class="hero-lead">
+        <p class="hero-brand reveal">hekouwang · writer-skill</p>
+        <h1 class="hero-title reveal" style="transition-delay:.06s">中文写作，<span class="hero-br" aria-hidden="true"></span>不只要写得顺，<span class="hero-br" aria-hidden="true"></span>还要<em>对得上</em>。</h1>
+        <p class="hero-copy reveal" style="transition-delay:.12s">把材料写成正式中文文档：出处找得到，数字对得上，「约 / 可能 / 待核实」不被润色抹掉。脚本只报告，不替你改文件。</p>
+        <p class="hero-note reveal" style="transition-delay:.16s">这条线来自一份真实脱敏的家庭养老保险办事文档。</p>
+        <div class="hero-actions reveal" style="transition-delay:.2s">
+          <a class="btn btn-primary focus" href="#story">看它怎么对上账</a>
+          <a class="btn btn-secondary focus" href="cases/family-pension-case.html">打开完整案例</a>
+          <a class="btn btn-accent focus" href="#paid">¥9.9/月 · 支付宝购买</a>
+        </div>
+        <div class="hero-stats reveal" style="transition-delay:.24s">
+          <div><b>6+3</b><span>公开检查器 + 订阅工具</span></div>
+          <div><b>3</b><span>铁律：出处 / 模态 / 修订</span></div>
+          <div><b>MIT-0</b><span>源码可查，可自己装</span></div>
         </div>
       </div>
-      <div class="demo-body" id="demo-body" role="tabpanel" aria-labelledby="demo-chip-1">
-        <div class="demo-block"><span class="demo-block-label" id="demo-label-a">出了什么问题</span><p class="demo-text" id="demo-before"></p></div>
-        <div class="demo-block is-after"><span class="demo-block-label" id="demo-label-b">它做了什么</span><p class="demo-text" id="demo-after"></p></div>
-        <p class="demo-note" id="demo-note"></p>
-      </div>
-      <div class="demo-foot">
-        <span>摘自仓库案例记录与台账，已脱敏</span>
-        <a class="focus" href="cases/family-pension-case.html">看完整证据链 →</a>
-      </div>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">怎么工作</p>
+      <h2>一台质量控制台。</h2>
+      <p>进来的是材料，出去的是能对账的稿。两条任务线共用三条保护规则，最后由六个检查器逐项核对——脚本只报告，不改你的文件。</p>
+    </div>
+    <div class="reveal diagram">
+      <svg viewBox="0 0 1180 560" role="img" aria-label="质量控制台：输入汇合后分成写作线与文章线，共用出处、模态、修订三条保护，经六个检查器核对后交付">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/>
+          </marker>
+          <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+        </defs>
+
+        <text class="dg-cap" x="12" y="40">输入</text>
+        <text class="dg-cap" x="252" y="40">两条任务线</text>
+        <text class="dg-cap" x="714" y="40">检查器</text>
+        <text class="dg-cap" x="1048" y="40">交付</text>
+
+        <g class="dg-node">
+          <rect x="12" y="70" width="168" height="72" rx="12"/>
+          <text class="dg-t" x="28" y="102">素材</text>
+          <text class="dg-s" x="28" y="122">缴费记录、笔记</text>
+        </g>
+        <g class="dg-node">
+          <rect x="12" y="176" width="168" height="72" rx="12"/>
+          <text class="dg-t" x="28" y="208">原稿</text>
+          <text class="dg-s" x="28" y="228">已有文稿，要改</text>
+        </g>
+        <g class="dg-node">
+          <rect x="12" y="282" width="168" height="72" rx="12"/>
+          <text class="dg-t" x="28" y="314">研究包</text>
+          <text class="dg-s" x="28" y="334">来源与数据</text>
+        </g>
+
+        <path class="dg-line" d="M180,106 H214 V212"/>
+        <path class="dg-line" d="M180,212 H214"/>
+        <path class="dg-line" d="M180,318 H214 V212"/>
+        <circle cx="214" cy="212" r="4.5" fill="#fff" stroke="var(--accent)" stroke-width="1.6"/>
+        <path class="dg-line" d="M214,212 V106 H246" marker-end="url(#ah)"/>
+        <path class="dg-line dg-line-accent" d="M214,212 V286 H294" marker-end="url(#ahc)"/>
+
+        <g class="dg-node">
+          <rect x="252" y="74" width="116" height="64" rx="12"/>
+          <text class="dg-t" x="284" y="112">写作</text>
+        </g>
+        <g class="dg-node">
+          <rect x="392" y="74" width="116" height="64" rx="12"/>
+          <text class="dg-t" x="424" y="112">修订</text>
+        </g>
+        <g class="dg-node">
+          <rect x="532" y="74" width="116" height="64" rx="12"/>
+          <text class="dg-t" x="564" y="112">体检</text>
+        </g>
+        <path class="dg-line" d="M368,106 H386" marker-end="url(#ah)"/>
+        <path class="dg-line" d="M508,106 H526" marker-end="url(#ah)"/>
+
+        <g class="dg-node dg-accent">
+          <rect x="300" y="254" width="140" height="64" rx="12"/>
+          <text class="dg-t" x="332" y="292">写正文</text>
+        </g>
+        <g class="dg-node dg-accent">
+          <rect x="470" y="254" width="140" height="64" rx="12"/>
+          <text class="dg-t" x="502" y="292">去 AI 味</text>
+        </g>
+        <path class="dg-line dg-line-accent" d="M440,286 H464" marker-end="url(#ahc)"/>
+
+        <g class="dg-node dg-soft">
+          <rect x="252" y="418" width="132" height="72" rx="12"/>
+          <text class="dg-t" x="268" y="448">出处</text>
+          <text class="dg-s" x="268" y="468">查不到就标</text>
+        </g>
+        <g class="dg-node dg-soft">
+          <rect x="406" y="418" width="132" height="72" rx="12"/>
+          <text class="dg-t" x="422" y="448">模态</text>
+          <text class="dg-s" x="422" y="468">约 / 可能 保留</text>
+        </g>
+        <g class="dg-node dg-soft">
+          <rect x="560" y="418" width="132" height="72" rx="12"/>
+          <text class="dg-t" x="576" y="448">修订</text>
+          <text class="dg-s" x="576" y="468">逐条可回退</text>
+        </g>
+        <path class="dg-dash" d="M370,318 V392"/>
+        <path class="dg-dash" d="M540,318 V392"/>
+        <path class="dg-dash" d="M318,392 H626"/>
+        <path class="dg-dash" d="M318,392 V412" marker-end="url(#ahc)"/>
+        <path class="dg-dash" d="M472,392 V412" marker-end="url(#ahc)"/>
+        <path class="dg-dash" d="M626,392 V412" marker-end="url(#ahc)"/>
+
+        <path class="dg-line" d="M648,106 H690 V150 H714" marker-end="url(#ah)"/>
+        <path class="dg-line dg-line-accent" d="M610,286 H690 V216 H714" marker-end="url(#ahc)"/>
+
+        <rect class="dg-panel" x="714" y="66" width="300" height="412" rx="16"/>
+        <g class="dg-chip"><rect x="730" y="94" width="128" height="104" rx="10"/><text class="dg-t" x="760" y="151">锯末词</text></g>
+        <g class="dg-chip"><rect x="870" y="94" width="128" height="104" rx="10"/><text class="dg-t" x="892" y="151">句子负荷</text></g>
+        <g class="dg-chip"><rect x="730" y="214" width="128" height="104" rx="10"/><text class="dg-t" x="752" y="271">文章节奏</text></g>
+        <g class="dg-chip"><rect x="870" y="214" width="128" height="104" rx="10"/><text class="dg-t" x="892" y="271">文档检查</text></g>
+        <g class="dg-chip"><rect x="730" y="334" width="128" height="104" rx="10"/><text class="dg-t" x="752" y="391">数字对账</text></g>
+        <g class="dg-chip"><rect x="870" y="334" width="128" height="104" rx="10"/><text class="dg-t" x="892" y="391">修订对账</text></g>
+
+        <path class="dg-line" d="M1014,272 H1042" marker-end="url(#ah)"/>
+        <g class="dg-node">
+          <rect x="1048" y="196" width="116" height="152" rx="12"/>
+          <text class="dg-t" x="1064" y="230">交付</text>
+          <text class="dg-s" x="1064" y="252">能对账的稿</text>
+          <rect x="1064" y="272" width="80" height="26" rx="6" fill="none" stroke="var(--accent)" stroke-dasharray="3 3"/>
+          <text class="dg-s dg-accent-text" x="1072" y="290">可核对</text>
+        </g>
+      </svg>
+      <p class="diagram-hint">← 左右滑动查看完整流程 →</p>
     </div>
   </div>
 </section>
@@ -231,6 +434,27 @@ button{font:inherit}
       <p class="eyebrow">一条真实案例</p>
       <h2>一份办事文档，<span class="soft">从乱材料到对得上的稿。</span></h2>
       <p>不讲抽象能力。只走一遍家庭养老保险提档补差案例里实际发生过的事。</p>
+    </div>
+    <div class="reveal story-demo">
+      <div class="demo">
+        <div class="demo-head">
+          <span class="demo-title">真实案例里的三处核对</span>
+          <div class="demo-switch" role="tablist" aria-label="核对示例切换">
+            <button class="demo-chip" role="tab" id="demo-chip-1" aria-selected="true" aria-controls="demo-body" data-demo="1">数字算错</button>
+            <button class="demo-chip" role="tab" id="demo-chip-2" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="2">「约」保住</button>
+            <button class="demo-chip" role="tab" id="demo-chip-3" aria-selected="false" aria-controls="demo-body" tabindex="-1" data-demo="3">长句拆开</button>
+          </div>
+        </div>
+        <div class="demo-body" id="demo-body" role="tabpanel" aria-labelledby="demo-chip-1">
+          <div class="demo-block"><span class="demo-block-label" id="demo-label-a">出了什么问题</span><p class="demo-text" id="demo-before"></p></div>
+          <div class="demo-block is-after"><span class="demo-block-label" id="demo-label-b">它做了什么</span><p class="demo-text" id="demo-after"></p></div>
+          <p class="demo-note" id="demo-note"></p>
+        </div>
+        <div class="demo-foot">
+          <span>摘自仓库案例记录与台账，已脱敏</span>
+          <a class="focus" href="cases/family-pension-case.html">看完整证据链 →</a>
+        </div>
+      </div>
     </div>
     <div class="reveal chain">
       <div class="chain-row"><div class="chain-idx">01</div><div class="chain-body"><h3>你给它什么</h3><p>缴费记录、电话核实笔记、政策摘录——材料散，口径不一，有的只有电话、没有网页链接。</p><p class="out"><b>输入：</b>真实材料，不是「帮我写一篇」四个字。</p></div></div>
@@ -329,16 +553,98 @@ button{font:inherit}
   </div>
 </section>
 
+<section id="paid" class="section section--accent">
+  <div class="shell">
+    <div class="section-head reveal">
+      <p class="eyebrow">订阅版 · ¥9.9/月</p>
+      <h2>订阅版多的四件东西。</h2>
+      <p>公开版的六个检查器一个不少。这四件是订阅版独有，对的是「一本稿子、一个目录、一篇长文」这种量级。</p>
+    </div>
+    <div class="cap-list reveal">
+      <div class="cap-row">
+        <span class="cap-num">01</span>
+        <div class="cap-main">
+          <h3>数字台账</h3>
+          <p>全文数字连单位、上下文、行号抽成一张表；另列裸数字与中文数字，逐条等人工确认。</p>
+        </div>
+        <span class="cap-tag">PAID</span>
+        <span class="cap-arrow">→</span>
+      </div>
+      <div class="cap-row">
+        <span class="cap-num">02</span>
+        <div class="cap-main">
+          <h3>批量体检</h3>
+          <p>整个目录一次跑完五个单文件检查器，按处理顺序排好；可另存 HTML 报告发给同事。</p>
+        </div>
+        <span class="cap-tag">PAID</span>
+        <span class="cap-arrow">→</span>
+      </div>
+      <div class="cap-row">
+        <span class="cap-num">03</span>
+        <div class="cap-main">
+          <h3>术语表草稿</h3>
+          <p>抽候选术语与同尾分组，解决「社保窗口 / 经办窗口 / 政务中心」这类叫法分裂。</p>
+        </div>
+        <span class="cap-tag">PAID</span>
+        <span class="cap-arrow">→</span>
+      </div>
+      <div class="cap-row">
+        <span class="cap-num">04</span>
+        <div class="cap-main">
+          <h3>三套场景检查包</h3>
+          <p>政务办事指南、项目汇报、公众号长文；各含材料清单、口径陷阱与验收问题。</p>
+        </div>
+        <span class="cap-tag">PAID</span>
+        <span class="cap-arrow">→</span>
+      </div>
+    </div>
+    <div class="cap-example reveal">
+      <h4>输出示例 · 数字台账</h4>
+      <div class="ledger">
+        <table>
+          <thead><tr><th>值</th><th>单位</th><th>次数</th><th>首次行</th><th>上下文</th></tr></thead>
+          <tbody>
+            <tr><td>1,330</td><td>元</td><td>1</td><td>53</td><td class="ctx">…921 元 ／ 1,330 元…</td></tr>
+            <tr><td>661</td><td>元</td><td>1</td><td>53</td><td class="ctx">…661 元 ／ 878 元…</td></tr>
+            <tr><td>30</td><td>天</td><td>2</td><td>44</td><td class="ctx">…30 天内到账…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" style="margin-top:12px">python3 scripts/number_ledger.py 文档.md</p>
+    </div>
+    <div class="reveal closing" style="margin-top:28px">
+      <div>
+        <div class="price-pill" style="margin-bottom:12px">¥9.9 / 月 <span>含 5 次免费试用</span></div>
+        <h3>四件都在这一个月里。</h3>
+        <p>订阅期内跟随最新版本。公开版仍可免费安装，两边的差别只在上面这四件。</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-accent focus" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer">去支付宝购买</a>
+        <a class="btn btn-secondary focus" href="#start">看免费安装方式</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="start" class="surface section">
   <div class="shell">
     <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
       <p class="eyebrow">安装</p>
-      <h2>三步开始使用</h2>
-      <p>装上后，先用下面这段指令感受「只检查、不改文件」。</p>
+      <h2>四步开始使用</h2>
+      <p>第 1 步是订阅版，适合不想碰命令行的人；愿意自己动手就走第 2、3 步。</p>
     </div>
     <div class="reveal steps">
+      <div class="step" id="buy" style="scroll-margin-top:96px">
+        <span class="step-num">01 · 省事版</span>
+        <div>
+          <p>不想自己找宿主目录，可在支付宝购买订阅版（¥9.9/月，含 5 次免费试用）。</p>
+          <a class="btn btn-accent btn-sm focus" style="margin-top:12px" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer">去支付宝购买</a>
+          <p class="hint">四件独占能力：数字台账、批量体检、术语表草稿、三套场景包——上面的订阅版区块有逐项说明和输出示例。</p>
+          <p class="hint">订阅期内跟随最新版本。源码仍是 MIT-0，愿意自己动手的可以走下面两种免费方式。</p>
+        </div>
+      </div>
       <div class="step">
-        <span class="step-num">01 · 安装</span>
+        <span class="step-num">02 · 安装</span>
         <div>
           <p>用 skills CLI 装到当前 Agent 宿主（推荐）。</p>
           <code class="code">clawhub install hekouwang-writer-skill</code>
@@ -347,14 +653,14 @@ button{font:inherit}
         </div>
       </div>
       <div class="step">
-        <span class="step-num">02 · 备选</span>
+        <span class="step-num">03 · 备选</span>
         <div>
           <p>手动克隆后，复制到宿主识别的 Skill 目录。</p>
           <code class="code">git clone https://github.com/huiyonghkw/hekouwang-writer-skill.git</code>
         </div>
       </div>
       <div class="step">
-        <span class="step-num">03 · 30 秒自测</span>
+        <span class="step-num">04 · 30 秒自测</span>
         <div>
           <p>复制下面指令，贴上你自己的一段文字。</p>
           <div class="prompt">
@@ -371,11 +677,7 @@ button{font:inherit}
 
 <section class="section">
   <div class="shell" style="max-width:720px">
-    <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline">
-      <p class="eyebrow">边界</p>
-      <a class="focus" style="font-size:13px;color:var(--accent);font-weight:600" href="https://github.com/huiyonghkw/hekouwang-writer-skill/blob/main/CHANGELOG.md" target="_blank" rel="noreferrer">v1.6.1 · 更新记录</a>
-    </div>
-    <h2 class="reveal" style="margin:12px 0 0;font-size:clamp(30px,4vw,42px);letter-spacing:-.035em;font-weight:750">它不替你假装确定。</h2>
+    <h2 class="reveal" style="margin:0;font-size:clamp(30px,4vw,42px);letter-spacing:-.035em;font-weight:750">它不替你假装确定。</h2>
     <div class="reveal faq" style="margin-top:36px">
       <div class="faq-item">
         <button class="focus" aria-expanded="false"><span>它和「去 AI 味 / 活人感」Skill 有何不同？</span><span class="faq-plus">+</span></button>
@@ -396,12 +698,14 @@ button{font:inherit}
     </div>
     <div class="reveal closing">
       <div>
+        <div class="price-pill" style="margin-bottom:12px">¥9.9 / 月 <span>含 5 次免费试用</span></div>
         <h3>先看懂一条真实证据链，再决定要不要装。</h3>
         <p>养老案例里有错算、对账、出处边界和检查结果。</p>
       </div>
       <div class="actions">
         <a class="btn btn-primary focus" href="#start">免费安装</a>
         <a class="btn btn-secondary focus" href="cases/family-pension-case.html">读真实案例</a>
+        <a class="btn btn-accent focus" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer">支付宝购买</a>
       </div>
     </div>
   </div>
@@ -428,6 +732,14 @@ if('IntersectionObserver'in window){
 const topbar=$('.topbar');
 const onScroll=()=>topbar&&topbar.classList.toggle('is-stuck',window.scrollY>8);
 onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+const navLinks=[...document.querySelectorAll('.nav-links a:not(.btn)[href^="#"]')];
+const navTargets=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+if(navTargets.length&&'IntersectionObserver'in window){
+  const setCurrent=id=>navLinks.forEach(a=>a.classList.toggle('is-current',a.getAttribute('href')==='#'+id));
+  const navIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setCurrent(e.target.id)}),{rootMargin:'-45% 0px -50% 0px'});
+  navTargets.forEach(t=>navIO.observe(t));
+}
 
 const menu=$('#menu');
 if(menu){
@@ -458,9 +770,23 @@ const renderDemo=key=>{
 };
 renderDemo('1');
 const demoChips=[...document.querySelectorAll('.demo-chip')];
+const demoSwitch=$('.demo-switch');
+let demoIndicator=null;
+if(demoSwitch){
+  demoIndicator=document.createElement('span');
+  demoIndicator.className='demo-indicator';
+  demoIndicator.setAttribute('aria-hidden','true');
+  demoSwitch.prepend(demoIndicator);
+}
+const moveIndicator=chip=>{
+  if(!demoIndicator||!chip)return;
+  demoIndicator.style.width=chip.offsetWidth+'px';
+  demoIndicator.style.transform=`translateX(${chip.offsetLeft}px)`;
+};
 const selectDemo=(chip,focus=false)=>{
   demoChips.forEach(c=>{const on=c===chip;c.setAttribute('aria-selected',String(on));c.tabIndex=on?0:-1});
   renderDemo(chip.dataset.demo);
+  moveIndicator(chip);
   if(focus)chip.focus();
 };
 demoChips.forEach((chip,i)=>{
@@ -476,6 +802,10 @@ demoChips.forEach((chip,i)=>{
     selectDemo(demoChips[next],true);
   });
 });
+const activeChip=()=>demoChips.find(c=>c.getAttribute('aria-selected')==='true')||demoChips[0];
+requestAnimationFrame(()=>moveIndicator(activeChip()));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>moveIndicator(activeChip()));
+window.addEventListener('resize',()=>moveIndicator(activeChip()),{passive:true});
 
 document.querySelectorAll('.faq-item button').forEach((b,i)=>{
   const panel=b.nextElementSibling;

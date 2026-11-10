@@ -9,18 +9,18 @@
 :root{
   --ink:#141413;
   --muted:#5c5b57;
-  --faint:#8b897f;
+  --faint:#6f6d63;
   --paper:#f4f2ec;
-  --surface:#fffcf7;
+  --surface:#ffffff;
   --line:#e6e2d8;
   --line-strong:#d3cec3;
   --accent:#0f5c4c;
   --accent-soft:#e4f0ec;
   --warn-bg:#f6efe4;
   --warn-ink:#6a5330;
-  --radius:12px;
+  --radius:14px;
   --shadow:0 20px 48px -34px rgba(20,20,19,.28);
-  --font: 'HKW Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  --font: -apple-system,'system-ui',Inter,'HKW Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
   --mono: ui-monospace,SFMono-Regular,Menlo,monospace;
   color-scheme:light;
 }
@@ -28,7 +28,10 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:var(--paper);
+  background-color:var(--paper);
+  background-image:radial-gradient(rgba(20,20,19,.045) 1px,transparent 1px);
+  background-size:22px 22px;
+  background-position:-1px -1px;
   color:var(--ink);
   font-family:var(--font);
   line-height:1.7;
