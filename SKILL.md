@@ -3,7 +3,7 @@ name: hekouwang-writer-lite-skill
 description: "免费版中文写作质控：把话说清楚。文档写作、修订、体检与去 AI 味（/deai）；出处/模态/修订三铁律；四个纯标准库检查器只报告不改写。何时用：要把素材写清楚、改稿或去 AI 味。写长文与进阶检查属付费版 hekouwang-writer-skill。不用于无素材的营销文案、诗歌、小说。"
 license: MIT-0
 metadata:
-  version: 2.0.1
+  version: 2.0.2
   slug: hekouwang-writer-lite-skill
   displayName: 会勇禾口王 · 写作技能（免费版）
   summary: 把话说清楚：结构、句子、去 AI 味；四检查器只报告不改写。写长文与进阶检查在付费版。
@@ -77,7 +77,7 @@ metadata:
 
 ## 六、learnings
 
-位置/触发/晋升/脱敏：读 [write-flow.md](references/write-flow.md)#自进化learnings-台账。
+默认只在会话内；要落盘须你确认，只写用户目录，不自动改规则。→ [write-flow.md](references/write-flow.md#自进化learnings默认只在会话内)
 
 ## 七、工具（`<skill>/scripts/`，只报告，stdlib，`--selftest`）
 

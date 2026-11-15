@@ -119,16 +119,10 @@ C 级证据，只看到 README 的转述，没读到它的 SKILL.md 原文。
 
 ## 七、依据
 
-访问日期均为 2026-11-14。
+访问日期均为 2026-11-14。只列仓库与页面，不逐条抄文件地址。
 
-| 材料 | 地址 |
-|---|---|
-| internal-comms · SKILL.md | https://raw.githubusercontent.com/anthropics/skills/main/skills/internal-comms/SKILL.md |
-| internal-comms · 3p-updates.md | https://raw.githubusercontent.com/anthropics/skills/main/skills/internal-comms/examples/3p-updates.md |
-| internal-comms · 目录清单 | https://api.github.com/repos/anthropics/skills/contents/skills/internal-comms/examples |
-| mcp-builder · 目录清单 | https://api.github.com/repos/anthropics/skills/contents/skills/mcp-builder |
-| doc-coauthoring · SKILL.md | https://raw.githubusercontent.com/anthropics/skills/main/skills/doc-coauthoring/SKILL.md |
-| prd · SKILL.md | https://raw.githubusercontent.com/github/awesome-copilot/main/skills/prd/SKILL.md |
-| design-docs-creator · README | https://github.com/BrunoMartino/Michelangelo-Dev-Toolkit/blob/main/.claude/skills/design-docs-creator/README.md |
-| user-research · 片段 | https://vibehackers.io/claude-code/skills/user-research-anthropics |
-| design_doc · 片段 | https://claudepluginhub.com/skills/shouenlee-design-doc-plugins-design-doc/design_doc |
+- anthropics/skills：internal-comms、doc-coauthoring 两组说明与示例，https://github.com/anthropics/skills
+- github/awesome-copilot：prd 说明，https://github.com/github/awesome-copilot
+- Michelangelo-Dev-Toolkit：design-docs-creator 说明，https://github.com/BrunoMartino/Michelangelo-Dev-Toolkit
+- user-research 片段（第三方转述）：https://vibehackers.io/claude-code/skills/user-research-anthropics
+- design_doc 片段（第三方转述）：https://claudepluginhub.com/skills/shouenlee-design-doc-plugins-design-doc/design_doc
