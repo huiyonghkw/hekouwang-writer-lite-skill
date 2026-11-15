@@ -1,44 +1,58 @@
-# 会勇禾口王 · 写作技能 2.0（付费版）
+# 会勇禾口王 · 写作技能（免费版）
 
-**对得上账的中文写作质控。** 把素材写成结构清楚、出处找得到、数字对得上的中文文档；也支持基于研究包写文章、修订已有文稿、文章去 AI 味。
+**把话说清楚。** 给素材，写成结构干净的中文文档；给成稿，去掉 AI 味、拆开长句、治标点。
 
-2.0.0 是付费版，不再提供免费安装。旧版（1.6.x）已停止更新，说明见 [LEGACY-MIT-0.md](LEGACY-MIT-0.md)。
+免费版是 MIT-0 开源，克隆即用，不用付款、不用注册。数字对账、证据出处卡、文体规范、长文写作在[付费版](#付费版多什么)。
 
-[在线介绍](https://huiyonghkw.github.io/hekouwang-writer-skill/) · [支付宝购买 ¥9.9/月](https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939) · 腾讯 SkillHub 按次商品上架中
+## 安装
 
-## 购买与安装
+把仓库放进宿主的 skill 目录即可。以 Claude Code 为例：
 
-### 支付宝 SkillPay（订阅，¥9.9/月）
+```bash
+git clone https://github.com/huiyonghkw/hekouwang-writer-lite-skill.git \
+  ~/.claude/skills/hekouwang-writer-lite-skill
+```
 
-不设免费试用，订阅期内跟随最新版本。
-
-1. 对 Agent 说：请通过 SkillPay 购买并安装 Skill「会勇禾口王 · 写作技能」。
-2. Agent 先读官方说明 `https://skillpay.alipay.com/userguide.md`，并安装 `skillpay-onboarding`。
-3. 按 onboarding 的说明购买并安装商户 `2088302457563894` 的商品 `P0806000212858939`。
-4. 需要登录或付款时，由你本人扫码确认。
-
-也可以直接打开[商品页](https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939)。
-
-### 腾讯 SkillHub（按次，¥1/次）
-
-按次商品上架中。上架后此处更新商品页链接，安装与计费按 SkillHub 说明执行。
+也支持 Cursor、Codex、CodeBuddy 等能识别 Skill 目录的宿主。需要 Python 3，不需要装任何第三方库。
 
 ## 包含什么
 
-- **11 个纯标准库脚本**：6 个检查器、2 个交付工具、3 个专业工具。只报告不改写。
-- **12 个参考文件与 3 套场景包**：政务办事、项目汇报、公众号长文。
-- **示例**：含办事假账练习卷。
+- **4 个检查器**：锯末词、句长、节奏、文档体检（表格列数与标题层级）。只报告，不改写你的文件。
+- **8 份参考**：WRITE 五步、七种文档原型、句法纪律、修订模式、去 AI 味、说人话、术语表、盲读。
+- **两种模式**：文档写作与体检；文章去 AI 味（`/deai`）。
+- **三条铁律**：出处、模态（约／可能／待核实保留）、修订（不悄悄改用户事实）。
+
+常用命令：
+
+```bash
+python3 scripts/sawdust_scan.py 文档.md     # 锯末词密度
+python3 scripts/sentence_load.py 文档.md    # 长句与分句堆叠
+python3 scripts/rhythm_scan.py 文档.md      # 结构层 AI 味
+python3 scripts/doc_lint.py 文档.md         # 表格与标题层级
+```
+
+## 付费版多什么
+
+付费版名字是 `hekouwang-writer-skill`，¥9.9 / 30 天，不自动续费。
+
+| 能力 | 免费版 | 付费版 |
+|---|---|---|
+| 脚本 | 4 | 11 |
+| 参考 | 8 | 16 |
+| 数字对账、来源范围、修订对账、出处卡 | 无 | 有 |
+| 证据纪律、调研报告文体规范 | 无 | 有 |
+| 长文写作与三套场景包 | 无 | 有 |
+
+- 支付宝订阅：<https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939>
+- 腾讯 SkillHub 按次：商品上架中
+- 在线介绍：<https://huiyonghkw.github.io/hekouwang-writer-lite-skill/>
+
+两个版本不要同时安装。
 
 ## 许可
 
-2.0.0 使用专有许可，条款见 [LICENSE](LICENSE)。个人使用，不可转售或再分发。
-
-1.0 到 1.6.4 的公开版按 MIT-0 发布，已经发出的副本继续适用原许可。见 [LEGACY-MIT-0.md](LEGACY-MIT-0.md)。
+MIT-0：可用、可改、可商用、可再分发，不要求署名。见 [LICENSE](LICENSE)。
 
 ## 不适用
 
 无素材的营销文案、诗歌小说、英文写作。
-
-## 这个仓库里有什么
-
-只有购买说明、付费入口文件和许可文本。脚本、参考文件、场景包、示例都在付费交付里，不在本仓库。

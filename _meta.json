@@ -1,19 +1,37 @@
 {
-  "name": "hekouwang-writer-skill",
-  "displayName": "会勇禾口王 · 写作技能",
+  "name": "hekouwang-writer-lite-skill",
+  "displayName": "会勇禾口王 · 写作技能（免费版）",
   "version": "2.0.0",
-  "tagline": "付费中文写作质控：对得上账的文档与文章",
-  "description": "付费版。未购买时只显示购买与安装说明，不执行写作、检查或改写。",
+  "tagline": "免费版中文写作质控：把话说清楚，把 AI 味去掉；四个检查器只报告不改写",
+  "description": "免费版中文写作质控。文档写作与改进：WRITE 五步法、修订模式、句法纪律、去AI味、文档体检、learnings 自进化台账；四个纯标准库检查器（句长、锯末词、节奏、表格与标题层级）只报告不修改，全带 --selftest。适用办事指南/方案/报告/说明/邮件/汇报。数字对账、证据出处卡、文体规范、长文写作与三套场景包在付费版 hekouwang-writer-skill。",
   "author": "会勇禾口王",
-  "license": "Proprietary",
+  "license": "MIT-0",
   "category": "writing",
   "tags": [
     "文档写作",
+    "结构化",
+    "去AI味",
+    "句法纪律",
     "文档体检",
-    "数字对账",
-    "去AI味"
+    "中文写作",
+    "人性化",
+    "大白话"
   ],
   "requires_api_key": false,
-  "scripts": [],
-  "references": []
+  "scripts": [
+    "scripts/sawdust_scan.py",
+    "scripts/sentence_load.py",
+    "scripts/rhythm_scan.py",
+    "scripts/doc_lint.py"
+  ],
+  "references": [
+    "references/write-flow.md",
+    "references/style-rules.md",
+    "references/deai-flavor.md",
+    "references/counter-examples.md",
+    "references/clarify-questions.md",
+    "references/glossary.md",
+    "references/blind-read.md",
+    "references/plain-talk.md"
+  ]
 }
