@@ -33,7 +33,7 @@ python3 scripts/doc_lint.py 文档.md         # 表格与标题层级
 
 ## 付费版多什么
 
-付费版名字是 `hekouwang-writer-skill`，¥9.9 / 30 天，不自动续费。
+付费版名字是 `hekouwang-writer-skill`，能力对照如下。
 
 | 能力 | 免费版 | 付费版 |
 |---|---|---|
@@ -43,9 +43,8 @@ python3 scripts/doc_lint.py 文档.md         # 表格与标题层级
 | 证据纪律、调研报告文体规范 | 无 | 有 |
 | 长文写作与三套场景包 | 无 | 有 |
 
-- 支付宝订阅：<https://skillpay.alipay.com/user/product?merchantId=2088302457563894&productId=P0806000212858939>
-- 腾讯 SkillHub 按次：商品上架中
 - 在线介绍：<https://huiyonghkw.github.io/hekouwang-writer-lite-skill/>
+- 付费版入口见该页面底部
 
 两个版本不要同时安装。
 
