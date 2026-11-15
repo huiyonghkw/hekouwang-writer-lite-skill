@@ -1,7 +1,7 @@
 # 流程演示：文章去 AI 味
 
 > **示例，不是实测案例。** 原句为演示用占位文本。不得把本例理解为 AI 检测或绕过检测的能力承诺。
-> **真实实测**见同目录 [`terminal-readme-deai-case.md`](terminal-readme-deai-case.md)（产品 README，含盲读与 `change_list` 摘要）。
+> **真实实测**见同目录 [`terminal-readme-deai-case.md`](terminal-readme-deai-case.md)（产品 README，含盲读与对账摘要；免费版用四检查器 + 手工改动清单复现）。
 
 ## 输入原句（占位）
 

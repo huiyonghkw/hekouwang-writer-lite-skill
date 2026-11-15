@@ -15,12 +15,12 @@
 
 示例句和问题均为虚构占位，不能视为真实检查发现。
 
-## advisory 与硬错误
+## advisory 与硬错误（免费四检查器）
 
 - `sawdust_scan.py`、`sentence_load.py`、`rhythm_scan.py` 的告警是 advisory，发现问题时进程仍返回 0。
-- `doc_lint.py` 的表格列数/标题层级硬错误，以及 `check_fidelity.py` 的算术不一致，可返回 1。
+- `doc_lint.py` 的表格列数/标题层级硬错误可返回 1。
 - `sentence_load.py --json` 中的 `hard` 字段是超阈值句子数，不是进程退出码。
-- `change_list.py` 默认只报告；只有使用 `--strict-numbers` 且出现数字变化才返回 1。
+- 合计与表间算术不一致：免费版靠**人工复算**标出；付费包的 `check_fidelity.py` 可在算术不一致时返回 1（本包不要求、也跑不了）。
 
 ## 验证状态
 
