@@ -3,7 +3,7 @@ name: hekouwang-writer-lite-skill
 description: "免费版中文写作质控：把话说清楚。文档写作、修订、体检与去 AI 味（/deai）；出处/模态/修订三铁律；四个纯标准库检查器只报告不改写。何时用：要把素材写清楚、改稿或去 AI 味。写长文与进阶检查属付费版 hekouwang-writer-skill。不用于无素材的营销文案、诗歌、小说。"
 license: MIT-0
 metadata:
-  version: 2.0.2
+  version: 2.0.3
   slug: hekouwang-writer-lite-skill
   displayName: 会勇禾口王 · 写作技能（免费版）
   summary: 把话说清楚：结构、句子、去 AI 味；四检查器只报告不改写。写长文与进阶检查在付费版。
@@ -23,8 +23,8 @@ metadata:
 # 会勇禾口王 · 写作技能
 
 > **定位**：把话说清楚——写给谁、用来做什么，再用纪律装进结构。
-> **本版**：表达层（结构、句子、去 AI 味）。验算与证据类能力只在付费版提供，免费版不承诺。
-> **模式**：文档写作/修订/体检（默认）与去 AI 味。三大铁律都生效。写长文属付费版。
+> **本版**：表达层（结构、句子、去 AI 味）；验算与证据等进阶能力见第八节。
+> **模式**：文档写作/修订/体检（默认）与去 AI 味；文章成稿的去 AI 味称文章模式。三大铁律都生效。
 
 `<skill>` = 本 SKILL.md 所在目录。
 
@@ -36,7 +36,7 @@ metadata:
 | **模态** | 「可能/约/待核实」原样保留 | 「可能失败」→「失败」 |
 | **修订** | 只调表达结构，保留事实意图；改动可列出可回退 | 悄悄改用户事实 |
 
-违反一律打回。时效事实须核实；仍无则标暂无出处；依据表写访问日，链接须打开过。
+违反一律打回。时效事实须核实；仍无则标暂无出处。文档里有来源的，在文末「依据」节列来源，每条一行：来源名+链接或文件名+访问日，链接须打开过。
 
 ## 一、路由
 
@@ -45,7 +45,7 @@ metadata:
 | 轻量 | 改一段/一句/小表 | 无 | 改动说明 |
 | 常规 | 一篇写作或改进 | sawdust + sentence_load + doc_lint | WRITE、闸门、交付格式 |
 
-判不准按常规；动了结构却说随便改 → 升档。检查/格式档、真稿/试写、修订与文字保护：读 [write-flow.md](references/write-flow.md)。
+判不准按常规；动了结构却说随便改 → 升档。检查/格式档、修订与文字保护：读 [write-flow.md](references/write-flow.md)。
 
 <!-- lite-only -->
 **升版**：表内数字/多来源/重大决策/出处卡 → 装付费版 `hekouwang-writer-skill`，勿用免费版硬凑。
@@ -53,7 +53,7 @@ metadata:
 
 ### 去 AI 味（`/deai`）
 
-先诊断再改写；保事实与密度。四步：诊断（七类+sawdust+rhythm）→ 改写 → 输出 → 盲读。文档模式不补第一人称。→ [deai-flavor.md](references/deai-flavor.md)、[plain-talk.md](references/plain-talk.md)、[blind-read.md](references/blind-read.md)。
+先诊断再改写；保事实与密度。四步：诊断（三级诊断+句式黑名单，脚本按路由表）→ 改写 → 输出 → 盲读。文档模式不补第一人称；文章成稿走文章模式，交稿前必盲读。→ [deai-flavor.md](references/deai-flavor.md)、[plain-talk.md](references/plain-talk.md)、[blind-read.md](references/blind-read.md)。
 
 <!-- lite-only -->
 研究包写公众号/头条属付费版。
