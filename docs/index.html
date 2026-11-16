@@ -410,7 +410,7 @@ img,svg{display:block}
 .compare-row:not(.compare-head) span:last-child::before{content:"✓";display:inline-block;margin-right:9px;color:var(--green);font-weight:750}
 .compare-head span{padding-top:13px;padding-bottom:13px;background:rgba(20,20,19,.028);font:700 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
 .compare-head span:last-child{color:var(--green);font-weight:650}
-.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px;align-items:stretch}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px;align-items:stretch}
 .plan{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-2),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .25s var(--ease),box-shadow .25s}
 .plan--paid{background:var(--green);border-color:var(--green);color:#f4f2ec;position:relative;overflow:hidden;box-shadow:0 2px 6px -2px rgba(15,92,76,.2),0 44px 80px -50px rgba(15,92,76,.55),inset 0 1px 0 rgba(255,255,255,.16)}
 .plan--paid::before{content:"";position:absolute;width:360px;height:360px;right:-150px;top:-170px;border-radius:50%;background:radial-gradient(closest-side,rgba(157,206,184,.28),transparent 70%)}
@@ -446,11 +446,7 @@ img,svg{display:block}
 .plan-actions{margin-top:auto;padding-top:22px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
 .plan-actions .fine{font-size:10.5px;color:var(--faint);text-align:center}
 .plan--paid .plan-actions .fine{color:#a9cbbf}
-.percall{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:18px;padding:22px 26px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);box-shadow:var(--shadow-1),inset 0 1px 0 rgba(255,255,255,.9)}
-.percall h3{margin:8px 0 0;font-size:22px;line-height:1.2;letter-spacing:-.03em;font-weight:780}
-.percall p{margin:6px 0 0;font-size:13px;line-height:1.8;color:var(--muted);max-width:56em}
-.percall .btn{flex:none}
-@media(max-width:680px){.percall{flex-direction:column;align-items:flex-start}}
+.plan--percall{border-color:#c4ddd4;background:linear-gradient(160deg,var(--soft),rgba(255,253,248,.9))}
 .plan--paid .plan-actions{border-top-color:rgba(244,242,236,.22)}
 .toolbench{margin-top:36px;border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:15px}
 .tool-group{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
@@ -543,6 +539,8 @@ img,svg{display:block}
   .hero h1{font-size:clamp(42px,6.2vw,74px)}
   .case-grid{gap:38px}
   .nav-links{gap:18px}
+  .plan{padding:24px}
+  .plan h3{font-size:22px}
 }
 @media(max-width:960px){
   .nav-inner>.theme-toggle{margin-left:auto}
@@ -1145,15 +1143,28 @@ img,svg{display:block}
             <span class="fine">购买后在同一支付宝账号下查看</span>
           </div>
         </article>
-      </div>
 
-      <div class="percall reveal" style="--d:.14s">
-        <div>
-          <span class="plan-kicker">PAY PER CHECK</span>
-          <h3>按次体检 · ¥1 / 次</h3>
-          <p>只检查，不改写：长句、锯末词、数字对账、待核实标记。单篇不超过 2 万字；未付款返回 402，付款后带凭证重试。偶尔检查选按次，长期写稿选订阅。</p>
-        </div>
-        <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
+        <article class="plan plan--percall reveal" style="--d:.14s">
+          <div class="plan-head">
+            <div>
+              <span class="plan-kicker">PAY PER CHECK · 按次</span>
+              <h3>按次体检</h3>
+              <div class="plan-price"><span>¥1</span><small>/ 次</small></div>
+              <p class="plan-note">单篇 ≤ 2 万字 · 只检查不改写 · 不订阅</p>
+            </div>
+          </div>
+          <ul>
+            <li>长句、锯末词、数字对账、待核实标记</li>
+            <li>只检查，不改写正文</li>
+            <li>单篇不超过 2 万字</li>
+            <li>未付款返回 402，付款后带凭证重试</li>
+            <li>不装脚本，远端体检</li>
+          </ul>
+          <div class="plan-actions">
+            <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
+            <span class="fine">偶尔检查选按次，长期写稿选订阅</span>
+          </div>
+        </article>
       </div>
 
       <div class="toolbench reveal" id="tools" style="--d:.16s">
