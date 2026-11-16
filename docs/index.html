@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>(function(){try{var s=localStorage.getItem('hkw-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();</script>
-<meta name="description" content="会勇禾口王 · 写作技能：对得上账的中文写作质控。免费版 4 个检查器开源可用；专业版 11 个只报告不改写的脚本、证据纪律、文体规范与三套场景包，¥9.9 / 30 天订阅。">
+<meta name="description" content="会勇禾口王 · 写作技能：对得上账的中文写作质控。免费版 4 个检查器开源可用；专业版 11 个只报告不改写的脚本、证据纪律、文体规范与三套场景包，¥9.9 / 30 天订阅；也可按次体检，¥1 / 次。">
 <link rel="icon" href="icon.svg?v=3" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg?v=3">
 <link rel="stylesheet" href="tokens.css?v=7">
@@ -446,6 +446,11 @@ img,svg{display:block}
 .plan-actions{margin-top:auto;padding-top:22px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
 .plan-actions .fine{font-size:10.5px;color:var(--faint);text-align:center}
 .plan--paid .plan-actions .fine{color:#a9cbbf}
+.percall{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:18px;padding:22px 26px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);box-shadow:var(--shadow-1),inset 0 1px 0 rgba(255,255,255,.9)}
+.percall h3{margin:8px 0 0;font-size:22px;line-height:1.2;letter-spacing:-.03em;font-weight:780}
+.percall p{margin:6px 0 0;font-size:13px;line-height:1.8;color:var(--muted);max-width:56em}
+.percall .btn{flex:none}
+@media(max-width:680px){.percall{flex-direction:column;align-items:flex-start}}
 .plan--paid .plan-actions{border-top-color:rgba(244,242,236,.22)}
 .toolbench{margin-top:36px;border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:15px}
 .tool-group{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
@@ -463,6 +468,7 @@ img,svg{display:block}
 .install-kicker{font:700 10px/1 var(--mono);letter-spacing:.14em;color:var(--green)}
 .install-card h3{margin:0;font-size:20px;line-height:1.25;letter-spacing:-.03em;font-weight:760}
 .install-card p{margin:0;font-size:13px;line-height:1.8;color:var(--muted)}
+.install-card .fine a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .install-card .fine{font-size:10.5px;color:var(--faint)}
 .copy-btn{border:1px solid #3a3a34;background:transparent;color:#c9c5ba;border-radius:5px;padding:4px 7px;font:700 9px/1 var(--mono);cursor:pointer;transition:border-color .2s,color .2s}
 .copy-btn:hover{border-color:#7d7a72;color:#fffdf8}
@@ -1141,6 +1147,15 @@ img,svg{display:block}
         </article>
       </div>
 
+      <div class="percall reveal" style="--d:.14s">
+        <div>
+          <span class="plan-kicker">PAY PER CHECK</span>
+          <h3>按次体检 · ¥1 / 次</h3>
+          <p>只检查，不改写：长句、锯末词、数字对账、待核实标记。单篇不超过 2 万字；未付款返回 402，付款后带凭证重试。偶尔检查选按次，长期写稿选订阅。</p>
+        </div>
+        <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
+      </div>
+
       <div class="toolbench reveal" id="tools" style="--d:.16s">
         <div class="tool-group">
           <h4><svg class="tool-ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.1"/><path d="M10.1 10.1 13.8 13.8"/></svg>检查器 · 6</h4>
@@ -1179,6 +1194,7 @@ img,svg{display:block}
           <p>¥9.9 / 30 天，不自动续费，不设试用。购买后在同一支付宝账号下查看。</p>
           <a class="btn btn-accent" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer">去支付宝购买 <span class="arrow">↗</span></a>
           <p class="fine">订阅期内跟随最新版本。</p>
+          <p class="fine">不想订阅？<a href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer"><b>按次体检 ¥1 / 次 ↗</b></a>，只检查不改写，单篇不超过 2 万字。</p>
         </article>
 
         <article class="install-card reveal" style="--d:.08s">
@@ -1225,6 +1241,10 @@ img,svg{display:block}
           <div class="faq-a"><div><p>11 个脚本：6 个检查器、2 个交付工具、3 个专业工具；另有 3 套场景包、两种模式与三条铁律。30 天内使用，跟随最新版本；到期后手动续订，不自动扣款。</p></div></div>
         </div>
         <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false"><span>订阅和按次体检有什么区别？</span><span class="faq-plus" aria-hidden="true">+</span></button>
+          <div class="faq-a"><div><p>订阅 ¥9.9 / 30 天，拿整套 11 个脚本、3 套场景包，可以改稿、数字对账、写长文和批量体检；按次 ¥1 / 次，只把一段正文交给远端做体检，只检查不改写，单篇不超过 2 万字。偶尔检查选按次，长期写稿选订阅。</p></div></div>
+        </div>
+        <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false"><span>适合哪些文档和文章？</span><span class="faq-plus" aria-hidden="true">+</span></button>
           <div class="faq-a"><div><p>办事指南、方案、报告、说明、邮件、汇报、家庭文档；公众号、头条正文和去 AI 味。不适合无素材营销文案、诗歌、小说、英文。</p></div></div>
         </div>
@@ -1260,6 +1280,10 @@ img,svg{display:block}
         <a class="closing-step" href="#buy">
           <b>去支付宝订阅</b>
           <span>¥9.9 / 30 天 <i>↗</i></span>
+        </a>
+        <a class="closing-step" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">
+          <b>按次体检</b>
+          <span>¥1 / 次 <i>↗</i></span>
         </a>
         <a class="closing-step" href="cases/family-pension-case.html">
           <b>读真实案例</b>
