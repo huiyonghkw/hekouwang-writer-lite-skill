@@ -2,7 +2,15 @@
 
 **把话说清楚。** 给素材，写成结构干净的中文文档；给成稿，去掉 AI 味、拆开长句、治标点。
 
-免费版是 MIT-0 开源，克隆即用，不用付款、不用注册。数字对账、证据出处卡、文体规范、长文写作在[付费版](#付费版多什么)。
+免费版是 MIT-0 开源，克隆即用，不用付款、不用注册。数字对账、证据出处卡、文体规范、长文写作在[专业版](#专业版多什么)。
+
+## 三个入口
+
+- **免费版**（本仓库 / ClawHub）：`hekouwang-writer-lite-skill`，2.0.5，MIT-0；4 个检查器、8 份参考。
+- **专业版**（支付宝 SkillPay 订阅）：`hekouwang-writer-skill`，2.0.5；11 个脚本、16 份参考，含对账层与三套场景包。
+- **按次体检**（腾讯 SkillHub）：`hekouwang-writer-check-paid`，只检查不改写，不是专业版 11 脚本包；版本以 SkillHub 页面为准。
+
+免费版与专业版同号；按次体检是独立版本线。专业版与按次体检入口见产品页底部。
 
 ## 安装
 
@@ -18,7 +26,7 @@ git clone https://github.com/huiyonghkw/hekouwang-writer-lite-skill.git \
 ## 包含什么
 
 - **4 个检查器**：锯末词、句长、节奏、文档体检（表格列数与标题层级）。只报告，不改写你的文件。
-- **8 份参考**：WRITE 五步、七种文档原型、句法纪律、修订模式、去 AI 味、说人话、术语表、盲读。
+- **8 份参考**：`write-flow.md`（WRITE 五步、七种文档原型、修订模式）、`style-rules.md`、`deai-flavor.md`、`counter-examples.md`、`clarify-questions.md`、`glossary.md`、`blind-read.md`、`plain-talk.md`。
 - **两种模式**：文档写作与体检；文章去 AI 味（说「去 AI 味」即可触发）。
 - **三条铁律**：出处、模态（约／可能／待核实保留）、修订（不悄悄改用户事实）。
 
@@ -31,11 +39,11 @@ python3 scripts/rhythm_scan.py 文档.md      # 结构层 AI 味
 python3 scripts/doc_lint.py 文档.md         # 表格与标题层级
 ```
 
-## 付费版多什么
+## 专业版多什么
 
-付费版名字是 `hekouwang-writer-skill`，能力对照如下。
+专业版名字是 `hekouwang-writer-skill`，能力对照如下。
 
-| 能力 | 免费版 | 付费版 |
+| 能力 | 免费版 | 专业版 |
 |---|---|---|
 | 脚本 | 4 | 11 |
 | 参考 | 8 | 16 |
@@ -44,7 +52,7 @@ python3 scripts/doc_lint.py 文档.md         # 表格与标题层级
 | 长文写作与三套场景包 | 无 | 有 |
 
 - 在线介绍：<https://huiyonghkw.github.io/hekouwang-writer-lite-skill/>
-- 付费版入口见该页面底部
+- 专业版与按次体检入口见该页面底部
 
 两个版本不要同时安装。
 

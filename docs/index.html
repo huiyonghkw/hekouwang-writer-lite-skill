@@ -796,7 +796,7 @@ img,svg{display:block}
           <div class="hero-scope reveal" style="--d:.22s">
             <b>适合</b><span>办事指南</span><span>项目汇报</span><span>公众号长文</span><span>家庭文档</span><span>邮件</span>
           </div>
-          <p class="hero-foot reveal" style="--d:.26s">真实案例：一份家庭养老办事文档，39,750 的错算被拦下，改成 50,050。</p>
+          <p class="hero-foot reveal" style="--d:.26s">真实案例：一份家庭养老办事文档，39,750 的错算被拦下；按方案 A 复算，12 年补差 46,400，加三年缴费 12,000，需自筹 58,400。</p>
         </div>
 
         <div class="audit-wrap reveal" style="--d:.2s">
@@ -813,7 +813,7 @@ img,svg{display:block}
               <div class="audit-scan" aria-hidden="true"></div>
             </div>
             <ul class="audit-findings" aria-label="检查结果">
-              <li><span class="tag red">硬错误</span><span>补差总额 39,750 与复算不符，应为 50,050。</span></li>
+              <li><span class="tag red">硬错误</span><span>补差总额 39,750 与复算不符；按方案 A 复算，12 年补差 46,400。</span></li>
               <li><span class="tag amber">告警</span><span>单句过长，四个时间点挤在一起，建议拆成三句。</span></li>
               <li><span class="tag amber">告警</span><span>「此外」是锯末词，密度超过 3 处/千字就报。</span></li>
               <li><span class="tag green">保留</span><span>「约 661 元/月」不改成确定数，估算不是核定值。</span></li>
@@ -831,7 +831,7 @@ img,svg{display:block}
         <div><b data-count="3">3</b><span>条铁律：出处 · 模态 · 修订</span></div>
         <div><b data-count="2">2</b><span>种模式：文档 · 文章</span></div>
         <div><b data-count="11">11</b><span>个脚本：检查 · 交付 · 专业</span></div>
-        <div><b data-count="0">0</b><span>第三方依赖：纯 Python 标准库</span></div>
+        <div><b data-count="0">0</b><span>第三方依赖（订阅版脚本）：纯 Python 标准库</span></div>
       </div>
     </div>
   </section>
@@ -966,7 +966,7 @@ img,svg{display:block}
               <div><b>02</b><span>改写</span><em>事实与密度不动</em></div>
               <div><b>03</b><span>盲读</span><em>不看作答再读</em></div>
             </div>
-            <p class="mode-foot">先诊断再改写；不补第一人称，不承诺绕过检测。</p>
+            <p class="mode-foot">先诊断再改写；不编第一人称，不承诺绕过检测。</p>
           </div>
         </div>
       </div>
@@ -993,7 +993,7 @@ img,svg{display:block}
           <li><span class="n">03</span><div><h3>说得清 <span class="tag green">出处</span></h3><p>电话就写电话，无链接就写无链接；查不到标「暂无出处」。</p></div></li>
           <li><span class="n">04</span><div><h3>改得回 <span class="tag amber">修订</span></h3><p>每处改动列清单：改前、改后、原因，可逐条回退。</p></div></li>
           <li><span class="n">05</span><div><h3>读得下去 <span class="tag green">文章</span></h3><p>去 AI 味先做三级诊断，再按规则改写；专业版另有七类定位与三档改写。事实和数字不动。</p></div></li>
-          <li><span class="n">06</span><div><h3>装得上 <span class="tag green">安装</span></h3><p>免费版 4 个、专业版 11 个脚本，纯 Python 标准库；不装依赖，不挑宿主。</p></div></li>
+          <li><span class="n">06</span><div><h3>装得上 <span class="tag green">安装</span></h3><p>免费版 4 个、专业版 11 个脚本，纯 Python 标准库；需 Python 3，不装第三方库，不挑宿主。</p></div></li>
         </ol>
       </div>
       <div class="deliverables reveal" style="--d:.14s">
@@ -1020,7 +1020,7 @@ img,svg{display:block}
           <ol class="case-steps">
             <li><span class="n">01</span><span><b>先问清楚。</b>读者是不懂社保的家属，目的是 12 月去窗口前定档次。</span></li>
             <li><span class="n">02</span><span><b>再拆句补出处。</b>一句话里四个时间点，拆开；「已确认」补成「恩阳区城乡局已确认」。</span></li>
-            <li><span class="n">03</span><span><b>最后独立复算。</b>39,750 改成 50,050；需自筹 46,400 + 4,000 × 3 = 58,400，和表内数字咬合。</span></li>
+            <li><span class="n">03</span><span><b>最后独立复算。</b>12 年补差 39,750 改成 46,400；需自筹 46,400 + 4,000 × 3 = 58,400，和表内数字咬合。</span></li>
           </ol>
           <a class="case-link" href="cases/family-pension-case.html">读完整证据链 <span aria-hidden="true">→</span></a>
         </div>
@@ -1031,9 +1031,9 @@ img,svg{display:block}
             <table class="ledger-table">
               <tbody>
                 <tr>
-                  <td class="label">补差总额</td>
+                  <td class="label">12 年补差（方案 A）</td>
                   <td class="val"><span class="wrong">39,750</span></td>
-                  <td class="val right" id="case-right">50,050</td>
+                  <td class="val right" id="case-right">46,400</td>
                 </tr>
                 <tr>
                   <td class="label">需自筹</td>
@@ -1057,7 +1057,7 @@ img,svg{display:block}
       <div class="more-cases reveal" id="more-cases">
         <div class="more-head"><span>更多案例</span><span>MORE EVIDENCE</span></div>
         <div class="more-grid">
-          <a href="cases/terminal-readme-deai-case.html"><b>产品 README 去 AI 味</b><span>诊断、分档改写、盲读与 57 处改动对账</span></a>
+          <a href="cases/terminal-readme-deai-case.html"><b>产品 README 去 AI 味</b><span>诊断、分档改写、盲读与约 57 处改动对账</span></a>
           <a href="cases/doc-checkup-only.html"><b>只检查，不改写</b><span>位置 / 原句 / 问题 / 建议</span></a>
           <a href="cases/write-sop.html"><b>写 SOP</b><span>从零散素材到能照着做的说明</span></a>
           <a href="cases/revise-project-report.html"><b>修订项目汇报</b><span>保住数字、责任归属与范围外内容</span></a>
@@ -1150,7 +1150,7 @@ img,svg{display:block}
               <span class="plan-kicker">PAY PER CHECK · 按次</span>
               <h3>按次体检</h3>
               <div class="plan-price"><span>¥1</span><small>/ 次</small></div>
-              <p class="plan-note">单篇 ≤ 2 万字 · 只检查不改写 · 不订阅</p>
+              <p class="plan-note">单篇 ≤ 2 万字 · 只检查不改写 · 不订阅 · 不是专业版 11 脚本包</p>
             </div>
           </div>
           <ul>
@@ -1158,7 +1158,7 @@ img,svg{display:block}
             <li>只检查，不改写正文</li>
             <li>单篇不超过 2 万字</li>
             <li>未付款返回 402，付款后带凭证重试</li>
-            <li>不装脚本，远端体检</li>
+            <li>只装按次客户端（Node.js 20），不装 11 个脚本</li>
           </ul>
           <div class="plan-actions">
             <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
@@ -1211,7 +1211,7 @@ img,svg{display:block}
         <article class="install-card reveal" style="--d:.08s">
           <span class="install-kicker">02 · 装到宿主</span>
           <h3>放进宿主识别的 Skill 目录</h3>
-          <p>购买后按商品页的安装说明操作。宿主支持 Skill 目录即可使用，不需要额外依赖。</p>
+          <p>购买后按商品页的安装说明操作。宿主支持 Skill 目录即可使用；需要 Python 3，不需要第三方库。</p>
           <div class="hosts"><span>Claude Code</span><span>Cursor</span><span>Codex</span><span>CodeBuddy</span></div>
         </article>
 
@@ -1235,7 +1235,7 @@ img,svg{display:block}
         </article>
       </div>
 
-      <p class="install-note reveal">全部脚本纯 Python 标准库，不装第三方依赖。</p>
+      <p class="install-note reveal">订阅版 11 个脚本纯 Python 标准库，不装第三方依赖；按次客户端需要 Node.js 20。</p>
     </div>
   </section>
 
@@ -1253,7 +1253,7 @@ img,svg{display:block}
         </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false"><span>订阅和按次体检有什么区别？</span><span class="faq-plus" aria-hidden="true">+</span></button>
-          <div class="faq-a"><div><p>订阅 ¥9.9 / 30 天，拿整套 11 个脚本、3 套场景包，可以改稿、数字对账、写长文和批量体检；按次 ¥1 / 次，只把一段正文交给远端做体检，只检查不改写，单篇不超过 2 万字。偶尔检查选按次，长期写稿选订阅。</p></div></div>
+          <div class="faq-a"><div><p>订阅 ¥9.9 / 30 天，拿整套 11 个脚本、3 套场景包，可以改稿、数字对账、写长文和批量体检；按次 ¥1 / 次，只把一段正文交给远端做体检，只检查不改写，单篇不超过 2 万字。按次体检是独立的远端检查服务，不是专业版 11 脚本包。偶尔检查选按次，长期写稿选订阅。</p></div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false"><span>适合哪些文档和文章？</span><span class="faq-plus" aria-hidden="true">+</span></button>
@@ -1406,7 +1406,7 @@ img,svg{display:block}
       countTo($('#audit-r3'),0,0,0,0);
     }
     if(el.id==='case-ledger'){
-      countTo($('#case-right'),39750,50050,1000,600);
+      countTo($('#case-right'),39750,46400,1000,600);
     }
   };
   const auditEl=$('#audit');
