@@ -6,8 +6,8 @@
 
 ## 三个入口
 
-- **免费版**（本仓库 / ClawHub）：`hekouwang-writer-lite-skill`，2.0.5，MIT-0；4 个检查器、8 份参考。
-- **专业版**（支付宝 SkillPay 订阅）：`hekouwang-writer-skill`，2.0.5；11 个脚本、16 份参考，含对账层与三套场景包。
+- **免费版**（本仓库 / ClawHub）：`hekouwang-writer-lite-skill`，版本见 `SKILL.md`，MIT-0；4 个检查器、8 份参考。
+- **专业版**（支付宝 SkillPay 订阅）：`hekouwang-writer-skill`，与免费版同号（版本见 `SKILL.md`）；11 个脚本、16 份参考，含对账层与三套场景包。
 - **按次体检**（腾讯 SkillHub）：`hekouwang-writer-check-paid`，只检查不改写，不是专业版 11 脚本包；版本以 SkillHub 页面为准。
 
 免费版与专业版同号；按次体检是独立版本线。专业版与按次体检入口见产品页底部。
