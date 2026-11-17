@@ -23,7 +23,7 @@ metadata:
 # 会勇禾口王 · 写作技能
 
 > **定位**：把话说清楚——写给谁、用来做什么，再用纪律装进结构。
-> **本版**：表达层（结构、句子、去 AI 味）；验算与证据等进阶能力见第八节。
+> **本版**：表达层（结构、句子、去 AI 味）；验算与证据等进阶能力见第七节。
 > **模式**：文档写作/修订/体检（默认）与去 AI 味；文章成稿的去 AI 味称文章模式。三大铁律都生效。
 
 `<skill>` = 本 SKILL.md 所在目录。
@@ -53,7 +53,7 @@ metadata:
 
 ### 去 AI 味
 
-用户说「去 AI 味」，或提到 AI 味、人性化、润色时走这里。先诊断再改写；保事实与密度。四步：诊断（三级诊断+句式黑名单，脚本按路由表）→ 改写 → 输出 → 盲读。文档模式不补第一人称；文章成稿走文章模式，交稿前必盲读。→ [deai-flavor.md](references/deai-flavor.md)、[plain-talk.md](references/plain-talk.md)、[blind-read.md](references/blind-read.md)。
+用户说「去 AI 味」，或提到 AI 味、人性化、润色时走这里。先诊断再改写；保事实与密度。四步：诊断（三级诊断+句式黑名单）→ 改写 → 输出 → 盲读。锯末≤3/千字；必跑 `rhythm_scan`；守 G1–G5、P1–P3。文档模式不补第一人称；文章成稿走文章模式，交稿前必盲读。→ [deai-flavor.md](references/deai-flavor.md)、[plain-talk.md](references/plain-talk.md)、[blind-read.md](references/blind-read.md)、[counter-examples.md](references/counter-examples.md)。
 
 <!-- lite-only -->
 研究包写公众号/头条属付费版。
@@ -71,15 +71,11 @@ metadata:
 
 五轴心、闸门两问、进度卡、审稿分级：读 [write-flow.md](references/write-flow.md)。进度卡与脚本结果只写在回复里。
 
-## 五、去 AI 味要点
-
-锯末≤3/千字；去 AI 味必跑 rhythm；守 G1–G5、P1–P3。→ [deai-flavor.md](references/deai-flavor.md)、[counter-examples.md](references/counter-examples.md)。
-
-## 六、learnings
+## 五、learnings
 
 默认只在会话内；要落盘须你确认，只写用户目录，不自动改规则。→ [write-flow.md](references/write-flow.md#自进化learnings默认只在会话内)
 
-## 七、工具（`<skill>/scripts/`，只报告，stdlib，`--selftest`）
+## 六、工具（`<skill>/scripts/`，只报告，stdlib，`--selftest`）
 
 | 脚本 | 查什么 | 何时 |
 |---|---|---|
@@ -90,7 +86,7 @@ metadata:
 
 `python3 <skill>/scripts/<脚本>.py <文档.md>` 或 stdin。字数口径各异。`doc_lint` 硬错误码 1，其余 advisory 恒 0。
 
-## 八、边界与付费版
+## 七、边界与付费版
 
 **Will**：结构、句法、去 AI 味、体检、改动清单、术语表。
 **Will not**：无素材营销/诗/小说；编造经历；替用户判事实；无出处编造；抹掉约/可能；保证合规。
