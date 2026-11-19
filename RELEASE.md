@@ -4,7 +4,9 @@
 >
 > 写作技能版本以 [`edition/VERSION`](edition/VERSION) 为准，不在本文件重复写死；升级用 `python3 scripts/bump_version.py <version>`。
 >
-> 目录与推送：组织标准见 `~/.user-agents/standards/hekouwang-skill-structure.md`；本仓特例见 [`STRUCTURE.md`](STRUCTURE.md)。Pages = 主仓 `docs/`；日常 `git push origin` 推主仓。
+> 目录与推送：组织标准见 `~/.user-agents/standards/hekouwang-skill-structure.md`；本仓特例见 [`STRUCTURE.md`](STRUCTURE.md)。Pages = 主仓 `docs/`；日常 `git push origin` 推主仓。  
+> 付费化：`~/.user-agents/standards/hekouwang-skill-monetize.md` · 执行门：`…/hekouwang-skill-monetize-playbook.md`。公开面 = **策略 A（Lite 引流）**。  
+> 按次产物：`services/skillhub-402/dist/<version>/`（不与技能 `dist/<version>/` 混放）。
 >
 > 最后更新：2026-11-19
 
@@ -63,10 +65,10 @@
 
 ## 六、当前工作区备注
 
-- `dist/` 只保留当前版本目录 `dist/<version>/`（本机已将 `release-2.0.7/` 收拢为 `dist/2.0.7/`）；历史版本包直接删除，不另存归档。
-- 历史修正候选不再保留；需要时从对应版本源重建。
+- `dist/` 只保留当前版 `dist/<version>/`，**目录内默认只放 zip**（Lite + Pro）。发版说明 / SHA256 快照在 `roadmap/evidence/`（如 `2026-11-17-release-2.0.7/`）。
+- 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
-- `roadmap/` 里的执行计划是发布证据，后续版本不再逐版更新；渠道/版本口径以本文件为准。
+- `roadmap/` 执行计划与证据；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
 
 ## 七、2.0.6 封版记录（2026-11-16）
 
@@ -101,5 +103,5 @@
 - 免费包 SHA256：`1a0cd812a9d4bdecb57681ce38e113bd5fce3b5f566e11d62b35c34911455ce7`
 - 专业版 SHA256：`ebdbfed4958da85625de66d3596f18e6033d718c1e9a00204b4975cb1e93728d`
 - SkillHub SHA256：`a8e9fd4ed3eb431a8c73e282ff5d8c97ddaafd7b953cfc6143572027281db303`
-- 详细说明：`dist/release-2.0.7/RELEASE-2.0.7.md`、`SKILLPAY-2.0.7.md`、`SKILLHUB-2.0.1.md`
+- 详细说明（已迁）：`roadmap/evidence/2026-11-17-release-2.0.7/`；SkillHub zip：`services/skillhub-402/dist/2.0.1/`
 - 2.0.7 内容冻结；下一次内容变更升 2.0.8；ClawHub 发布必须设置 Catalog metadata。

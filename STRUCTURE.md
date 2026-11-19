@@ -1,5 +1,7 @@
-> 组织标准：见 `~/.user-agents/standards/hekouwang-skill-structure.md`  
-> 本文件只写本仓特例与成熟度档位。
+> 组织标准（目录）：`~/.user-agents/standards/hekouwang-skill-structure.md`  
+> 付费化口径：`~/.user-agents/standards/hekouwang-skill-monetize.md`  
+> 迁移执行手册：`~/.user-agents/standards/hekouwang-skill-monetize-playbook.md`  
+> 本文件只写本仓特例与成熟度档位。公开面策略：**A. Lite 引流**（见 monetize 第 2.1 节）。
 
 # hekouwang-writer-skill · 目录结构
 

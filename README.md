@@ -39,7 +39,6 @@
 | `roadmap/` | 独立本地仓 | 升级与作战地图：方案、执行计划与证据（无公开远程；勿与对外产品路线混淆） |
 | `services/skillhub-402/` | 独立私有仓 | 402 服务与 SkillHub 按次客户端 |
 | `dist/`、`archive/` | 不版控 | 构建产物（`dist/<version>/` 只留当前版 zip）与归档 |
-| `public/` | 遗留 | 旧 product worktree，非标准；可暂留，见 STRUCTURE 迁移说明 |
 
 ## 开发命令
 
