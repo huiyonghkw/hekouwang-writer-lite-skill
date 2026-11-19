@@ -5,7 +5,7 @@ __pycache__/
 
 # 付费包资产与内部计划：只存本地，绝不进公开仓库
 edition/
-plans/
+roadmap/
 archive/
 dist/
 

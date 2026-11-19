@@ -11,7 +11,7 @@
 | 主仓角色 | 完整 Lite 源码（`hekouwang-writer-lite-skill`）；可安全 `git push origin` |
 | Pages | 主仓 **`docs/`**（仓库 Settings → Pages → `/docs`） |
 | Pro 增量 | **`edition/`**（独立本地仓，无公开远程） |
-| 升级规划 | **`plans/`**（独立本地仓；`evidence/` 可含订单截图） |
+| 升级与作战地图 | **`roadmap/`**（独立本地仓；`evidence/` 可含订单截图；勿与对外产品路线混淆） |
 | 独立服务 | **`services/skillhub-402/`**（按次 402，独立版本线） |
 | 货架物料 | **`materials/`**（原 `images/`；可进 git，不进 Skill/ClawHub 包） |
 
@@ -29,7 +29,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ├── .clawhubignore
 ├── materials/                   货架物料（不进安装包）
 ├── edition/                     Pro 增量（无公开远程）；VERSION 为双产物版本真源
-├── plans/                       升级规划与 evidence
+├── roadmap/                       升级与作战地图（方案/计划/审核证据）
 ├── services/skillhub-402/       按次服务（私有仓）
 ├── archive/ · dist/             不版控；dist/<version>/ 只留当前版 zip
 └── （不再使用 public/ worktree）
@@ -53,7 +53,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 
 1. 进安装包？→ 主仓（Pro 增量 → `edition/`）  
 2. 站点给买家看？→ **`docs/`（主仓内）**  
-3. 不能公开？→ `edition/` 或 `plans/`  
+3. 不能公开？→ `edition/` 或 `roadmap/`  
 4. 独立部署生命周期？→ `services/`
 
 ## 推送与远程
@@ -63,7 +63,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 | `origin` | 公开 Lite 仓；**日常 `git push origin` 推主仓** |
 | `paid` | 可选；仅当 Pro 以 git 交付 |
 
-禁止给 `edition/`、`plans/` 加公开远程。`services/<name>/` 只推自己的私有远程。
+禁止给 `edition/`、`roadmap/` 加公开远程。`services/<name>/` 只推自己的私有远程。
 
 ## `dist/`
 
@@ -82,11 +82,11 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ## 禁止（本仓 + 组织标准）
 
 - 免费版与专业版同名  
-- 给 `edition/`、`plans/` 加公开远程  
+- 给 `edition/`、`roadmap/` 加公开远程  
 - 把「必选 `public/` 工作树」写进新 Skill 脚手架或本仓日常流程  
 - `materials/` / listing / 订单证据打进 Skill 安装包  
 - 按次 client 冒充专业版全集  
 
 ## 启动指令
 
-> 读组织标准 `~/.user-agents/standards/hekouwang-skill-structure.md`。按「主仓=Lite + `docs/` 做 Pages」「`edition/`=Pro 增量」「`plans/`=升级规划」「`services/`=独立服务」、`-skill`/`-lite-skill` 命名、`materials/` 货架目录、白名单 Pro 打包，审视并改造本仓库；多渠道则更新 `RELEASE.md`。不要再引入必选的 `public/` 工作树。
+> 读组织标准 `~/.user-agents/standards/hekouwang-skill-structure.md`。按「主仓=Lite + `docs/` 做 Pages」「`edition/`=Pro 增量」「`roadmap/`=升级与作战地图」「`services/`=独立服务」、`-skill`/`-lite-skill` 命名、`materials/` 货架目录、白名单 Pro 打包，审视并改造本仓库；多渠道则更新 `RELEASE.md`。不要再引入必选的 `public/` 工作树。

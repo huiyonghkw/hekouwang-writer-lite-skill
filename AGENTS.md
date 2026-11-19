@@ -10,7 +10,7 @@
 
 ## 目录结构
 
-按组织标准 `~/.user-agents/standards/hekouwang-skill-structure.md` 与本仓 [`STRUCTURE.md`](STRUCTURE.md) 执行：主仓 = Lite 源码 + `docs/`（GitHub Pages）；主仓可 `git push origin`；`edition/` = Pro 增量；`plans/` = 升级规划与证据（可含订单截图）；`services/` = 独立服务；`materials/` = 货架物料；`archive/`、`dist/` 不版控。**不要**再把 `public/` worktree / `product` 分支当作标准发布方式（遗留 worktree 可暂留，见 STRUCTURE 迁移说明）。新建或改造其他 Skill 仓库时照组织标准执行。
+按组织标准 `~/.user-agents/standards/hekouwang-skill-structure.md` 与本仓 [`STRUCTURE.md`](STRUCTURE.md) 执行：主仓 = Lite 源码 + `docs/`（GitHub Pages）；主仓可 `git push origin`；`edition/` = Pro 增量；`roadmap/` = 升级与作战地图（方案/计划/审核证据，可含订单截图；勿与对外产品路线混淆）；`services/` = 独立服务；`materials/` = 货架物料；`archive/`、`dist/` 不版控。**不要**再把 `public/` worktree / `product` 分支当作标准发布方式（遗留 worktree 可暂留，见 STRUCTURE 迁移说明）。新建或改造其他 Skill 仓库时照组织标准执行。
 
 ## 铁律
 

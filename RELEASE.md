@@ -33,7 +33,7 @@
 | 渠道 | 上架产品 | 版本 | 包 / 源 | 价格 | 线上状态 |
 |---|---|---|---|---|---|
 | 支付宝 SkillPay | 专业版 `hekouwang-writer-skill` | 见 `edition/VERSION` | `dist/<version>/hekouwang-writer-skill-<version>-paid.zip` | ¥9.9 / 30 天，0 试用，不自动续费 | 以支付宝商品页为准；新构建上传后更新 |
-| ClawHub | 免费版 `hekouwang-writer-lite-skill` | 见 `edition/VERSION` | 主仓 Lite 树（`.clawhubignore` 排除 materials/listing/edition/plans/services/dist 等） | 免费，MIT-0 | 以 ClawHub 页面为准；新版本发布后更新 |
+| ClawHub | 免费版 `hekouwang-writer-lite-skill` | 见 `edition/VERSION` | 主仓 Lite 树（`.clawhubignore` 排除 materials/listing/edition/roadmap/services/dist 等） | 免费，MIT-0 | 以 ClawHub 页面为准；新版本发布后更新 |
 | 腾讯 SkillHub | 按次体检 `hekouwang-writer-check-paid` | 线上 2.0.0；2.0.1 审核中 | `services/skillhub-402/client/` | ¥1 / 次 | 2.0.1 已提交，待审核 |
 | GitHub / GitHub Pages | 免费版 | 见 `edition/VERSION` | 主仓；Pages 源 = 主仓 **`docs/`** | 免费 | 以 Pages 为准；`git push origin` 后更新 |
 
@@ -59,14 +59,14 @@
 5. **按次体检**：只改 `services/skillhub-402/client/`，版本线独立；不要把它改成写作技能版本，也不要把专业版的 11 个脚本塞进去。
 6. **不覆盖已发布包**：任何包内容变化都要升对应版本线的号；不要用同一个版本号覆盖已发布包。
 7. **ClawHub 发布必须设置 Catalog metadata**：CATEGORIES 不要留 `Other`，TOPICS 不能为空；CLI 用 `--categories` / `--topics`，发布后回读设置页核对。
-8. **`dist/`**：只保留当前版 `dist/<version>/`，目录内默认只放 zip；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果可写 `plans/` 发版回执）。
+8. **`dist/`**：只保留当前版 `dist/<version>/`，目录内默认只放 zip；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果可写 `roadmap/` 发版回执）。
 
 ## 六、当前工作区备注
 
 - `dist/` 只保留当前版本目录；历史版本包直接删除，不放进 `dist/`，也不另存本地归档。
 - 历史修正候选不再保留；需要时从对应版本源重建。
 - 主仓是免费版真源；GitHub Pages 与 ClawHub 以各自页面为准。旧 `public/` worktree 可暂留，非标准出口。
-- `plans/` 里的执行计划是发布证据，后续版本不再逐版更新；渠道/版本口径以本文件为准。
+- `roadmap/` 里的执行计划是发布证据，后续版本不再逐版更新；渠道/版本口径以本文件为准。
 
 ## 七、2.0.6 封版记录（2026-11-16）
 
