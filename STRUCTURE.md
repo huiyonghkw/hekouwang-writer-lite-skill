@@ -32,7 +32,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ├── plans/                       升级规划与 evidence
 ├── services/skillhub-402/       按次服务（私有仓）
 ├── archive/ · dist/             不版控；dist/<version>/ 只留当前版 zip
-└── public/                      【遗留】旧 product worktree，非标准，见下文迁移说明
+└── （不再使用 public/ worktree）
 ```
 
 ```text
@@ -69,16 +69,15 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 
 产物写在根目录 **`dist/<version>/`**（与 `edition/VERSION` 同号），默认只放 zip，不强制 `SHA256SUMS` / `MANIFEST`。只保留当前版一个 `<version>/` 目录。
 
-## 一期迁移说明（过渡）
+## 迁移说明（已完成）
 
-旧设计用 `public/` 作为 `product` 分支 worktree、推送公开仓。**该方式已废止为标准**，但本机若仍挂着 `public/`：
+旧 `public/` / `product` 旁路已拆除（2026-11-19）：
 
-- **可暂留**，勿当日常发版出口；`.gitignore` 可保留 `public/` 一行并注明遗留。  
-- **日常发版（目标）**：改主仓 → 推主仓到 `origin`；Pages 直接用主仓 `docs/`。  
-- **本机陷阱（2026-11-19 仍在）**：`remote.origin.push = refs/heads/product:refs/heads/main`，裸跑 `git push` **不会**推工作区 `main`，只会推 `product`。清掉该 refspec、改 upstream、以及 GitHub Pages 切到默认分支 `/docs`，须维护者确认后另令执行；在此之前不要假设「文档口径 = 本机 push 行为」。  
-- ClawHub：从主仓（或打包脚本产出的 Lite 树）发布，勿再以 `public/` 树为真源。  
-- `bump_version.py` 对 `public/SKILL.md` / `public/_meta.json` 仍「存在才改」，仅为过渡兼容；目标态不再依赖它们。  
-- 废止条件：GitHub Pages 已切到主仓 `docs/`，本地 `origin.push` 已恢复为推主仓，且不再需要经 `product` 旁路后，可拆除 worktree（另令，本阶段不删目录）。
+- 主仓历史已收成干净单根；日常 **`git push origin`** 推 `main`。  
+- GitHub Pages = 主仓 **`docs/`**（Settings 已确认）。  
+- 本地 `backup/pre-align-20261119` 保留对齐前 tip；`origin.push` 特殊 refspec 已清除。  
+- `bump_version.py` 对 `public/*` 仍「存在才改」，仅为兼容，目标态不依赖。  
+- `.gitignore` 可保留 `public/` 一行，防止误建同名目录。  
 
 ## 禁止（本仓 + 组织标准）
 
