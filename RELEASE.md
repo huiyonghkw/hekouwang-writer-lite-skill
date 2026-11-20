@@ -8,7 +8,7 @@
 > 付费化：`~/.user-agents/standards/hekouwang-skill-monetize.md` · 执行门：`…/hekouwang-skill-monetize-playbook.md`。公开面 = **策略 A（Lite 引流）**。  
 > 按次产物：`services/skillhub-402/dist/<version>/`（不与技能 `dist/<version>/` 混放）。
 >
-> 最后更新：2026-11-19
+> 最后更新：2026-11-20
 
 ## 一、三个产品，不是三个版本
 
@@ -26,7 +26,7 @@
 |---|---|---|---|
 | 写作技能 · 免费版 | 见 `edition/VERSION` | ClawHub、GitHub、GitHub Pages | 与专业版同号 |
 | 写作技能 · 专业版 | 见 `edition/VERSION` | 支付宝 SkillPay 订阅 | 与免费版同号；包在 `dist/<version>/hekouwang-writer-skill-<version>-paid.zip` |
-| 按次体检 · 客户端/服务 | 线上 2.0.0；已提交 2.0.1（审核中） | 腾讯 SkillHub Pay Skill | 独立版本线，不跟随写作技能版本；2.0.1 补「会」字与文案 |
+| 按次体检 · 客户端/服务 | 线上 2.0.1 | 腾讯 SkillHub Pay Skill | 独立版本线，不跟随写作技能版本；2.0.1 补「会」字与文案，已审核通过 |
 
 **不要把写作技能版本和 2.0.0/2.0.1 对比**：它们不是同一个产品的版本号。
 
@@ -36,7 +36,7 @@
 |---|---|---|---|---|---|
 | 支付宝 SkillPay | 专业版 `hekouwang-writer-skill` | 见 `edition/VERSION` | `dist/<version>/hekouwang-writer-skill-<version>-paid.zip` | ¥9.9 / 30 天，0 试用，不自动续费 | 以支付宝商品页为准；新构建上传后更新 |
 | ClawHub | 免费版 `hekouwang-writer-lite-skill` | 见 `edition/VERSION` | 主仓 Lite 树（`.clawhubignore` 排除 materials/listing/edition/roadmap/services/dist 等） | 免费，MIT-0 | 以 ClawHub 页面为准；新版本发布后更新 |
-| 腾讯 SkillHub | 按次体检 `hekouwang-writer-check-paid` | 线上 2.0.0；2.0.1 审核中 | `services/skillhub-402/client/` | ¥1 / 次 | 2.0.1 已提交，待审核 |
+| 腾讯 SkillHub | 按次体检 `hekouwang-writer-check-paid` | 线上 2.0.1 | `services/skillhub-402/client/` | ¥1 / 次 | 2.0.1 已审核通过并上线；详情页 https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill |
 | GitHub / GitHub Pages | 免费版 | 见 `edition/VERSION` | 主仓；Pages 源 = 主仓 **`docs/`** | 免费 | 以 Pages 为准；`git push origin` 后更新 |
 
 **专业版不在 ClawHub。免费版不在支付宝。SkillHub 上的不是专业版 11 脚本包。**
@@ -105,3 +105,14 @@
 - SkillHub SHA256：`a8e9fd4ed3eb431a8c73e282ff5d8c97ddaafd7b953cfc6143572027281db303`
 - 详细说明（已迁）：`roadmap/evidence/2026-11-17-release-2.0.7/`；SkillHub zip：`services/skillhub-402/dist/2.0.1/`
 - 2.0.7 内容冻结；下一次内容变更升 2.0.8；ClawHub 发布必须设置 Catalog metadata。
+
+## 九、SkillHub 2.0.1 上线（2026-11-20）
+
+| 项 | 状态 |
+|---|---|
+| 按次体检客户端 | 2.0.1 已审核通过并上线，替换原线上 2.0.0 |
+| 商品页 | https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill ，标题「会勇禾口王 · 写作体检（按次）」，标 v2.0.1 |
+| SHA256 | `a8e9fd4ed3eb431a8c73e282ff5d8c97ddaafd7b953cfc6143572027281db303`（与提交包一致） |
+| 包路径 | `services/skillhub-402/dist/2.0.1/`；说明见 `roadmap/evidence/2026-11-17-release-2.0.7/SKILLHUB-2.0.1.md` |
+
+本变更只更新渠道口径与证据；写作技能免费版 / 专业版版本号不变。
