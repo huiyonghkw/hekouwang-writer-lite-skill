@@ -58,6 +58,40 @@ def read_public_meta():
         return json.load(fh)
 
 
+def _count_files(dir_path, suffix, prefix=None):
+    """统计目录下匹配后缀（可选前缀）的普通文件数；目录不存在返回 0。"""
+    if not os.path.isdir(dir_path):
+        return 0
+    return sum(
+        1 for name in os.listdir(dir_path)
+        if not name.startswith(".")
+        and name.endswith(suffix)
+        and (prefix is None or name.startswith(prefix))
+        and os.path.isfile(os.path.join(dir_path, name))
+    )
+
+
+def count_package_assets(dest):
+    """从构建产物实际统计（脚本数, 参考数, 场景包数）。"""
+    refs = os.path.join(dest, "references")
+    return (
+        _count_files(os.path.join(dest, "scripts"), ".py"),
+        _count_files(refs, ".md"),
+        _count_files(refs, ".md", "pack-"),
+    )
+
+
+def expected_assets():
+    """从构建输入统计预期（脚本数, 参考数, 场景包数）：免费清单 + edition 增量。"""
+    meta = read_public_meta()
+    refs = os.path.join(EDITION, "references")
+    return (
+        len(meta.get("scripts", [])) + _count_files(os.path.join(EDITION, "scripts"), ".py"),
+        len(meta.get("references", [])) + _count_files(refs, ".md"),
+        _count_files(refs, ".md", "pack-"),
+    )
+
+
 def copy_public(dest):
     """按白名单拷免费内容：根文件 + _meta.json 清单 + examples 整目录。"""
     meta = read_public_meta()
@@ -192,10 +226,12 @@ def set_meta(meta_path, version, added):
 
 def add_edition_note(dest, version, added):
     path = os.path.join(dest, "PAID-EDITION.md")
+    n_scripts, n_refs, n_packs = count_package_assets(dest)
     lines = [
         f"# 专业版说明（v{version}）",
         "",
-        f"本包是 {version} 专业版，包含完整 SKILL.md、11 个脚本、16 个参考文件（8 个通用参考加 8 个进阶参考，其中 3 份是场景包）。",
+        f"本包是 {version} 专业版，包含完整 SKILL.md、{n_scripts} 个脚本、"
+        f"{n_refs} 个参考文件（其中 {n_packs} 份是场景包）。",
         "免费版是另一个名字 hekouwang-writer-lite-skill，两者不要同时安装。",
         "",
         "## 增量文件",
@@ -424,13 +460,14 @@ def print_upload_checklist(dest, version):
     else:
         print("  2. 商品描述：listing-skillpay.md 缺失，无法比对")
     print(f"  3. 版本 {version}；价格沿用平台现有设置；免费试用核对为 0 次（不设试用）")
-    n_scripts = len(meta.get("scripts", []))
-    n_refs = len(meta.get("references", []))
+    n_scripts, n_refs, n_packs = count_package_assets(dest)
+    exp_scripts, exp_refs, exp_packs = expected_assets()
     drill = os.path.exists(os.path.join(dest, "examples", "gov-service-drill.md"))
-    print(f"  4. 包内核对：脚本 {n_scripts} 个；参考 {n_refs} 个；许可 Proprietary")
+    print(f"  4. 包内核对：脚本 {n_scripts} 个；参考 {n_refs} 个（场景包 {n_packs} 套）；许可 Proprietary")
     print(f"  5. 示例文件 {len(meta.get('examples', []))} 个；办事假账练习卷 {'在' if drill else '缺'}")
-    if n_scripts != 11 or n_refs != 16 or not drill:
-        print(f"  ⚠ 包内数量与 {version} 预期不一致：应为 11 个脚本、16 个参考、练习卷在")
+    if (n_scripts, n_refs, n_packs) != (exp_scripts, exp_refs, exp_packs) or not drill:
+        print(f"  ⚠ 包内数量与 {version} 预期不一致：应为 {exp_scripts} 个脚本、"
+              f"{exp_refs} 个参考、{exp_packs} 套场景包、练习卷在")
     if display and slug and display == slug:
         print("  ⚠ displayName 与 name 相同，平台无法区分两者，请检查 _meta.json")
 
@@ -448,6 +485,11 @@ def selftest():
         ("_meta.json 可解析", bool(read_public_meta().get("scripts"))),
         ("listing 商品名称可读", bool(read_listing_product_name())),
     ]
+    exp_scripts, exp_refs, exp_packs = expected_assets()
+    checks.append((
+        f"计数推导：{exp_scripts} 脚本 / {exp_refs} 参考 / {exp_packs} 场景包",
+        exp_scripts > 0 and exp_refs > 0 and exp_packs > 0,
+    ))
     paid_meta = {}
     meta_path = os.path.join(EDITION, "meta.paid.json")
     if os.path.exists(meta_path):
