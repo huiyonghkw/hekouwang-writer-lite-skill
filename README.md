@@ -11,7 +11,7 @@
 | 产物 | 名字 | 来源 | 许可 | 脚本 / 参考 |
 |---|---|---|---|---|
 | 免费版 | `hekouwang-writer-lite-skill` | 根目录 | MIT-0 | 4 / 8 |
-| 专业版 | `hekouwang-writer-skill` | 根目录 + `edition/` | Proprietary | 11 / 16 |
+| 专业版 | `hekouwang-writer-skill` | 根目录 + `edition/` | Proprietary | 11 / 20 |
 
 免费版管表达（结构、句子、去 AI 味）。专业版在此基础上加证据纪律、数字对账、出处卡、修订对账、文体规范、长文写作与七套场景包。
 
