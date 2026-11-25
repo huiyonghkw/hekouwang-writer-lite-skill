@@ -9,6 +9,7 @@ __pycache__/
 .DS_Store
 scripts/build_paid_package.py
 scripts/bump_version.py
+scripts/subset-fonts.sh
 listing-skillpay.md
 .env
 .env.*
@@ -19,6 +20,7 @@ materials/
 edition/
 roadmap/
 services/
+tools/
 dist/
 archive/
 public/
