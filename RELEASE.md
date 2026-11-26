@@ -6,7 +6,7 @@
 >
 > 目录与推送：组织标准见 `~/.user-agents/standards/huiyonghkw/skills/skill-structure.md`；本仓特例见 [`STRUCTURE.md`](STRUCTURE.md)。Pages = 主仓 `docs/`；日常 `git push origin` 推主仓。  
 > 付费化：`~/.user-agents/standards/huiyonghkw/skills/skill-monetize.md` · 执行门：`…/skills/skill-monetize-playbook.md`。公开面 = **策略 A（Lite 引流）**。  
-> 按次产物：`services/skillhub-402/dist/<version>/`（不与技能 `dist/<version>/` 混放）。
+> 按次产物：`services/skillhub-402/dist/<version>/`（不与技能根目录 `dist/` 混放）。
 >
 > 最后更新：2026-11-25
 
@@ -25,7 +25,7 @@
 | 版本线 | 版本 | 谁在用 | 规则 |
 |---|---|---|---|
 | 写作技能 · 免费版 | 见 `edition/VERSION` | ClawHub、GitHub、GitHub Pages | 与专业版同号 |
-| 写作技能 · 专业版 | 见 `edition/VERSION` | 支付宝 SkillPay 订阅 | 与免费版同号；包在 `dist/<version>/hekouwang-writer-skill-<version>-paid.zip` |
+| 写作技能 · 专业版 | 见 `edition/VERSION` | 支付宝 SkillPay 订阅 | 与免费版同号；包在 `dist/skillpay/hekouwang-writer-skill-<version>-paid.zip` |
 | 按次体检 · 客户端/服务 | 线上 2.0.1 | 腾讯 SkillHub Pay Skill | 独立版本线，不跟随写作技能版本；2.0.1 补「会」字与文案，已审核通过 |
 
 **不要把写作技能版本和 2.0.0/2.0.1 对比**：它们不是同一个产品的版本号。
@@ -34,7 +34,7 @@
 
 | 渠道 | 上架产品 | 版本 | 包 / 源 | 价格 | 线上状态 |
 |---|---|---|---|---|---|
-| 支付宝 SkillPay | 专业版 `hekouwang-writer-skill` | 见 `edition/VERSION` | `dist/<version>/hekouwang-writer-skill-<version>-paid.zip` | ¥9.9 / 30 天，0 试用，不自动续费 | 以支付宝商品页为准；新构建上传后更新 |
+| 支付宝 SkillPay | 专业版 `hekouwang-writer-skill` | 见 `edition/VERSION` | `dist/skillpay/hekouwang-writer-skill-<version>-paid.zip` | ¥9.9 / 30 天，0 试用，不自动续费 | 以支付宝商品页为准；新构建上传后更新 |
 | ClawHub | 免费版 `hekouwang-writer-lite-skill` | 见 `edition/VERSION` | 主仓 Lite 树（`.clawhubignore` 排除 materials/listing/edition/roadmap/services/dist 等） | 免费，MIT-0 | 以 ClawHub 页面为准；新版本发布后更新 |
 | 腾讯 SkillHub | 按次体检 `hekouwang-writer-check-paid` | 线上 2.0.1 | `services/skillhub-402/client/` | ¥1 / 次 | 2.0.1 已审核通过并上线；详情页 https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill |
 | GitHub / GitHub Pages | 免费版 | 见 `edition/VERSION` | 主仓；Pages 源 = 主仓 **`docs/`** | 免费 | 以 Pages 为准；`git push origin` 后更新 |
@@ -56,16 +56,16 @@
 
 1. **先看本表**：确认要发的是哪个产品、哪个渠道、哪条版本线。
 2. **升级写作技能版本**：跑 `python3 scripts/bump_version.py <version>`，再跑 `--check` 必须 PASS；不要手改 `SKILL.md`、`_meta.json`、`edition/meta.paid.json`。
-3. **专业版**：先改 `listing-skillpay.md`，再改平台商品描述；然后跑 `python3 scripts/build_paid_package.py`，产物是 `dist/<version>/hekouwang-writer-skill-<version>-paid.zip`。
+3. **专业版**：先改 `listing-skillpay.md`，再改平台商品描述；然后跑 `python3 scripts/build_paid_package.py`，产物是 `dist/skillpay/hekouwang-writer-skill-<version>-paid.zip`。
 4. **免费版 / Pages**：改主仓（含 `docs/`）→ `git push origin`；ClawHub 从主仓发布，版本与根 `_meta.json` / `SKILL.md` 一致。不要再走 `public/` worktree / `product` 分支（遗留见 STRUCTURE 迁移说明）。
 5. **按次体检**：只改 `services/skillhub-402/client/`，版本线独立；不要把它改成写作技能版本，也不要把专业版的 11 个脚本塞进去。
 6. **不覆盖已发布包**：任何包内容变化都要升对应版本线的号；不要用同一个版本号覆盖已发布包。
 7. **ClawHub 发布必须设置 Catalog metadata**：CATEGORIES 不要留 `Other`，TOPICS 不能为空；CLI 用 `--categories` / `--topics`，发布后回读设置页核对。
-8. **`dist/`**：只保留当前版 `dist/<version>/`，目录内默认只放 zip；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果随发布回执在对话返回）。
+8. **`dist/`**：按渠道轴 `dist/<channel>/`（`skillpay/`、`clawhub/`、`skillhub/`）放当前在售包与渠道材料；`dist/<version>/` 仅作构建留档与历史只读归档，不承担发布出口；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果随发布回执在对话返回）。
 
 ## 六、当前工作区备注
 
-- `dist/` 只保留当前版 `dist/<version>/`，**目录内默认只放 zip**（Lite + Pro）。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
+- `dist/` 按渠道轴 `dist/<channel>/` 保留当前在售包与渠道材料，**目录内默认只放 zip**（Lite + Pro）；`dist/2.0.7/` 等历史版仅只读归档、非发布真源。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
 - 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
 - `roadmap/` 执行计划与发版结论（不留过程凭证）；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。

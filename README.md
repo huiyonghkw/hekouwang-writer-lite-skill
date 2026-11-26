@@ -38,7 +38,7 @@
 | `edition/` | 独立本地仓 | 专业版增量与构建材料（无公开远程） |
 | `roadmap/` | 独立本地仓 | 升级与作战地图：方案、执行计划与证据（无公开远程；勿与对外产品路线混淆） |
 | `services/skillhub-402/` | 独立私有仓 | 402 服务与 SkillHub 按次客户端 |
-| `dist/`、`archive/` | 不版控 | 构建产物（`dist/<version>/` 只留当前版 zip）与归档 |
+| `dist/`、`archive/` | 不版控 | 渠道轴产物（`dist/<channel>/`）与归档；`dist/<version>/` 仅构建留档 |
 
 ## 开发命令
 
@@ -52,7 +52,7 @@ python3 scripts/bump_version.py 2.0.7
 # 校验 6 个版本点一致
 python3 scripts/bump_version.py --check
 
-# 构建专业版包（默认读 edition/VERSION，输出到 dist/<version>/）
+# 构建专业版包（默认读 edition/VERSION；发布视图走渠道轴 dist/skillpay/）
 python3 scripts/build_paid_package.py
 
 # 指定版本或输出路径
@@ -92,7 +92,7 @@ python3 -m http.server 8788 --directory docs
 ## 产品入口
 
 - 产品页：<https://huiyonghkw.github.io/hekouwang-writer-lite-skill/>
-- 售卖渠道与商品页链接不在仓库留存，统一在创作者后台维护
+- 商品 ID 与后台管理入口不在仓库留存，统一在创作者后台维护；面向买家的 CTA 直连支付宝 SkillPay 与腾讯 SkillHub 平台链接（见 `docs/index.html`）
 
 ## 许可
 
