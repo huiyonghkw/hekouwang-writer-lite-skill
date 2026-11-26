@@ -61,14 +61,14 @@
 5. **按次体检**：只改 `services/skillhub-402/client/`，版本线独立；不要把它改成写作技能版本，也不要把专业版的 11 个脚本塞进去。
 6. **不覆盖已发布包**：任何包内容变化都要升对应版本线的号；不要用同一个版本号覆盖已发布包。
 7. **ClawHub 发布必须设置 Catalog metadata**：CATEGORIES 不要留 `Other`，TOPICS 不能为空；CLI 用 `--categories` / `--topics`，发布后回读设置页核对。
-8. **`dist/`**：只保留当前版 `dist/<version>/`，目录内默认只放 zip；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果可写 `roadmap/` 发版回执）。
+8. **`dist/`**：只保留当前版 `dist/<version>/`，目录内默认只放 zip；不强制 `SHA256SUMS` / `MANIFEST`（需要校验时临时 `shasum -a 256`，结果随发布回执在对话返回）。
 
 ## 六、当前工作区备注
 
 - `dist/` 只保留当前版 `dist/<version>/`，**目录内默认只放 zip**（Lite + Pro）。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
 - 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
-- `roadmap/` 执行计划与证据；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
+- `roadmap/` 执行计划与发版结论（不留过程凭证）；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
 
 ## 七、2.0.6 封版记录（2026-11-16）
 

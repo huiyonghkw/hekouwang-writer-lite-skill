@@ -31,7 +31,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ├── .clawhubignore
 ├── materials/                   货架物料（不进安装包）
 ├── edition/                     Pro 增量（无公开远程）；VERSION 为双产物版本真源
-├── roadmap/                       升级与作战地图（方案/计划/审核证据）
+├── roadmap/                       升级与作战地图（规划/方案/执行计划）
 ├── services/skillhub-402/       按次服务（私有仓）
 ├── archive/ · dist/             不版控；本仓用默认渠道轴 dist/<channel>/（见组织标准 8.2）
 └── （不再使用 public/ worktree）
