@@ -65,7 +65,7 @@
 
 ## 六、当前工作区备注
 
-- `dist/` 只保留当前版 `dist/<version>/`，**目录内默认只放 zip**（Lite + Pro）。发版说明 / SHA256 快照在 `roadmap/evidence/`（如 `2026-11-17-release-2.0.7/`）。
+- `dist/` 只保留当前版 `dist/<version>/`，**目录内默认只放 zip**（Lite + Pro）。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
 - 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
 - `roadmap/` 执行计划与证据；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
@@ -103,7 +103,7 @@
 - 免费包 SHA256：`1a0cd812a9d4bdecb57681ce38e113bd5fce3b5f566e11d62b35c34911455ce7`
 - 专业版 SHA256：`ebdbfed4958da85625de66d3596f18e6033d718c1e9a00204b4975cb1e93728d`
 - SkillHub SHA256：`a8e9fd4ed3eb431a8c73e282ff5d8c97ddaafd7b953cfc6143572027281db303`
-- 详细说明（已迁）：`roadmap/evidence/2026-11-17-release-2.0.7/`；SkillHub zip：`services/skillhub-402/dist/2.0.1/`
+- 发版结论见 `roadmap/` 对应规划；SkillHub zip：`services/skillhub-402/dist/2.0.1/`
 - 2.0.7 内容冻结；下一次内容变更按 2.1.0 执行（见下）；ClawHub 发布必须设置 Catalog metadata。
 
 ### 2.1.0 封版记录（2026-11-25，规划定稿）
@@ -124,6 +124,6 @@
 | 按次体检客户端 | 2.0.1 已审核通过并上线，替换原线上 2.0.0 |
 | 商品页 | https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill ，标题「会勇禾口王 · 写作体检（按次）」，标 v2.0.1 |
 | SHA256 | `a8e9fd4ed3eb431a8c73e282ff5d8c97ddaafd7b953cfc6143572027281db303`（与提交包一致） |
-| 包路径 | `services/skillhub-402/dist/2.0.1/`；说明见 `roadmap/evidence/2026-11-17-release-2.0.7/SKILLHUB-2.0.1.md` |
+| 包路径 | `services/skillhub-402/dist/2.0.1/`；发版结论见 `roadmap/` 对应规划的验收清单 |
 
 本变更只更新渠道口径与证据；写作技能免费版 / 专业版版本号不变。

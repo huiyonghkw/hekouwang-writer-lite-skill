@@ -13,7 +13,7 @@
 | 主仓角色 | 完整 Lite 源码（`hekouwang-writer-lite-skill`）；可安全 `git push origin` |
 | Pages | 主仓 **`docs/`**（仓库 Settings → Pages → `/docs`） |
 | Pro 增量 | **`edition/`**（独立本地仓，无公开远程） |
-| 升级与作战地图 | **`roadmap/`**（独立本地仓；`evidence/` 可含订单截图；勿与对外产品路线混淆） |
+| 升级与作战地图 | **`roadmap/`**（独立本地仓；只装规划与验收结论、不留过程凭证；勿与对外产品路线混淆） |
 | 独立服务 | **`services/skillhub-402/`**（按次 402，独立版本线） |
 | 货架物料 | **`materials/`**（原 `images/`；可进 git，不进 Skill/ClawHub 包） |
 
