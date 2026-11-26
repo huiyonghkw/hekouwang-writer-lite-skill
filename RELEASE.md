@@ -4,8 +4,8 @@
 >
 > 写作技能版本以 [`edition/VERSION`](edition/VERSION) 为准，不在本文件重复写死；升级用 `python3 scripts/bump_version.py <version>`。
 >
-> 目录与推送：组织标准见 `~/.user-agents/standards/hekouwang-skill-structure.md`；本仓特例见 [`STRUCTURE.md`](STRUCTURE.md)。Pages = 主仓 `docs/`；日常 `git push origin` 推主仓。  
-> 付费化：`~/.user-agents/standards/hekouwang-skill-monetize.md` · 执行门：`…/hekouwang-skill-monetize-playbook.md`。公开面 = **策略 A（Lite 引流）**。  
+> 目录与推送：组织标准见 `~/.user-agents/standards/huiyonghkw/skills/skill-structure.md`；本仓特例见 [`STRUCTURE.md`](STRUCTURE.md)。Pages = 主仓 `docs/`；日常 `git push origin` 推主仓。  
+> 付费化：`~/.user-agents/standards/huiyonghkw/skills/skill-monetize.md` · 执行门：`…/skills/skill-monetize-playbook.md`。公开面 = **策略 A（Lite 引流）**。  
 > 按次产物：`services/skillhub-402/dist/<version>/`（不与技能 `dist/<version>/` 混放）。
 >
 > 最后更新：2026-11-25

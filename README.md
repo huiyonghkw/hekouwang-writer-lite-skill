@@ -34,7 +34,7 @@
 | `SKILL.md`、`scripts/`、`references/`、`examples/` | 主仓 | 免费版源码，也是专业版的底座 |
 | `docs/` | 主仓 | 产品页与案例页源（GitHub Pages） |
 | `materials/` | 主仓 | 货架物料（不进 Skill/ClawHub 安装包） |
-| `STRUCTURE.md` | 主仓 | 本仓特例；组织标准见 `~/.user-agents/standards/hekouwang-skill-structure.md` |
+| `STRUCTURE.md` | 主仓 | 本仓特例；组织标准见 `~/.user-agents/standards/huiyonghkw/skills/skill-structure.md` |
 | `edition/` | 独立本地仓 | 专业版增量与构建材料（无公开远程） |
 | `roadmap/` | 独立本地仓 | 升级与作战地图：方案、执行计划与证据（无公开远程；勿与对外产品路线混淆） |
 | `services/skillhub-402/` | 独立私有仓 | 402 服务与 SkillHub 按次客户端 |

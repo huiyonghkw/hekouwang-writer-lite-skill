@@ -1,6 +1,6 @@
-> 组织标准（目录）：`~/.user-agents/standards/hekouwang-skill-structure.md`  
-> 付费化口径：`~/.user-agents/standards/hekouwang-skill-monetize.md`  
-> 迁移执行手册：`~/.user-agents/standards/hekouwang-skill-monetize-playbook.md`  
+> 组织标准（目录）：`~/.user-agents/standards/huiyonghkw/skills/skill-structure.md`  
+> 付费化口径：`~/.user-agents/standards/huiyonghkw/skills/skill-monetize.md`  
+> 迁移执行手册：`~/.user-agents/standards/huiyonghkw/skills/skill-monetize-playbook.md`  
 > 本文件只写本仓特例与成熟度档位。公开面策略：**A. Lite 引流**（见 monetize 第 2.1 节）。
 
 # hekouwang-writer-skill · 目录结构
@@ -9,7 +9,7 @@
 
 | 项 | 本仓 |
 |---|---|
-| 成熟度目标 | **L3**（主仓 = Lite；`edition/` = Pro 增量；Pages = `docs/`；白名单 Pro 包；`RELEASE.md`；`.clawhubignore`；bump；`dist/<version>/`） |
+| 成熟度目标 | **L3**（主仓 = Lite；`edition/` = Pro 增量；Pages = `docs/`；白名单 Pro 包；`RELEASE.md`；`.clawhubignore`；bump；`dist/<channel>/` 渠道轴） |
 | 主仓角色 | 完整 Lite 源码（`hekouwang-writer-lite-skill`）；可安全 `git push origin` |
 | Pages | 主仓 **`docs/`**（仓库 Settings → Pages → `/docs`） |
 | Pro 增量 | **`edition/`**（独立本地仓，无公开远程） |
@@ -33,7 +33,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ├── edition/                     Pro 增量（无公开远程）；VERSION 为双产物版本真源
 ├── roadmap/                       升级与作战地图（方案/计划/审核证据）
 ├── services/skillhub-402/       按次服务（私有仓）
-├── archive/ · dist/             不版控；dist/<version>/ 只留当前版 zip
+├── archive/ · dist/             不版控；本仓用默认渠道轴 dist/<channel>/（见组织标准 8.2）
 └── （不再使用 public/ worktree）
 ```
 
@@ -69,7 +69,8 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 
 ## `dist/`
 
-产物写在根目录 **`dist/<version>/`**（与 `edition/VERSION` 同号），默认只放 zip，不强制 `SHA256SUMS` / `MANIFEST`。只保留当前版一个 `<version>/` 目录。
+本仓按组织标准 8.2 采用默认**渠道轴**：产物写在根目录 `dist/<channel>/`（`skillpay/`、`clawhub/`、`skillhub/`），每渠道目录自带当前包、填写材料与 `README.md` 索引；版本真源仍是 `edition/VERSION`（双产物）与 `services/<name>/`（按次），不由目录名承载。历史版 `dist/2.0.7/` 仅作只读归档、非发布真源（见 `RELEASE.md`）。整个 `dist/` 不进 git、不放进 `edition/`。  
+组织标准的例外（8.5 版本轴 `dist/<version>/`）只在单渠道或版本线同步时用；本仓三渠道版本线不同步（写作者 2.1.0 / 按次 2.0.1），不适用，也不两套并行混用。
 
 ## 迁移说明（已完成）
 
@@ -91,4 +92,4 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 
 ## 启动指令
 
-> 读组织标准 `~/.user-agents/standards/hekouwang-skill-structure.md`。按「主仓=Lite + `docs/` 做 Pages」「`edition/`=Pro 增量」「`roadmap/`=升级与作战地图」「`services/`=独立服务」、`-skill`/`-lite-skill` 命名、`materials/` 货架目录、白名单 Pro 打包，审视并改造本仓库；多渠道则更新 `RELEASE.md`。不要再引入必选的 `public/` 工作树。
+> 读组织标准 `~/.user-agents/standards/huiyonghkw/skills/skill-structure.md`。按「主仓=Lite + `docs/` 做 Pages」「`edition/`=Pro 增量」「`roadmap/`=升级与作战地图」「`services/`=独立服务」、`-skill`/`-lite-skill` 命名、`materials/` 货架目录、白名单 Pro 打包，审视并改造本仓库；多渠道则更新 `RELEASE.md`。不要再引入必选的 `public/` 工作树。
