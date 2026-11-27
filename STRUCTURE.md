@@ -9,7 +9,7 @@
 
 | 项 | 本仓 |
 |---|---|
-| 成熟度目标 | **L3**（主仓 = Lite；`edition/` = Pro 增量；Pages = `docs/`；白名单 Pro 包；`RELEASE.md`；`.clawhubignore`；bump；`dist/<channel>/` 渠道轴） |
+| 成熟度目标 | **L3**（主仓 = Lite；`edition/` = Pro 增量；Pages = `docs/`；白名单 Lite/Pro 包；`RELEASE.md`；`.clawhubignore`；bump；`dist/<channel>/` 渠道轴） |
 | 主仓角色 | 完整 Lite 源码（`hekouwang-writer-lite-skill`）；可安全 `git push origin` |
 | Pages | 主仓 **`docs/`**（仓库 Settings → Pages → `/docs`） |
 | Pro 增量 | **`edition/`**（独立本地仓，无公开远程） |
@@ -24,6 +24,8 @@
 ```text
 hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ├── SKILL.md                     Lite 入口（name: hekouwang-writer-lite-skill）
+├── README.md                    Lite 用户入口，随包分发
+├── DEVELOPMENT.md               维护文档，随仓库但不随包分发
 ├── scripts/ · references/ · examples/
 ├── docs/                        站点源 = GitHub Pages
 ├── RELEASE.md · STRUCTURE.md · AGENTS.md
@@ -70,7 +72,7 @@ hekouwang-writer-skill/          # = 公开 Git 仓本体（Lite）
 ## `dist/`
 
 本仓按组织标准 8.2 采用默认**渠道轴**：产物写在根目录 `dist/<channel>/`（`skillpay/`、`clawhub/`、`skillhub/`），每渠道目录自带当前包、填写材料与 `README.md` 索引；版本真源仍是 `edition/VERSION`（双产物）与 `services/<name>/`（按次），不由目录名承载。历史版 `dist/2.0.7/` 仅作只读归档、非发布真源（见 `RELEASE.md`）。整个 `dist/` 不进 git、不放进 `edition/`。  
-组织标准的例外（8.5 版本轴 `dist/<version>/`）只在单渠道或版本线同步时用；本仓三渠道版本线不同步（写作者 2.1.0 / 按次 2.0.1），不采用版本轴作为发布出口。`dist/<version>/` 仅作构建留档与历史只读归档，不承担发布真源，不与渠道轴并行混用。
+组织标准的例外（8.5 版本轴 `dist/<version>/`）只在单渠道或版本线同步时用；本仓写作技能与按次体检版本线不同步，不采用版本轴作为发布出口。`dist/<version>/` 仅作构建留档与历史只读归档，不承担发布真源，不与渠道轴并行混用。
 
 ## 迁移说明（已完成）
 

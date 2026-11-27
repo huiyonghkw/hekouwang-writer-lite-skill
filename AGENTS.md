@@ -11,18 +11,32 @@
 ## 常用命令
 
 ```bash
-# 全套脚本自检（6 个脚本，改动 scripts/*.py 后必跑）
+# 全套脚本自检（7 个脚本，改动 scripts/*.py 后必跑）
 for f in scripts/*.py; do python3 "$f" --selftest || exit 1; done
+
+# 专业版增量脚本
+for f in edition/scripts/*.py; do python3 "$f" --selftest || exit 1; done
 
 # 单脚本自检（定位单个检查器时用）
 python3 scripts/doc_lint.py --selftest
 
-# 升级版本（6 个版本点一次更新）/ 校验一致
-python3 scripts/bump_version.py 2.1.0
+# 升级版本（标准布局 4 个版本点一次更新）/ 校验一致
+python3 scripts/bump_version.py <version>
 python3 scripts/bump_version.py --check
 
-# 组装专业版包（默认读 edition/VERSION；发布视图走渠道轴 dist/skillpay/）
-python3 scripts/build_paid_package.py
+# 构建 Lite / Pro 渠道包（默认读 edition/VERSION）
+python3 scripts/build_lite_package.py
+python3 scripts/build_paid_package.py --out "dist/skillpay/hekouwang-writer-skill-$(cat edition/VERSION)-paid.zip"
+
+# 最终安装包与渠道副本验收（含官网 docs_check）
+python3 tools/release_check.py --check
+
+# 单独验收官网 / 修改演示输入后重建实证 JSON
+python3 tools/docs_check.py
+python3 tools/build_demo_evidence.py
+
+# 干净私有 CI（不要求已有 dist 渠道副本）+ 按次服务测试
+bash tools/ci_all.sh
 
 # 改过 docs/ 文案后重建字体子集
 bash scripts/subset-fonts.sh
@@ -31,14 +45,14 @@ bash scripts/subset-fonts.sh
 python3 -m http.server 8788 --directory docs
 ```
 
-无第三方依赖，也不需要单独的 lint/test 框架——测试就是每个脚本内置的 `--selftest`。构建脚本默认输出在 `dist/<version>/` 仅为留档；发布出口按 STRUCTURE 渠道轴 `dist/<channel>/`，历史版只读归档、非发布真源。
+写作 Skill 无第三方依赖，测试就是脚本内置的 `--selftest`；按次服务另有 `unittest` 与 `node:test`。Lite 默认输出 `dist/clawhub/`；Pro 默认输出 `dist/<version>/` 仅为留档，发布时用 `--out` 指向 `dist/skillpay/`。发布出口按 STRUCTURE 渠道轴 `dist/<channel>/`，历史版只读归档、非发布真源。
 
 ## 架构：一份源码，三个产物
 
 - **免费版** = 主仓本身（根 `SKILL.md` + `scripts/` 4 个检查器 + `references/` 8 份；MIT-0）。
 - **专业版** = 主仓 ∪ `edition/` 叠加层（`build_paid_package.py` 先拷主仓、再叠 `edition/`、替换 name/描述/许可、删掉只对免费版成立的段落；11 脚本 / 21 参考）。
 - **按次体检** = `services/skillhub-402/`，独立服务 + 独立版本线，只检查不改写，不是专业版脚本包。
-- 版本真源是 `edition/VERSION`，`bump_version.py` 统一维护 6 个版本点；写作技能两产物同号，按次体检独立。
+- 版本真源是 `edition/VERSION`，`bump_version.py` 统一维护标准布局的 4 个版本点（遗留 `public/` 两点仅存在时兼容）；写作技能两产物同号，按次体检独立。
 - 四个文档检查器（`doc_lint.py`、`sentence_load.py`、`rhythm_scan.py`、`sawdust_scan.py`）统一契约：可接文件参数或 stdin、`--json` 输出、**只报告不改写用户文档**；`--json` 字段名是 `dianping-review-skill/writer_bridge.py` 的运行时依赖，只许加不许改。
 
 ## 目录结构
@@ -47,10 +61,10 @@ python3 -m http.server 8788 --directory docs
 
 ## 铁律
 
-1. 改 `scripts/*.py` 后必须跑上面「常用命令」一节的全套自检（6 个 `--selftest` 全过）才能提交；定位单个检查器时用单脚本自检。
+1. 改 `scripts/*.py` 后必须跑上面「常用命令」一节的全套自检（根目录 7 个 + `edition/` 7 个全过），再跑 `tools/release_check.py --check` 验收最终包；定位单个检查器时用单脚本自检。
 2. 版本号分两条线，渠道不要混：
-   - **两个写作技能产物同号**：以 `edition/VERSION` 为准。升级跑 `python3 scripts/bump_version.py <version>`，再跑 `--check`；构建仍跑 `python3 scripts/build_paid_package.py`。不要手改 `SKILL.md`、`_meta.json`、`edition/meta.paid.json` 的版本号。
-   - **按次体检客户端独立版本线**：`services/skillhub-402/client/SKILL.md` 沿 2.0.1 → 2.1.0 → 2.1.1 独立递进（2.1.1 已提交 SkillHub 审核，2026-11-27；线上 2.1.0），不跟随写作技能版本，也不要把专业版 11 个脚本塞进去。
+   - **两个写作技能产物同号**：以 `edition/VERSION` 为准。升级跑 `python3 scripts/bump_version.py <version>`，再跑 `--check`；Lite 跑 `build_lite_package.py`，Pro 跑 `build_paid_package.py`。不要手改 `SKILL.md`、`_meta.json`、`edition/meta.paid.json` 的版本号。
+   - **按次体检客户端独立版本线**：`services/skillhub-402/client/SKILL.md` 沿 2.0.1 → 2.1.0 → 2.1.1 → 2.2.0 独立递进；2.2.0 是本地新包，2.1.1 已提交审核，线上版本须后台回读。不要把按次版本跟随写作技能，也不要把专业版 11 个脚本塞进客户端。
    - 渠道与版本矩阵见 [`RELEASE.md`](RELEASE.md)；发版前先看，别把三个渠道混成一条线。
    产品页不展示版本号，别在 HTML 里加回去。
    发版前还要比对仓库根目录的 `listing-skillpay.md`：包内能力有变化，先改那份文案再改平台商品描述；顺序反了就是拿旧描述送审，SkillPay 会以「描述与上传文件能力说明不一致」驳回。

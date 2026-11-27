@@ -3,12 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){try{var s=localStorage.getItem('hkw-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();</script>
+<script>(function(){document.documentElement.classList.add('js');try{var s=localStorage.getItem('hkw-theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();</script>
 <meta name="description" content="会勇禾口王 · 写作技能：对得上账的中文写作质控。免费版 4 个检查器开源可用；专业版 11 个只报告不改写的脚本、证据纪律、文体规范与八套场景包，¥9.9 / 30 天订阅；也可按次体检，¥1 / 次。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#f7f8f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111513" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://huiyonghkw.github.io/hekouwang-writer-lite-skill/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="会勇禾口王 · 写作技能">
+<meta property="og:title" content="免费版把话说清楚，专业版让数字对得上">
+<meta property="og:description" content="中文写作质控：本地写作、修订、只检查与去 AI 味；专业版增加数字对账、证据纪律与 8 套场景包。">
+<meta property="og:url" content="https://huiyonghkw.github.io/hekouwang-writer-lite-skill/">
+<meta property="og:image" content="https://huiyonghkw.github.io/hekouwang-writer-lite-skill/writer-skill-overview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="中文写作的质量控制台：素材输入、写作修订、检查器与可核对交付">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="会勇禾口王 · 写作技能">
+<meta name="twitter:description" content="免费版把话说清楚，专业版让数字对得上。">
+<meta name="twitter:image" content="https://huiyonghkw.github.io/hekouwang-writer-lite-skill/writer-skill-overview.jpg">
+<link rel="preload" href="fonts/hkw-sans-sc-subset.woff2?v=8" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="icon.svg?v=3" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg?v=3">
 <link rel="stylesheet" href="tokens.css?v=7">
 <title>会勇禾口王 · 写作技能 — 免费版把话说清楚，专业版让数字对得上</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "会勇禾口王 · 写作技能",
+      "url": "https://huiyonghkw.github.io/hekouwang-writer-lite-skill/",
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "免费版和专业版能一起装吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不建议并存。先卸载或禁用 Lite，再安装 Pro，避免重复规则和路由冲突。升级后用同一篇稿子先跑只检查。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "脚本会改我的文件吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不会。所有检查器只输出报告；改不改、怎么改，由你确认。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "我的文档内容会被上传吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lite 与专业版脚本在本地运行，不上传正文。按次体检是独立远端服务，会把正文发送到服务器检查。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "订阅和按次体检有什么区别？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "订阅提供专业版本地写作、修订、数字对账和场景包；按次体检是独立的远端检查服务，只检查不改写，单篇不超过 2 万字。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 /* ============ 基础 ============ */
 /* 窄屏段尾孤行：短段落平衡断行 */
@@ -17,7 +86,7 @@
 :root{
   --ink:#1a1a1a;
   --muted:#52524e;
-  --faint:#7a7a74;
+  --faint:#676762;
   --paper:#f7f8f7;
   --sand:#eef0ee;
   --surface:#ffffff;
@@ -71,10 +140,13 @@ img,svg{display:block}
 .skip:focus{top:12px}
 
 /* ============ 浮动购买按钮 ============ */
-.floating-cta{position:fixed;bottom:28px;right:28px;z-index:80;opacity:0;transform:translateY(20px) scale(.95);pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.floating-cta{position:fixed;bottom:max(28px,env(safe-area-inset-bottom));right:28px;z-index:80;display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface);border:1px solid var(--line-2);border-radius:14px;box-shadow:var(--shadow-2);opacity:0;transform:translateY(20px) scale(.95);pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .floating-cta.show{opacity:1;transform:none;pointer-events:auto}
 .floating-cta .btn{box-shadow:0 8px 32px -8px rgba(10,125,100,.5),0 0 0 1px rgba(10,125,100,.1)}
-@media(max-width:680px){.floating-cta{bottom:20px;right:20px;left:20px}.floating-cta .btn{width:100%}}
+.floating-paid{font-size:12px;color:var(--muted);white-space:nowrap}
+.floating-close{display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line-2);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-size:18px;line-height:1}
+.floating-close:hover{color:var(--ink);border-color:var(--ink)}
+@media(max-width:680px){.floating-cta{bottom:calc(12px + env(safe-area-inset-bottom));right:12px;left:12px;gap:8px}.floating-cta .btn{flex:1;width:auto}.floating-close{width:40px;height:40px}.has-floating-cta body{padding-bottom:104px}}
 
 /* ============ 信任条 ============ */
 .trust-bar{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:32px;padding:18px 24px;background:var(--surface);border:1px solid var(--line);border-radius:14px;font-size:13px;color:var(--muted)}
@@ -214,6 +286,8 @@ img,svg{display:block}
 .audit.play .audit-findings{display:block}
 .audit-findings li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(20,20,19,.06);font-size:12.5px;line-height:1.6;color:var(--muted);opacity:0;transform:translateY(6px)}
 .audit-findings li:last-child{border-bottom:0}
+.audit-evidence{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0;padding:0 22px 14px;font-size:12px;line-height:1.7;color:var(--faint)}
+.audit-evidence a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .audit.play .audit-findings li{animation:riseIn .45s var(--ease) both}
 .audit.play .audit-findings li:nth-child(1){animation-delay:1.15s}
 .audit.play .audit-findings li:nth-child(2){animation-delay:1.35s}
@@ -244,8 +318,9 @@ img,svg{display:block}
 .section-head--wide{max-width:none}
 
 /* 入场 */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
-.reveal.on{opacity:1;transform:none}
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.js .reveal.on{opacity:1;transform:none}
 
 /* ============ 三条铁律 ============ */
 .laws{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
@@ -474,7 +549,7 @@ img,svg{display:block}
 .plan li::before{content:"✓";flex:none;font-weight:750;color:var(--green)}
 .plan--paid li::before{color:var(--mint)}
 .plan-actions{margin-top:auto;padding-top:22px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
-.plan-actions .fine{font-size:10.5px;color:var(--faint);text-align:center}
+.plan-actions .fine{font-size:12px;color:var(--faint);text-align:center}
 .plan--paid .plan-actions .fine{color:#a9cbbf}
 .plan--percall{border-color:#c4ddd4;background:linear-gradient(160deg,var(--soft),rgba(255,253,248,.9))}
 .plan--paid .plan-actions{border-top-color:rgba(244,242,236,.22)}
@@ -502,8 +577,8 @@ img,svg{display:block}
 .install-card h3{margin:0;font-size:20px;line-height:1.25;letter-spacing:-.03em;font-weight:760}
 .install-card p{margin:0;font-size:13px;line-height:1.8;color:var(--muted)}
 .install-card .fine a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:2px}
-.install-card .fine{font-size:10.5px;color:var(--faint)}
-.copy-btn{border:1px solid #3a3a34;background:transparent;color:#c9c5ba;border-radius:5px;padding:4px 7px;font:700 9px/1 var(--mono);cursor:pointer;transition:border-color .2s,color .2s}
+.install-card .fine{font-size:12px;color:var(--faint)}
+.copy-btn{border:1px solid #3a3a34;background:transparent;color:#c9c5ba;border-radius:5px;padding:6px 8px;min-width:54px;min-height:32px;font:700 11px/1.2 var(--mono);cursor:pointer;transition:border-color .2s,color .2s}
 .copy-btn:hover{border-color:#7d7a72;color:#fffdf8}
 .wide-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:20px;align-items:start}
 .wide-notes b{display:block;margin-bottom:8px;font:700 10px/1 var(--mono);letter-spacing:.12em;color:var(--faint)}
@@ -517,7 +592,14 @@ img,svg{display:block}
 .prompt-box .copy-btn:hover{border-color:var(--green);color:var(--green);background:var(--soft)}
 .hosts{display:flex;flex-wrap:wrap;gap:6px}
 .hosts span{padding:5px 8px;border-radius:5px;background:rgba(20,20,19,.045);font-size:10.5px;color:var(--muted)}
-.install-note{margin-top:18px;font-size:11px;color:var(--faint);display:flex;gap:8px;align-items:flex-start}
+.command-box p{font:650 12px/1.7 var(--mono);overflow-wrap:anywhere}
+.prompt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cli-details{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.cli-details summary{cursor:pointer;font:700 12px/1.6 var(--mono);color:var(--muted)}
+.cli-details summary:hover{color:var(--green)}
+.cli-details pre{margin:14px 0 0;padding:16px;overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:rgba(244,242,236,.55);font:11px/1.9 var(--mono);color:var(--muted);white-space:pre}
+.cli-details p{margin:12px 0 0;font-size:11px;line-height:1.8;color:var(--faint)}
+.install-note{margin-top:18px;font-size:12px;color:var(--faint);display:flex;gap:8px;align-items:flex-start}
 .install-note::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green);flex:none;margin-top:.5em}
 
 /* ============ FAQ ============ */
@@ -639,7 +721,7 @@ img,svg{display:block}
   .plan-price{font-size:36px}
   .tool-group{gap:6px}
   .chip{font-size:10px}
-  .wide-grid{grid-template-columns:1fr}
+  .wide-grid,.prompt-grid{grid-template-columns:1fr}
   .more-grid{grid-template-columns:1fr;gap:0}
   .closing-actions{width:100%}
   .closing-step{padding:14px 0}
@@ -680,6 +762,7 @@ img,svg{display:block}
   .deliverables-grid>div:nth-child(n+4){border-top:1px solid var(--line)}
 }
 @media(max-width:680px){
+  .copy-btn{min-height:44px}
   .hero-scope{margin-top:18px;gap:5px}
   .hero-scope span{font-size:10px;padding:5px 7px}
   .outcomes-list li{grid-template-columns:30px minmax(0,1fr);gap:10px;padding:15px 0}
@@ -755,7 +838,7 @@ img,svg{display:block}
 :root[data-theme="dark"] .plan--paid{background:#17453a;border-color:#1d5345}
 :root[data-theme="dark"] .plan--paid::before{background:radial-gradient(closest-side,rgba(157,206,184,.14),transparent 70%)}
 :root[data-theme="dark"] .install-card--buy{background:linear-gradient(160deg,rgba(111,191,164,.10),rgba(255,253,248,.03));border-color:rgba(111,191,164,.24)}
-:root[data-theme="dark"] .prompt-box{background:rgba(255,253,248,.035)}
+:root[data-theme="dark"] .prompt-box,:root[data-theme="dark"] .cli-details pre{background:rgba(255,253,248,.035)}
 :root[data-theme="dark"] .faq-plus{background:rgba(255,253,248,.06)}
 :root[data-theme="dark"] .footer{background:linear-gradient(180deg,rgba(255,253,248,.025),rgba(17,21,19,0) 60%)}
 :root[data-theme="dark"] .section--sand{background:linear-gradient(180deg,rgba(255,253,248,.052),rgba(255,253,248,.022) 58%,rgba(17,21,19,0))}
@@ -782,8 +865,11 @@ img,svg{display:block}
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
-<div class="floating-cta" id="floating-cta">
-  <a class="btn btn-accent" href="#buy">¥9.9 订阅 <span class="arrow">→</span></a>
+<span class="sr-only" id="copy-status" aria-live="polite"></span>
+<div class="floating-cta" id="floating-cta" aria-hidden="true" inert>
+  <a class="btn btn-accent" href="#install" data-metric="floating_free_start">免费开始 <span class="arrow">→</span></a>
+  <a class="floating-paid" href="#buy" data-metric="floating_paid_start">专业版 ¥9.9</a>
+  <button class="floating-close" id="floating-close" type="button" aria-label="关闭浮动开始提示">×</button>
 </div>
 <div class="progress" aria-hidden="true"><i id="progress-bar"></i></div>
 
@@ -832,9 +918,9 @@ img,svg{display:block}
           </h1>
           <p class="hero-lede reveal" style="--d:.12s">写完发现数字对不上？改稿时事实被悄悄改了？「约」「可能」被润色抹掉？这个 Skill 帮你拦住。</p>
           <div class="hero-actions reveal" style="--d:.18s">
-            <a class="btn btn-primary" href="#case">看它怎么拦错 <span class="arrow">→</span></a>
-            <a class="btn btn-ghost" href="https://github.com/huiyonghkw/hekouwang-writer-lite-skill" target="_blank" rel="noreferrer">免费版 GitHub</a>
-            <a class="btn-price" href="#plans"><span class="p-num">¥9.9</span><span class="p-sep" aria-hidden="true"></span><span class="p-days">30 天</span></a>
+            <a class="btn btn-primary" href="#install" data-metric="hero_free_start">免费开始 <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#case" data-metric="hero_case">看它怎么拦错</a>
+            <a class="btn-price" href="#plans" data-metric="hero_paid"><span class="p-num">¥9.9</span><span class="p-sep" aria-hidden="true"></span><span class="p-days">30 天</span></a>
           </div>
           <div class="hero-scope reveal" style="--d:.22s">
             <b>适合</b><span>办事指南</span><span>项目汇报</span><span>公众号长文</span><span>家庭文档</span><span>邮件</span>
@@ -849,21 +935,22 @@ img,svg{display:block}
           <div class="audit" id="audit" aria-label="文档体检演示">
             <div class="audit-bar">
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="audit-title">doc_lint · 文档体检</span>
+              <span class="audit-title">综合检查 · 脱敏演示</span>
               <span class="audit-state" id="audit-state">待扫描</span>
             </div>
             <div class="audit-doc" id="audit-doc">
-              <p>材料包括缴费记录、电话核实笔记和政策摘录。<mark class="m-long">参保人 2026 年 12 月满 60 岁时只有 14 年缴费，2027 年保费不能提前缴，只能当年缴，年底才满 15 年，待遇从次月起发。</mark></p>
-              <p><mark class="m-sawdust">此外</mark>，补差总额按 <mark class="m-num">39,750</mark> 元测算，<mark class="m-modal">约 661 元/月</mark>。</p>
+              <p>材料包括缴费记录、电话核实笔记和政策摘录。<mark class="m-long">参保人 2026 年 12 月满 60 岁时只有 14 年缴费，2027 年保费不能提前缴，只能当年缴，年底才满 15 年，待遇从次月起发，具体时间和缴费记录仍需逐项核对。</mark></p>
+              <p><mark class="m-sawdust">值得注意的是</mark>，补差总额按 <mark class="m-num">39,750</mark> 元测算，<mark class="m-modal">约 661 元/月</mark>。</p>
               <p>以上信息来自 <mark class="m-source">恩阳区城乡局电话核实</mark>。</p>
               <div class="audit-scan" aria-hidden="true"></div>
             </div>
             <ul class="audit-findings" aria-label="检查结果">
-              <li><span class="tag red">硬错误</span><span>补差总额 39,750 与复算不符；按方案 A 复算，12 年补差 46,400。</span></li>
-              <li><span class="tag amber">告警</span><span>单句过长，四个时间点挤在一起，建议拆成三句。</span></li>
-              <li><span class="tag amber">告警</span><span>「此外」是锯末词，密度超过 3 处/千字就报。</span></li>
-              <li><span class="tag green">保留</span><span>「约 661 元/月」不改成确定数，估算不是核定值。</span></li>
+              <li><span class="tag red">check_fidelity · 硬错误</span><span>补差总额 39,750 与复算不符；按方案 A 复算，12 年补差 46,400。</span></li>
+              <li><span class="tag amber">sentence_load · 告警</span><span>单句过长，四个时间点挤在一起，建议拆成三句。</span></li>
+              <li><span class="tag amber">sawdust_scan · 告警</span><span>「值得注意的是」命中锯末词，短文密度超过 3 处/千字。</span></li>
+              <li><span class="tag green">模态保留 · 通过</span><span>「约 661 元/月」不改成确定数，估算不是核定值。</span></li>
             </ul>
+            <p class="audit-evidence"><a href="examples/checker-demo.md" download>下载示例输入</a><a href="examples/checker-demo.json" target="_blank" rel="noreferrer">查看真实 JSON 输出</a><span>实际结果以你的稿件为准</span></p>
             <div class="audit-report">
               <div><b id="audit-r1">0</b><span>文风告警</span></div>
               <div><b id="audit-r2">0</b><span>数字硬错误</span></div>
@@ -873,17 +960,9 @@ img,svg{display:block}
         </div>
       </div>
 
-      <div class="hero-metrics reveal" style="--d:.3s">
-        <div><b data-count="3">3</b><span>条铁律：出处 · 模态 · 修订</span></div>
-        <div><b data-count="2">2</b><span>种模式：文档 · 文章</span></div>
-        <div><b data-count="11">11</b><span>个脚本：检查 · 交付 · 专业</span></div>
-        <div><b data-count="0">0</b><span>第三方依赖（订阅版脚本）：纯 Python 标准库</span></div>
-      </div>
-
-      <div class="trust-bar reveal" style="--d:.36s">
-        <div class="trust-item"><span class="trust-dot"></span>ClawHub 开源可用</div>
-        <div class="trust-item"><span class="trust-star">★</span><strong>4.9</strong> 用户评分</div>
-        <div class="trust-item">零依赖 · 装上即跑</div>
+      <div class="trust-bar reveal" style="--d:.3s">
+        <div class="trust-item"><span class="trust-dot"></span>ClawHub 开源 · 扫描 clean</div>
+        <div class="trust-item">Lite / Pro 本地脚本零第三方 Python 依赖</div>
         <div class="trust-item">脚本只报告不改写</div>
       </div>
     </div>
@@ -1201,14 +1280,14 @@ img,svg{display:block}
             </div>
           </div>
           <ul>
-            <li>长句、锯末词、数字对账、待核实标记</li>
-            <li>只检查，不改写正文</li>
+            <li>长句、锯末词、数字对账、待核实标记；文章另查结构节奏</li>
+            <li>只检查，不改写正文；检查失败不交付空报告，可同订单重试</li>
             <li>单篇不超过 2 万字</li>
             <li>未付款返回 402，付款后带凭证重试</li>
             <li>只装按次客户端（Node.js 20），不装 11 个脚本</li>
           </ul>
           <div class="plan-actions">
-            <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
+            <a class="btn btn-accent" href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer" data-metric="buy_skillhub">去 SkillHub 按次体检 <span class="arrow">↗</span></a>
             <span class="fine">商品名：会勇禾口王 · 写作体检（按次）· 偶尔检查选按次，长期写稿选订阅</span>
           </div>
         </article>
@@ -1249,48 +1328,69 @@ img,svg{display:block}
     <div class="shell">
       <div class="section-head reveal">
         <p class="eyebrow">07 · 开始使用</p>
-        <h2>购买后，跑第一次体检。</h2>
-        <p class="sub">订阅后按商品页说明装到宿主；第一次先只检查，不改文件。</p>
+        <h2>30 秒开始：安装后，直接说人话。</h2>
+        <p class="sub">先用免费版跑一次。需要数字对账、出处卡或长文写作，再升级专业版。</p>
       </div>
 
       <div class="install-grid">
-        <article class="install-card install-card--buy reveal" id="buy" style="--d:.04s;scroll-margin-top:96px">
-          <span class="install-kicker">01 · 订阅</span>
-          <h3>支付宝订阅</h3>
-          <p>¥9.9 / 30 天，不自动续费，不设试用。购买后在同一支付宝账号下查看。</p>
-          <a class="btn btn-accent" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer">去支付宝购买 <span class="arrow">↗</span></a>
-          <p class="fine">订阅期内跟随最新版本。</p>
+        <article class="install-card reveal" style="--d:.04s">
+          <span class="install-kicker">01 · 免费安装</span>
+          <h3>先装 Lite，不用购买</h3>
+          <p>在已安装 ClawHub CLI 的环境中运行：</p>
+          <div class="prompt-box command-box">
+            <button class="copy-btn" type="button" data-copy="#install-lite">复制</button>
+            <p id="install-lite">clawhub install hekouwang-writer-lite-skill</p>
+          </div>
+          <p class="fine">需要 Python 3，不需要 API key 或第三方 Python 包。</p>
+          <p class="fine"><a href="https://clawhub.ai/huiyonghkw/hekouwang-writer-lite-skill" target="_blank" rel="noreferrer" data-metric="install_clawhub">去 ClawHub 查看</a> · <a href="https://github.com/huiyonghkw/hekouwang-writer-lite-skill" target="_blank" rel="noreferrer" data-metric="install_github">没有 CLI？看 GitHub 说明</a></p>
+          <p class="fine">宿主需支持 Skill 目录；<a href="compatibility.html">查看兼容性实测矩阵</a>。</p>
+        </article>
+
+        <article class="install-card install-card--buy reveal" id="buy" style="--d:.08s;scroll-margin-top:96px">
+          <span class="install-kicker">02 · 需要进阶能力</span>
+          <h3>数字、证据与长文，选专业版</h3>
+          <p>¥9.9 / 30 天，不自动续费，不设试用。增加数字对账、出处卡、证据纪律与长文写作。</p>
+          <a class="btn btn-accent" href="https://skillpay.alipay.com/user/product?merchantId=2088302457563894&amp;productId=P0806000212858939" target="_blank" rel="noreferrer" data-metric="buy_skillpay">去支付宝购买 <span class="arrow">↗</span></a>
+          <p class="fine">购买后在同一支付宝账号下查看，订阅期内跟随最新版本。</p>
+          <p class="fine"><b>从 Lite 升级：</b>先卸载或禁用 Lite，再装 Pro；两个写作 Skill 不要并存。</p>
           <p class="fine">不想订阅？<a href="https://skillhub.cn/skills/indiv-huiyonghkw/hekouwang-writer-skill" target="_blank" rel="noreferrer"><b>按次体检 ¥1 / 次 ↗</b></a>，只检查不改写，单篇不超过 2 万字。</p>
         </article>
 
-        <article class="install-card reveal" style="--d:.08s">
-          <span class="install-kicker">02 · 装到宿主</span>
-          <h3>放进宿主识别的 Skill 目录</h3>
-          <p>购买后按商品页的安装说明操作。宿主支持 Skill 目录即可使用；需要 Python 3，不需要第三方库。</p>
-          <div class="hosts"><span>Claude Code</span><span>Cursor</span><span>Codex</span><span>CodeBuddy</span></div>
-        </article>
-
         <article class="install-card install-card--wide reveal" style="--d:.12s">
-          <span class="install-kicker">03 · 30 秒自测</span>
-          <h3>第一次只检查，不改文件</h3>
-          <div class="wide-grid">
+          <span class="install-kicker">03 · 直接对 Agent 说</span>
+          <h3>不用背命令，点击复制第一句</h3>
+          <p>第一次建议先用「只检查」，确认它能看懂你的材料，再决定改不改。</p>
+          <div class="prompt-grid">
             <div class="prompt-box">
-              <button class="copy-btn" type="button" data-copy="#first-task">复制</button>
-              <p id="first-task">下面这段里可能有合计对不上，也可能有「约 / 可能 / 待核实」。请先只检查、不要改文件：按「位置 / 原句 / 问题 / 建议」列出；数字和不确定说法都不要擅自改掉。检查完再问我要不要改。</p>
+              <button class="copy-btn" type="button" data-copy="#task-write">复制</button>
+              <p id="task-write">根据这些素材写一份项目汇报。</p>
             </div>
-            <div class="wide-notes">
-              <b>拿到什么</b>
-              <ul>
-                <li>按「位置 / 原句 / 问题 / 建议」列出</li>
-                <li>数字和「约 / 可能 / 待核实」不擅自改</li>
-                <li>确认后再决定改不改</li>
-              </ul>
+            <div class="prompt-box">
+              <button class="copy-btn" type="button" data-copy="#task-revise">复制</button>
+              <p id="task-revise">修订这篇文章，保留数字、事实和我的原意，列出改动。</p>
+            </div>
+            <div class="prompt-box">
+              <button class="copy-btn" type="button" data-copy="#task-check">复制</button>
+              <p id="task-check">只检查，不要改写，也不要覆盖文件。</p>
+            </div>
+            <div class="prompt-box">
+              <button class="copy-btn" type="button" data-copy="#task-deai">复制</button>
+              <p id="task-deai">把这篇文章去 AI 味，保留信息密度。</p>
             </div>
           </div>
         </article>
       </div>
 
-      <p class="install-note reveal">订阅版 11 个脚本纯 Python 标准库，不装第三方依赖；按次客户端需要 Node.js 20。</p>
+      <details class="cli-details reveal">
+        <summary>熟悉命令行？展开四个本地检查器</summary>
+        <pre><code>python3 &lt;skill&gt;/scripts/sawdust_scan.py 文档.md
+python3 &lt;skill&gt;/scripts/sentence_load.py 文档.md
+python3 &lt;skill&gt;/scripts/rhythm_scan.py 文档.md
+python3 &lt;skill&gt;/scripts/doc_lint.py 文档.md</code></pre>
+        <p>把 <code>&lt;skill&gt;</code> 换成安装目录。四个检查器都支持 stdin 和 <code>--json</code>，只报告，不修改文档。</p>
+      </details>
+
+      <p class="install-note reveal"><strong>隐私边界：</strong>Lite 与专业版脚本在本地运行，不上传正文；按次体检是独立远端服务，会把正文发送到服务器。按次客户端需要 Node.js 20。</p>
     </div>
   </section>
 
@@ -1331,8 +1431,12 @@ img,svg{display:block}
           <div class="faq-a"><div><p>不会。所有检查器只输出报告；修订对账比较改前改后，出处卡只抽数字草稿。改不改、怎么改，由你确认。</p></div></div>
         </div>
         <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false"><span>免费版和专业版能一起装吗？</span><span class="faq-plus" aria-hidden="true">+</span></button>
+          <div class="faq-a"><div><p>不建议并存。先卸载或禁用 Lite，再安装 Pro，避免重复规则和路由冲突。升级后用同一篇稿子先跑「只检查」，确认数字对账、出处卡等进阶能力符合预期，再开始正式修订。</p></div></div>
+        </div>
+        <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false"><span>支持哪些宿主？</span><span class="faq-plus" aria-hidden="true">+</span></button>
-          <div class="faq-a"><div><p>Claude Code、Cursor、Codex、CodeBuddy 等能识别 Skill 目录的宿主。购买后按商品页的安装说明装到对应目录。</p></div></div>
+          <div class="faq-a"><div><p>宿主需要支持 Skill 目录和 Python 3。具体兼容性以<a href="compatibility.html">实测矩阵</a>为准；尚未完成宿主验收的条目标为「待验收」，不把目录可识别等同于完整兼容。</p></div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false"><span>它会替我做事实核查吗？</span><span class="faq-plus" aria-hidden="true">+</span></button>
@@ -1419,6 +1523,7 @@ img,svg{display:block}
   const $=(s,r=document)=>r.querySelector(s);
   const $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const fmt=n=>n.toLocaleString('en-US');
+  const track=name=>document.dispatchEvent(new CustomEvent('hkw:metric',{detail:{name}}));
   /* ---------- 亮 / 暗切换 ---------- */
   const themeBtns=$$('.theme-toggle');
   const syncThemeLabel=()=>{
@@ -1594,24 +1699,41 @@ img,svg{display:block}
   addEventListener('resize',moveIndicator,{passive:true});
 
   /* ---------- FAQ ---------- */
-  $$('.faq-q').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const item=btn.closest('.faq-item');
-      const open=item.classList.toggle('open');
-      btn.setAttribute('aria-expanded',String(open));
-    });
+  const setFaq=(item,open)=>{
+    const btn=$('.faq-q',item);
+    const panel=$('.faq-a',item);
+    item.classList.toggle('open',open);
+    if(btn) btn.setAttribute('aria-expanded',String(open));
+    if(panel){
+      panel.setAttribute('aria-hidden',String(!open));
+      panel.inert=!open;
+    }
+  };
+  $$('.faq-item').forEach(item=>{
+    setFaq(item,false);
+    const btn=$('.faq-q',item);
+    if(btn) btn.addEventListener('click',()=>setFaq(item,!item.classList.contains('open')));
   });
 
   /* ---------- 工具列表折叠 ---------- */
-  $$('.toolbench-toggle').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const bench=btn.closest('.toolbench');
-      const open=bench.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded',String(open));
-    });
+  const setBench=(bench,open)=>{
+    const btn=$('.toolbench-toggle',bench);
+    const content=$('.toolbench-content',bench);
+    bench.classList.toggle('is-open',open);
+    if(btn) btn.setAttribute('aria-expanded',String(open));
+    if(content){
+      content.setAttribute('aria-hidden',String(!open));
+      content.inert=!open;
+    }
+  };
+  $$('.toolbench').forEach(bench=>{
+    setBench(bench,false);
+    const btn=$('.toolbench-toggle',bench);
+    if(btn) btn.addEventListener('click',()=>setBench(bench,!bench.classList.contains('is-open')));
   });
 
   /* ---------- 复制 ---------- */
+  const copyStatus=$('#copy-status');
   const copyText=async(text,btn)=>{
     let ok=false;
     try{await navigator.clipboard.writeText(text);ok=true;}
@@ -1622,25 +1744,57 @@ img,svg{display:block}
       try{ok=document.execCommand('copy');}catch(_){}
       t.remove();
     }
+    if(copyStatus) copyStatus.textContent=ok?'已复制到剪贴板':'复制失败，请手动选择文本';
     if(!btn) return;
     const old=btn.textContent;
     btn.textContent=ok?'已复制':'复制失败';
     setTimeout(()=>{btn.textContent=old;},1600);
   };
   $$('[data-copy-text]').forEach(btn=>{
-    btn.addEventListener('click',()=>copyText(btn.dataset.copyText,btn));
-  });
-  $$('[data-copy]').forEach(btn=>{
+    if(!btn.getAttribute('aria-label')) btn.setAttribute('aria-label','复制文本');
     btn.addEventListener('click',()=>{
-      const target=$(btn.dataset.copy);
-      if(target) copyText(target.innerText,btn);
+      track('copy_text');
+      copyText(btn.dataset.copyText,btn);
     });
   });
+  $$('[data-copy]').forEach(btn=>{
+    const target=$(btn.dataset.copy);
+    if(target&&!btn.getAttribute('aria-label')){
+      const label=target.innerText.trim().replace(/\s+/g,' ').slice(0,24);
+      btn.setAttribute('aria-label',`复制：${label}`);
+    }
+    btn.addEventListener('click',()=>{
+      if(target){
+        track(`copy_${btn.dataset.copy.slice(1)}`);
+        copyText(target.innerText,btn);
+      }
+    });
+  });
+  $$('[data-metric]').forEach(el=>el.addEventListener('click',()=>track(el.dataset.metric)));
 
   /* ---------- 导航与进度 ---------- */
   const nav=$('#nav');
   const bar=$('#progress-bar');
   const floatingCta=$('#floating-cta');
+  const floatingClose=$('#floating-close');
+  const floatingStops=[$('#install'),$('.footer')].filter(Boolean);
+  let floatingDismissed=false;
+  const updateFloating=()=>{
+    if(!floatingCta) return;
+    const nearStop=floatingStops.some(el=>{
+      const rect=el.getBoundingClientRect();
+      return rect.top<innerHeight*.88&&rect.bottom>0;
+    });
+    const show=scrollY>500&&!nearStop&&!floatingDismissed;
+    floatingCta.classList.toggle('show',show);
+    floatingCta.setAttribute('aria-hidden',String(!show));
+    floatingCta.inert=!show;
+    doc.classList.toggle('has-floating-cta',show);
+  };
+  if(floatingClose) floatingClose.addEventListener('click',()=>{
+    floatingDismissed=true;
+    updateFloating();
+  });
   const links=$$('.nav-links a[href^="#"]:not(.btn)');
   const sections=links.map(a=>$(a.getAttribute('href'))).filter(Boolean);
   let ticking=false;
@@ -1650,7 +1804,7 @@ img,svg{display:block}
     requestAnimationFrame(()=>{
       const y=scrollY;
       if(nav) nav.classList.toggle('is-stuck',y>8);
-      if(floatingCta) floatingCta.classList.toggle('show',y>500);
+      updateFloating();
       const h=document.documentElement.scrollHeight-innerHeight;
       if(bar) bar.style.transform=`scaleX(${h>0?Math.min(1,y/h):0})`;
       ticking=false;
@@ -1671,22 +1825,30 @@ img,svg{display:block}
 
   /* ---------- 移动菜单 ---------- */
   const toggle=$('#nav-toggle');
-  if(toggle){
-    toggle.addEventListener('click',()=>{
-      const open=nav.classList.toggle('is-open');
+  if(toggle&&nav){
+    const setMenu=(open,focusFirst=false)=>{
+      nav.classList.toggle('is-open',open);
       toggle.setAttribute('aria-expanded',String(open));
       toggle.textContent=open?'关闭':'菜单';
+      const menu=$('#mobile-menu');
+      if(menu){
+        menu.setAttribute('aria-hidden',String(!open));
+        menu.inert=!open;
+        if(open&&focusFirst){
+          const first=$('a',menu);
+          if(first) first.focus();
+        }
+      }
+    };
+    setMenu(false);
+    toggle.addEventListener('click',()=>setMenu(!nav.classList.contains('is-open'),true));
+    $$('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+    document.addEventListener('click',e=>{
+      if(nav.classList.contains('is-open')&&!nav.contains(e.target)) setMenu(false);
     });
-    $$('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>{
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded','false');
-      toggle.textContent='菜单';
-    }));
     document.addEventListener('keydown',e=>{
       if(e.key==='Escape'&&nav.classList.contains('is-open')){
-        nav.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded','false');
-        toggle.textContent='菜单';
+        setMenu(false);
         toggle.focus();
       }
     });

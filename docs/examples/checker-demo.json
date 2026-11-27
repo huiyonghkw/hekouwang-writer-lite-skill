@@ -1,0 +1,72 @@
+{
+  "description": "脱敏演示的真实脚本输出；未手工修改数字或结论。",
+  "input": "docs/examples/checker-demo.md",
+  "commands": {
+    "check_fidelity": "python3 edition/scripts/check_fidelity.py --json docs/examples/checker-demo.md",
+    "sentence_load": "python3 scripts/sentence_load.py --json docs/examples/checker-demo.md",
+    "sawdust_scan": "python3 scripts/sawdust_scan.py --json docs/examples/checker-demo.md",
+    "doc_lint": "python3 scripts/doc_lint.py --json docs/examples/checker-demo.md"
+  },
+  "outputs": {
+    "check_fidelity": {
+      "path": "docs/examples/checker-demo.md",
+      "errors": [
+        "L5 乘法不符：67×12 = 804，文中写 39750"
+      ]
+    },
+    "sentence_load": {
+      "path": "docs/examples/checker-demo.md",
+      "sentences": 3,
+      "cjk": 95,
+      "warn": 45,
+      "split": 60,
+      "over": [],
+      "warn_items": [
+        {
+          "line": 3,
+          "len": 53,
+          "sentence": "参保人 2026 年 12 月满 60 岁时只有 14 年缴费，2027 年保费不能提前缴，只能当年缴，年底才满 15 年，待遇从次月起发，具体时间和缴费记录仍需逐项核对。",
+          "release": null
+        }
+      ],
+      "stacked": [
+        {
+          "line": 3,
+          "len": 53,
+          "sentence": "参保人 2026 年 12 月满 60 岁时只有 14 年缴费，2027 年保费不能提前缴，只能当年缴，年底才满 15 年，待遇从次月起发，具体时间和缴费记录仍需逐项核对。",
+          "release": null
+        },
+        {
+          "line": 5,
+          "len": 24,
+          "sentence": "值得注意的是，补差总额按 3,866.67 × 12 = 39,750 元测算，约 661 元/月，具体待遇待核实。",
+          "release": "公式"
+        }
+      ],
+      "nested": [],
+      "hard": 0
+    },
+    "sawdust_scan": {
+      "path": "docs/examples/checker-demo.md",
+      "cjk": 105,
+      "hits": 2,
+      "density": 19.05,
+      "findings": {
+        "ai连接词": {
+          "值得注意的是": 1,
+          "值得注意": 1
+        }
+      },
+      "threshold": 3.0,
+      "over": true
+    },
+    "doc_lint": {
+      "path": "docs/examples/checker-demo.md",
+      "hard_errors": [],
+      "warnings": [],
+      "semicolon_count": 0,
+      "semicolon_density": 0.0,
+      "pending_markers": 1
+    }
+  }
+}

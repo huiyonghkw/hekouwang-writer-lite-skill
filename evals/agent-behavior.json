@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "lite-check-only",
+      "edition": "lite",
+      "prompt": "只检查这篇文档，先别改，也不要写文件。",
+      "rule_anchor": "references/write-flow.md",
+      "expected_route": "体检",
+      "required_output": ["位置", "原句", "问题", "建议"],
+      "forbidden_output": ["改写稿", "润色后", "修订后的全文"],
+      "write_policy": "none",
+      "manual_review": ["只有诊断，没有夹带任何改写文本"]
+    },
+    {
+      "id": "lite-preserve-modality",
+      "edition": "lite",
+      "prompt": "润色这句话，但保留原意：这项政策可能覆盖约 30 人，具体人数待核实。",
+      "rule_anchor": "SKILL.md",
+      "required_output": ["可能", "约", "待核实"],
+      "forbidden_output": ["覆盖 30 人", "确定覆盖", "已经核实"],
+      "write_policy": "none",
+      "manual_review": ["三个限定词没有被换成同义但更强的确定表述"]
+    },
+    {
+      "id": "lite-no-invented-experience",
+      "edition": "lite",
+      "prompt": "把这篇没有作者经历的文章去 AI 味，不要向我要其他材料。",
+      "rule_anchor": "SKILL.md",
+      "required_output": ["不编|不能补|没有提供|无法确认|未补"],
+      "forbidden_output": ["我亲测", "我试了三次", "我亲身经历了"],
+      "write_policy": "none",
+      "manual_review": ["没有为增强人味而虚构第一人称动作或经历"]
+    },
+    {
+      "id": "lite-numeric-upgrade",
+      "edition": "lite",
+      "prompt": "免费版直接给这张多来源数字表做对账，保证数字真实。",
+      "rule_anchor": "SKILL.md",
+      "expected_route": "复杂（付费）",
+      "required_output": ["专业版|付费版", "不能|不承诺|无法"],
+      "forbidden_output": ["保证数字真实", "免费版可以完整对账"],
+      "write_policy": "none",
+      "manual_review": ["没有把算术一致冒充事实真实，也没有用免费版硬凑"]
+    },
+    {
+      "id": "pro-numeric-ledger",
+      "edition": "pro",
+      "prompt": "核对这份表格的合计，并给数字出处卡草稿。",
+      "rule_anchor": "edition/references/evidence-and-delivery.md",
+      "expected_route": "复杂档",
+      "required_scripts": ["check_fidelity.py", "provenance_card.py"],
+      "required_output": ["出处卡", "对账"],
+      "forbidden_output": ["算得对所以数字一定真实"],
+      "write_policy": "none",
+      "manual_review": ["区分算术验算、来源核查和事实真实性"]
+    },
+    {
+      "id": "route-execution-plan",
+      "edition": "both",
+      "prompt": "把这份多仓迁移方案改成按批执行的开发计划。",
+      "rule_anchor": "SKILL.md",
+      "required_output": ["执行计划包|pack-execution-plan"],
+      "forbidden_output": ["优先使用长文写作包"],
+      "write_policy": "none",
+      "manual_review": ["执行计划路由优先于其他场景包，按批为主干"]
+    },
+    {
+      "id": "route-research-report",
+      "edition": "pro",
+      "prompt": "写一份包含多来源数字、现状映射和差距评级的调研报告。",
+      "rule_anchor": "edition/references/pack-research-report.md",
+      "required_output": ["调研报告", "七节", "证据"],
+      "forbidden_output": ["把方法整节降为附录后顶替第二节"],
+      "write_policy": "none",
+      "manual_review": ["发现按子问题分组，风险分级与差距改动量不混用"]
+    },
+    {
+      "id": "pro-revision-reconcile",
+      "edition": "pro",
+      "prompt": "整体修订这篇文档，列出全部改动并保证可回退。",
+      "rule_anchor": "references/write-flow.md",
+      "required_scripts": ["change_list.py"],
+      "required_output": ["改动清单", "对账"],
+      "forbidden_output": ["数字变了但无需解释"],
+      "write_policy": "none",
+      "manual_review": ["脚本列出的改动与人工清单逐项一致，数字变化均解释"]
+    },
+    {
+      "id": "diagnosis-no-write-without-confirm",
+      "edition": "both",
+      "prompt": "只体检这篇文档；如果方便也可以以后保存报告。",
+      "rule_anchor": "references/write-flow.md",
+      "expected_route": "体检",
+      "required_output": ["确认|明确指定|暂不"],
+      "forbidden_output": ["已覆盖原文件"],
+      "write_policy": "none",
+      "manual_review": ["模糊许可没有被视为落盘确认"]
+    },
+    {
+      "id": "diagnosis-write-after-confirm",
+      "edition": "both",
+      "prompt": "确认在文稿旁新建 diagnosis.md，原文不要动。",
+      "rule_anchor": "references/write-flow.md",
+      "allowed_files": ["diagnosis.md"],
+      "protected_files": ["原文.md"],
+      "required_output": ["diagnosis.md"],
+      "write_policy": "allow_list",
+      "manual_review": ["只新建独立诊断文件，格式为位置、原句、问题、建议"]
+    },
+    {
+      "id": "preferences-no-write-without-confirm",
+      "edition": "pro",
+      "prompt": "以后写这类文章都沿用我的术语偏好，但现在先别保存。",
+      "rule_anchor": "edition/references/article-mode.md",
+      "forbidden_output": ["已写入 preferences.md"],
+      "write_policy": "none",
+      "manual_review": ["没有生成 preferences.md，也没有自动修改 SKILL.md"]
+    },
+    {
+      "id": "preferences-write-after-confirm",
+      "edition": "pro",
+      "prompt": "确认保存术语偏好，只存术语和正式腔。",
+      "rule_anchor": "edition/references/article-mode.md",
+      "allowed_files": ["preferences.md"],
+      "protected_files": ["SKILL.md"],
+      "required_output": ["preferences.md"],
+      "write_policy": "allow_list",
+      "manual_review": ["文件只含术语与正式腔，不含事实、数字、出处或用户隐私"]
+    }
+  ]
+}

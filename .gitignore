@@ -9,7 +9,7 @@ roadmap/
 archive/
 dist/
 
-# SkillHub 402 服务端源码：暂不纳入版本控制，部署时另建私有仓库
+# SkillHub 402 服务端与客户端：独立私有仓，主仓忽略
 services/
 
 # 遗留 worktree（旧 product 分支），非标准发布方式；见 STRUCTURE.md 迁移说明

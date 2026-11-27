@@ -6,7 +6,7 @@
   - edition/scripts/*.py   → scripts/
   - edition/references/*.md → references/
   - edition/examples/*     → examples/（若目录存在）
-  - SKILL.paid-section.md 插到 SKILL.md 的「## 八、边界」之前
+  - SKILL.paid-section.md 插到 SKILL.md 的「## 七、边界与付费版」之前
   - meta.paid.json 的 headerNote 替换「本版」行，name/description/homepage/handoff 覆盖
   - SKILL.md 与 _meta.json 的版本号改成付费版号
   - _meta.json 的 scripts / references 列表补上付费资产
@@ -352,8 +352,12 @@ def zip_tree(src, out_zip, arc_root):
             dirs.sort()
             for name in sorted(files):
                 full = os.path.join(base, name)
-                rel = os.path.relpath(full, src)
-                zf.write(full, os.path.join(arc_root, rel))
+                rel = os.path.relpath(full, src).replace(os.sep, "/")
+                info = zipfile.ZipInfo(f"{arc_root}/{rel}", (1980, 1, 1, 0, 0, 0))
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o100644 << 16
+                with open(full, "rb") as fh:
+                    zf.writestr(info, fh.read())
                 count += 1
     return count
 
@@ -513,6 +517,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="组装专业版安装包")
     ap.add_argument("--version", help="专业版版本号（默认读 edition/VERSION）")
     ap.add_argument("--out", help="输出 zip 路径")
+    ap.add_argument("--force", action="store_true", help="允许覆盖已存在的输出文件")
     ap.add_argument("--selftest", action="store_true", help="检查路径与前置资产")
     args = ap.parse_args(argv)
 
@@ -561,6 +566,9 @@ def main(argv=None):
         return 1
 
     out = args.out or os.path.join(ROOT, "dist", version, f"hekouwang-writer-skill-{version}-paid.zip")
+    if os.path.exists(out) and not args.force:
+        print(f"输出已存在：{out}；确认未发布且确需覆盖时加 --force", file=sys.stderr)
+        return 2
     os.makedirs(os.path.dirname(out), exist_ok=True)
     n_zip = zip_tree(build_dir, out, "hekouwang-writer-skill")
 

@@ -7,6 +7,7 @@ node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+scripts/build_lite_package.py
 scripts/build_paid_package.py
 scripts/bump_version.py
 scripts/subset-fonts.sh
@@ -14,12 +15,14 @@ listing-skillpay.md
 .env
 .env.*
 AGENTS.md
+DEVELOPMENT.md
 STRUCTURE.md
 RELEASE.md
 materials/
 edition/
 roadmap/
 services/
+evals/
 tools/
 dist/
 archive/
