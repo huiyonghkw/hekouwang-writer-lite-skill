@@ -53,7 +53,7 @@
 
 1. **先核实状态**：区分源码、已打包、审核中、线上版本；平台状态不明时先回读后台。
 2. **升级写作技能**：跑 `bump_version.py <version>` 与 `--check`；标准布局检查 4 个版本点，不手改。
-3. **文案先行**：Pro 能力变化先改 `listing-skillpay.md`，再改平台商品描述。
+3. **文案先行**：Pro 能力变化先改 `listing-skillpay.md`，再把同一段成稿逐字嵌入 `dist/skillpay/skillpay.md` 的「商品描述（上传 ZIP 后重贴）」区，最后改平台商品描述。上传 ZIP 会重置描述，必须从当版 `skillpay.md` 重新粘贴，不能只留 listing 指针。
 4. **构建新包**：Lite 跑 `build_lite_package.py`；Pro 用 `--out` 指向 `dist/skillpay/`。不覆盖已发布包，已存在输出只有确认未发布后才用 `--force`。
 5. **最终验收**：跑 `python3 tools/release_check.py --check`，必须全部 PASS；按次另跑服务端 `unittest`、客户端 `node --test`、跨语言集成和镜像 smoke test。再跑 `python3 tools/docs_check.py`，检查无 JS 回退、链接、复制目标、分享元数据、升级路径和可访问性约束。
 6. **Pages 发布门禁**：SkillPay 可下载包、按次线上服务与官网能力描述必须一致。若线上仍是旧包或未部署新服务，只发布仓库代码，不公开对应官网文案；先完成平台对齐再推 Pages。

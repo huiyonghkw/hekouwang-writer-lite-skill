@@ -33,7 +33,8 @@ COUNT_FILES = (
 BAD_COUNT_WORDS = (
     "三套", "3 套", "三份", "3 份", "五套", "5 套", "五份", "5 份",
     "七套", "7 套", "七份场景", "16 参考", "16 个参考", "16 份参考",
-    "18 参考", "18 个参考", "18 份参考", "20 参考", "20 个参考", "20 份参考", "20 个参考文件",
+    "18 参考", "18 个参考", "18 份参考", "19 参考", "19 个参考", "19 份参考",
+    "20 参考", "20 个参考", "20 份参考", "20 个参考文件",
 )
 EXPECTED_PACKS = {
     "pack-gov-service.md", "pack-project-report.md", "pack-article-longform.md",
@@ -179,6 +180,13 @@ def check_listing():
     for name in ("办事指南", "项目报告", "长文写作", "调研报告", "执行计划", "技术文档", "PRD 规格书", "会议纪要"):
         if name not in desc:
             problems.append(f"缺场景包名「{name}」")
+    version_log = ROOT / "dist" / "skillpay" / "skillpay.md"
+    if version_log.is_file():
+        log_text = version_log.read_text(encoding="utf-8")
+        if "## 商品描述（上传 ZIP 后重贴）" not in log_text:
+            problems.append("dist/skillpay/skillpay.md 缺商品描述保留区")
+        if desc not in log_text:
+            problems.append("dist/skillpay/skillpay.md 商品描述与 listing 不逐字一致")
     if problems:
         return False, "；".join(problems)
     return True, f"能力句与包内一致，平台计 {chars}/500 字"

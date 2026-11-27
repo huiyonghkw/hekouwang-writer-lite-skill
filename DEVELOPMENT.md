@@ -88,7 +88,7 @@ python3 -m http.server 8788 --directory docs
 
 1. 先看 [`RELEASE.md`](RELEASE.md)，区分源码版本、已打包版本、审核中版本和线上版本。
 2. 写作技能升级运行 `bump_version.py`，不要手改各版本点；标准布局为 4 个，遗留 `public/` 两个仅在目录存在时兼容检查。
-3. 专业版能力变化先改 [`listing-skillpay.md`](listing-skillpay.md)，再改平台商品描述。
+3. 专业版能力变化先改 [`listing-skillpay.md`](listing-skillpay.md)，再把成稿逐字嵌入 `dist/skillpay/skillpay.md` 的「商品描述（上传 ZIP 后重贴）」区，最后改平台商品描述；上传 ZIP 后从当版 `skillpay.md` 重贴，不能只留 listing 指针。
 4. 构建 Lite、Pro 和按次客户端的新版本包，不覆盖已发布版本。
 5. 运行 `tools/release_check.py --check` 与按次服务全部测试；页面文案改动后运行字体子集脚本。
 6. 对外推送、上传、提审和真实支付验收均需本人明确确认；完成后回读平台并更新 `RELEASE.md`。

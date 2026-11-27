@@ -67,7 +67,7 @@ python3 -m http.server 8788 --directory docs
    - **按次体检客户端独立版本线**：`services/skillhub-402/client/SKILL.md` 沿 2.0.1 → 2.1.0 → 2.1.1 → 2.2.0 独立递进；2.2.0 是本地新包，2.1.1 已提交审核，线上版本须后台回读。不要把按次版本跟随写作技能，也不要把专业版 11 个脚本塞进客户端。
    - 渠道与版本矩阵见 [`RELEASE.md`](RELEASE.md)；发版前先看，别把三个渠道混成一条线。
    产品页不展示版本号，别在 HTML 里加回去。
-   发版前还要比对仓库根目录的 `listing-skillpay.md`：包内能力有变化，先改那份文案再改平台商品描述；顺序反了就是拿旧描述送审，SkillPay 会以「描述与上传文件能力说明不一致」驳回。
+   发版前还要比对仓库根目录的 `listing-skillpay.md`：包内能力有变化，先改那份文案，再把成稿逐字嵌入 `dist/skillpay/skillpay.md` 的「商品描述（上传 ZIP 后重贴）」区，最后改平台商品描述；顺序反了就是拿旧描述送审，SkillPay 会以「描述与上传文件能力说明不一致」驳回。上传 ZIP 会重置描述，必须从当版 `skillpay.md` 重贴，不能只留 listing 指针。
 3. 新增或改名 `references/*.md` 时，同步 `SKILL.md` 指针和根 `_meta.json` 的 `references`。**文件在根目录和 `edition/` 之间移动时，两边都要改**：根目录只放免费内容，`edition/` 放专业版增量；移动后必须重建专业版包并检查两个版本各自无死链。
 4. `SKILL.md` 不重复 `references/` 的细节，只留要点 + 一行指针；改完跑 skill doctor 确认无死链、门禁 PASS。
 5. 改 `docs/` 页面文案后必须重跑 `bash scripts/subset-fonts.sh`（字体子集只含现有文字，漏跑新字会回退苹方）。
