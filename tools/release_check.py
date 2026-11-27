@@ -20,7 +20,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TARGET_VERSION = "2.1.0"  # 本检查工具面向 2.1 规划；发版前 bump_version 到该号
+TARGET_VERSION = "2.2.0"  # 本检查工具面向当前写作技能号；发版前 bump_version 到该号
 
 # 4.4 节数量词一致性检查范围；CHANGELOG 历史条目属例外，不在其中。
 COUNT_FILES = (
@@ -36,18 +36,21 @@ COUNT_FILES = (
     "listing-skillpay.md",
 )
 
-# 三态 14 词：3 套、5 套、16/18 参考的全部写法。
+# 旧数量词残留：勿再写 3/5/7 套或 16/18/20 参考（当前真源为 8 套 / 21 参考）。
 BAD_COUNT_WORDS = (
     "三套", "3 套", "三份", "3 份", "五套", "5 套", "五份", "5 份",
+    "七套", "7 套", "七份场景",
     "16 参考", "16 个参考", "16 份参考", "18 参考", "18 个参考", "18 份参考",
+    "20 参考", "20 个参考", "20 份参考", "20 个参考文件",
 )
 
-# 规划的 7 套场景包名单（2.2 节 + 7.1 节）。
+# 规划的 8 套场景包名单。
 KNOWN_PACKS = (
     "pack-gov-service.md",
     "pack-project-report.md",
     "pack-article-longform.md",
     "pack-research-report.md",
+    "pack-execution-plan.md",
     "pack-tech-docs.md",
     "pack-prd-spec.md",
     "pack-meeting-notes.md",
@@ -124,10 +127,10 @@ def check_counts():
     problems = []
     n_packs = len(pack_files())
     n_refs = ref_count()
-    if n_packs != 7:
-        problems.append(f"pack-*.md = {n_packs}（应为 7）")
-    if n_refs != 20:
-        problems.append(f"参考总数 = {n_refs}（应为 20）")
+    if n_packs != 8:
+        problems.append(f"pack-*.md = {n_packs}（应为 8）")
+    if n_refs != 21:
+        problems.append(f"参考总数 = {n_refs}（应为 21）")
     hits = []
     for rel in COUNT_FILES:
         path = os.path.join(ROOT, rel)
@@ -135,6 +138,11 @@ def check_counts():
             hits.append(f"{rel}（缺文件）")
             continue
         text = read(rel)
+        if rel == "RELEASE.md":
+            # 「封版记录」「上线」节（第七节起）是历史快照，保留当时数量词，只查当前口径区。
+            m = re.search(r"(?m)^## .*(封版记录|上线)", text)
+            if m:
+                text = text[:m.start()]
         for word in BAD_COUNT_WORDS:
             if word in text:
                 hits.append(f"{rel}:{word}")
@@ -143,7 +151,7 @@ def check_counts():
     if problems:
         return False, "；".join(problems)
     words = " / ".join(BAD_COUNT_WORDS)
-    return True, f"7 套场景包 / 20 参考，无「{words}」残留"
+    return True, f"8 套场景包 / 21 参考，无「{words}」残留"
 
 
 def check_listing():
@@ -160,7 +168,7 @@ def check_listing():
         problems.append(f"能力句缺「{n_packs} 套场景包」")
     if f"{n_refs} 个参考文件" not in desc:
         problems.append(f"能力句缺「{n_refs} 个参考文件」")
-    for name in ("办事指南", "项目报告", "长文写作", "调研报告", "技术文档", "PRD 规格书", "会议纪要"):
+    for name in ("办事指南", "项目报告", "长文写作", "调研报告", "执行计划", "技术文档", "PRD 规格书", "会议纪要"):
         if name not in desc:
             problems.append(f"缺场景包名「{name}」")
     if problems:

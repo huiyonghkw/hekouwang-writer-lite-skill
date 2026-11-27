@@ -11,15 +11,15 @@
 | 产物 | 名字 | 来源 | 许可 | 脚本 / 参考 |
 |---|---|---|---|---|
 | 免费版 | `hekouwang-writer-lite-skill` | 根目录 | MIT-0 | 4 / 8 |
-| 专业版 | `hekouwang-writer-skill` | 根目录 + `edition/` | Proprietary | 11 / 20 |
+| 专业版 | `hekouwang-writer-skill` | 根目录 + `edition/` | Proprietary | 11 / 21 |
 
-免费版管表达（结构、句子、去 AI 味）。专业版在此基础上加证据纪律、数字对账、出处卡、修订对账、文体规范、长文写作与七套场景包。
+免费版管表达（结构、句子、去 AI 味）。专业版在此基础上加证据纪律、数字对账、出处卡、修订对账、文体规范、长文写作与八套场景包。
 
 ## 三个渠道
 
 | 渠道 | 产品 | 版本 | 说明 |
 |---|---|---|---|
-| 支付宝 SkillPay | 专业版 | 见 `edition/VERSION` | 订阅；11 脚本 / 20 参考 |
+| 支付宝 SkillPay | 专业版 | 见 `edition/VERSION` | 订阅；11 脚本 / 21 参考 |
 | ClawHub / GitHub | 免费版 | 同 `edition/VERSION` | MIT-0；4 脚本 / 8 参考 |
 | 腾讯 SkillHub | 按次体检 | 线上 2.0.1 | 远端检查，不是专业版 11 脚本包 |
 
@@ -74,7 +74,7 @@ python3 -m http.server 8788 --directory docs
 3. **文件移动**：根目录只放免费内容，专业版内容放 `edition/`。移动后重建专业版包，确认两个版本各自无死链。
 4. **构建后自检**：解压安装包，确认 `SKILL.md` 的 name、版本号、脚本数与 `_meta.json` 一致。
 5. **页面文案改动**：重跑 `scripts/subset-fonts.sh`，否则新字会回退到苹方。
-6. **商品文案 / README / 构建核对**：统一按专业版包 **11 脚本 / 20 参考**对账；构建时从 `edition/meta.paid.json` 覆盖 homepage / handoff，并拷贝 `edition/examples`。
+6. **商品文案 / README / 构建核对**：统一按专业版包 **11 脚本 / 21 参考**对账；构建时从 `edition/meta.paid.json` 覆盖 homepage / handoff，并拷贝 `edition/examples`。
 
 ## 文档指针
 

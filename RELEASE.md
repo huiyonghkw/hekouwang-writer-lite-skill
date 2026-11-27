@@ -15,7 +15,7 @@
 | # | 产品 | 包名 / slug | 许可 | 卖什么 | 不卖什么 |
 |---|---|---|---|---|---|
 | 1 | 免费版 | `hekouwang-writer-lite-skill` | MIT-0 | 4 个检查器、8 份参考；文档写作/修订/体检、成稿去 AI 味 | 数字对账、出处卡、修订对账、长文写作、场景包 |
-| 2 | 专业版 | `hekouwang-writer-skill` | Proprietary | 11 个脚本、20 份参考；免费版全部能力 + 对账层 + 七套场景包 | 不是按次服务；不通过 SkillHub 交付 |
+| 2 | 专业版 | `hekouwang-writer-skill` | Proprietary | 11 个脚本、21 份参考；免费版全部能力 + 对账层 + 八套场景包 | 不是按次服务；不通过 SkillHub 交付 |
 | 3 | 按次体检 | `hekouwang-writer-check-paid` | Proprietary | 远端检查一段正文：长句、锯末词、数字对账、待核实标记；¥1/次，单篇 ≤ 20,000 字 | 不是专业版 11 脚本包；不给脚本、参考、场景包 |
 
 **一句话**：免费版和专业版是「写作技能」的两个产物；按次体检是另一个「只检查不改写」的远端服务，只是也收费、也在 SkillHub。
@@ -66,7 +66,7 @@
 ## 六、当前工作区备注
 
 - `dist/` 按渠道轴 `dist/<channel>/` 保留当前在售包与渠道材料，**目录内默认只放 zip**（Lite + Pro）；`dist/2.0.7/` 等历史版仅只读归档、非发布真源。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
-- 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。
+- 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。客户端已备 2.2.0（2026-11-27，仅版本号与写作技能对齐、功能同 2.0.1，待上传），线上仍 2.0.1。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
 - `roadmap/` 执行计划与发版结论（不留过程凭证）；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
 
