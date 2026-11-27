@@ -50,7 +50,7 @@ python3 -m http.server 8788 --directory docs
 1. 改 `scripts/*.py` 后必须跑上面「常用命令」一节的全套自检（6 个 `--selftest` 全过）才能提交；定位单个检查器时用单脚本自检。
 2. 版本号分两条线，渠道不要混：
    - **两个写作技能产物同号**：以 `edition/VERSION` 为准。升级跑 `python3 scripts/bump_version.py <version>`，再跑 `--check`；构建仍跑 `python3 scripts/build_paid_package.py`。不要手改 `SKILL.md`、`_meta.json`、`edition/meta.paid.json` 的版本号。
-   - **按次体检客户端独立版本线**：`services/skillhub-402/client/SKILL.md` 本地已备 2.2.0（与写作技能号对齐，功能同 2.0.1，待上传），线上仍 2.0.1；不自动跟随写作技能版本，也不要把专业版 11 个脚本塞进去。
+   - **按次体检客户端独立版本线**：`services/skillhub-402/client/SKILL.md` 沿 2.0.1 → 2.1.0 → 2.1.1 独立递进（2.1.1 已提交 SkillHub 审核，2026-11-27；线上 2.1.0），不跟随写作技能版本，也不要把专业版 11 个脚本塞进去。
    - 渠道与版本矩阵见 [`RELEASE.md`](RELEASE.md)；发版前先看，别把三个渠道混成一条线。
    产品页不展示版本号，别在 HTML 里加回去。
    发版前还要比对仓库根目录的 `listing-skillpay.md`：包内能力有变化，先改那份文案再改平台商品描述；顺序反了就是拿旧描述送审，SkillPay 会以「描述与上传文件能力说明不一致」驳回。

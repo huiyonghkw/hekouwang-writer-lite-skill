@@ -66,7 +66,7 @@
 ## 六、当前工作区备注
 
 - `dist/` 按渠道轴 `dist/<channel>/` 保留当前在售包与渠道材料，**目录内默认只放 zip**（Lite + Pro）；`dist/2.0.7/` 等历史版仅只读归档、非发布真源。发版结论写进 `roadmap/` 对应规划的验收清单（不留过程凭证目录）。
-- 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。客户端已备 2.2.0（2026-11-27，仅版本号与写作技能对齐、功能同 2.0.1，待上传），线上仍 2.0.1。
+- 按次 SkillHub 包在 `services/skillhub-402/dist/<version>/`，不与技能 `dist/` 混放。客户端 2.1.1 已于 2026-11-27 提交 SkillHub 审核（沿 2.0.1 → 2.1.0 → 2.1.1 独立递进，功能同 2.1.0），线上在售 2.1.0。
 - 主仓是免费版真源；日常 `git push origin`；GitHub Pages = 主仓 `docs/`。`public/` 旁路已拆除。
 - `roadmap/` 执行计划与发版结论（不留过程凭证）；渠道/版本口径以本文件为准。公开面 = 策略 A（Lite 引流）。
 
